@@ -34,6 +34,189 @@
     box-shadow: 0 0 0 0.25rem rgba(86, 89, 94, 0.25); /* sombreado azul */
     background-color: #F3F3F5;
 }
+/*------------------------------------Gabi*/
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Header / Hero */
+.hero {
+    background: linear-gradient(135deg, #8e2de2, #9913F2);
+    color: white;
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Stats */
+.stats {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 50px 20px;
+    background: #f9f9f9;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.stat h2 {
+    color: #8e2de2;
+    font-size: 2rem;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.stat p {
+    text-align: center;
+    font-weight: 500;
+}
+
+/* History Section */
+.history {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.history h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.history .subtitle {
+    font-size: 1rem;
+    color: #777;
+    margin-bottom: 40px;
+}
+
+.history-cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 25px;
+    max-width: 300px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: left;
+}
+
+.card h3 {
+    color: #8e2de2;
+    margin-bottom: 15px;
+}
+
+.card p {
+    color: #555;
+    font-size: 0.95rem;
+}
+
+/* Valores */
+.values {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.values h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.values .subtitle {
+    font-size: 1rem;
+    color: #777;
+    margin-bottom: 40px;
+}
+
+.values-cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.value-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 25px;
+    max-width: 220px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.value-card .icon {
+    font-size: 2rem;
+    background: linear-gradient(135deg, #8e2de2, #4a00e0);
+    color: white;
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 15px auto;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.value-card h3 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.value-card p {
+    color: #555;
+    font-size: 0.9rem;
+}
+
+/* Manifiesto */
+.manifesto {
+    background: linear-gradient(135deg, #8e2de2, #4a00e0);
+    color: white;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.manifesto h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.manifesto p {
+    max-width: 800px;
+    margin: 10px auto;
+    font-size: 1rem;
+}
+
+/* Responsivo */
+@media(max-width: 900px){
+    .stats, .values-cards, .history-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
 
 
 
