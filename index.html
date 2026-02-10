@@ -1,11 +1,246 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hilo Nacional</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="./CSS/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Inter:wght@400;600&display=swap">
 </head>
 <body>
-    
+
+  <!-- Barra de navegación -->       
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container d-flex align-items-center">
+            <!-- Logo y nombre -->
+            <a class="navbar-brand" href="#"><img src="./assets/hilo_nacional.svg" alt="" width="219" height="63"></a>
+
+            <!-- Botón de menú -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- menú de inicio -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-3">
+                    <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Productos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Acerca de Nosotros</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#">Contacto</a></li>
+                </ul>
+
+            <!-- Cuadro para buscar -->
+            <form class="d-flex ms-auto" role="search">
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-search"></i></span>
+                    <input class="form-control buscar" type="search" placeholder="Buscar..." aria-label="Buscar">
+                </div>
+            </form>
+            <div class="ms-">
+                <a href="#"><img src="./assets/icono_perfil.svg" alt="perfil"></a>
+                <a href="#"><img src="./assets/icono_corazon.svg" alt="favoritos"></a>
+                <a href="#"><img src="./assets/Icono_carrito.svg" alt="carrito"></a>
+            </div>
+
+
+            </div>
+        </div>
+    </nav>
+
+      <!-- Hero -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Tejiendo Sueños,<br>Conectando Talentos</h1>
+            <p>Hilo Nacional es más que una tienda en línea. Somos una plataforma que celebra y apoya el talento artesanal de nuestro país, conectando a creadores únicos con personas que valoran la autenticidad y la calidad.</p>
+        </div>
+    </header>
+
+    <!-- Stats -->
+    <section class="stats">
+        <div class="stat">
+            <h2>500+</h2>
+            <p>Artesanos</p>
+        </div>
+        <div class="stat">
+            <h2>10,000+</h2>
+            <p>Productos</p>
+        </div>
+        <div class="stat">
+            <h2>50,000+</h2>
+            <p>Clientes Felices</p>
+        </div>
+        <div class="stat">
+            <h2>100%</h2>
+            <p>Hecho Local</p>
+        </div>
+    </section>
+
+    <!-- Nuestra Historia -->
+    <section class="history">
+        <h2>Nuestra Historia</h2>
+        <p class="subtitle">Cómo comenzó nuestro viaje</p>
+
+        <div class="history-cards">
+            <div class="card">
+                <h3>El Inicio</h3>
+                <p>Hilo Nacional nació en 2020 con una visión clara: crear un espacio donde los artesanos locales pudieran compartir su trabajo con el mundo. Comenzamos con solo 20 artesanos y hoy somos una comunidad de más de 500 creadores.</p>
+            </div>
+
+            <div class="card">
+                <h3>Nuestra Misión</h3>
+                <p>Promover y preservar las técnicas artesanales tradicionales mientras impulsamos la innovación en el diseño. Creemos que cada producto cuenta una historia y queremos que esa historia llegue a más personas.</p>
+            </div>
+
+            <div class="card">
+                <h3>Nuestro Compromiso</h3>
+                <p>Nos comprometemos a pagar precios justos a nuestros artesanos, asegurando que reciban el valor real de su trabajo. Además, el 100% de los productos en nuestra plataforma son hechos localmente, apoyando la economía nacional.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nuestros Valores -->
+    <section class="values">
+        <h2>Nuestros Valores</h2>
+        <p class="subtitle">Los principios que guían nuestro trabajo</p>
+
+        <div class="values-cards">
+            <div class="value-card">
+                <div class="icon">❤️</div>
+                <h3>Pasión por lo Local</h3>
+                <p>Promovemos y apoyamos el talento artesanal de nuestro país</p>
+            </div>
+            <div class="value-card">
+                <div class="icon">👥</div>
+                <h3>Comunidad</h3>
+                <p>Creamos conexiones entre artesanos y clientes que valoran lo auténtico</p>
+            </div>
+            <div class="value-card">
+                <div class="icon">🏅</div>
+                <h3>Calidad</h3>
+                <p>Garantizamos productos de alta calidad hechos con dedicación</p>
+            </div>
+            <div class="value-card">
+                <div class="icon">📈</div>
+                <h3>Crecimiento</h3>
+                <p>Impulsamos el desarrollo económico de nuestros artesanos</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nuestro Manifiesto -->
+    <section class="manifesto">
+        <h2>Nuestro Manifiesto</h2>
+        <p>Creemos en el poder transformador del arte y la artesanía. Cada hilo tejido, cada pieza diseñada, cada producto creado lleva consigo la historia, la cultura y el alma de nuestro pueblo.</p>
+        <p>En un mundo de producción en masa, elegimos lo auténtico. En lugar de lo efímero, valoramos lo duradero. No solo vendemos productos, construimos puentes entre artesanos apasionados y clientes conscientes.</p>
+        <p>Hilo Nacional es nuestro compromiso con el talento local, nuestra apuesta por un comercio justo y nuestra celebración de lo que nos hace únicos.</p>
+    </section>
+
+ <!-- Inicia Tarjetas de presentacion -->
+  <section class="section">
+    <div class="container text-center">
+        <h2 class="section-title">Conoce a Nuestro Equipo</h2>
+        <p class="section-subtitle">Tejiendo Sueños, Conectando Talentos</p>
+
+        <div class="cards-flex">
+            <article class="team-card">
+                <div class="circle-img">
+                    <img src="./assets/MAR.jpg" alt="Marlen">
+                </div>
+                <h3><a href="https://www.linkedin.com/in/marlen-hidalgo-sanchez/" target="_blank">Marlen Hidalgo</a></h3>
+                <span class="role">Desarrolladora Full-Stack Java</span>
+                <p>Desarrolladora en formación, apasionada en la resolución de problemas y el análisis de datos.</p>
+            </article>
+
+            <article class="team-card">
+                <div class="circle-img">
+                    <img src="./assets/Gabi.png" alt="Gabriela">
+                </div>
+                <h3><a href="www.linkedin.com/in/gabrielaesparza-developer" target="_blank">Gabriela Esparza</a></h3>
+                <span class="role">Desarrolladora Full-Stack Java</span>
+                <p> Experiencia práctica participando en todas las etapas de creación de software. Me enfoco a la construcción de soluciones eficientes, escalables y alineadas a las necesidades del negocio y el usuario.</p>
+            </article>
+
+            <article class="team-card">
+                <div class="circle-img">
+                    <img src="./assets/WhatsApp Image 2026-02-09 at 4.30.55 PM.jpeg" alt="Atziri">
+                </div>
+                <h3><a href="https://www.linkedin.com/in/atzirisarahi-berrospe/" target="_blank">Atziri Berrospe</a></h3>
+                <span class="role">Desarrolladora Full-Stack Java</span>
+                <p>Especialista en estructura web, creando tarjetas dinámicas y secciones responsivas.</p>
+            </article>
+
+            <article class="team-card">
+                <div class="circle-img">
+                    <img src="./assets/foto4.jpg" alt="Héctor">
+                </div>
+                <h3><a href="www.linkedin.com/in/héctor-gonzález-ramírez" target="_blank">Héctor González</a></h3>
+                <span class="role">Desarrolladora Full-Stack Java</span>
+                <p>Soy desarrollador web en formación, apasionado por crear interfaces fieles y funcionales, cuidando cada detalle visual y profesionalizando mi flujo de trabajo con Git.</p>
+            </article>
+
+            <article class="team-card">
+                <div class="circle-img">
+                    <img src="foto5.jpg" alt="Ignacio">
+                </div>
+                <h3><a href="LINKEDIN_5" target="_blank">Ignacio Zambada</a></h3>
+                <span class="role">Desarrolladora Full-Stack Java</span>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+            </article>
+        </div>
+    </div>
+</section>
+<!-- Termina Tarjetas de presentacion -->
+
+<!-- FOOTER -->
+  <footer class="footer">
+
+    <div class="container footer-content">
+
+      <div class="footer-info">
+        <div class="logo"></div>
+        <img src="./assets/logoFooter.svg" alt="logo-footer">
+        <p>
+          Conectando artesanos locales con el mundo, cada producto cuenta una historia única
+        </p>
+      </div>
+
+      <div class="Enlaces-rápidos">
+        <h6>Enlaces rápidos</h6>
+        <ul>
+          <li>Inicio</li>
+          <li>Productos</li>
+          <li>Acerca de nosotros</li>
+          <li>Contacto</li>
+        </ul>
+      </div>
+
+      <div class="Servicio-cliente">
+        <h6>Servicio al cliente</h6>
+        <ul>
+          <li>Mi cuenta</li>
+          <li>Historial de pedidos</li>
+          <li>Política de devoluciones</li>
+          <li>Términos y condiciones</li>
+        </ul>
+      </div>
+
+      <div class="contact-info">
+        <p><i class="bi bi-geo-alt-fill"></i> Calle Principal 123, México</p>
+        <p><i class="bi bi-telephone-fill"></i> 01 800 456 789</p>
+        <p><i class="bi bi-envelope-fill"></i> soporte@hilonacional.com</p>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 Hilo Nacional. Todos los derechos reservados.</p>
+    </div>
+
+  </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
