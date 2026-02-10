@@ -272,3 +272,98 @@ body {
 }
 
 /* Termina Sección Tarjetas de Presentación */
+
+/* ==========================
+   FOOTER – HILO NACIONAL
+========================== */
+
+.footer {
+    background: linear-gradient(180deg, #0b1220 0%, #020617 100%);
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    padding: 4rem 1.5rem 1.5rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.5rem;
+}
+
+@media (max-width: 992px) {
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+}
+
+.footer-info p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    max-width: 260px;
+    color: #e5e7eb;
+}
+
+.footer h6 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #ffffff;
+}
+
+.footer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer ul li {
+    font-size: 0.88rem;
+    margin-bottom: 0.55rem;
+    color: #e5e7eb;
+    cursor: pointer;
+    transition: opacity 0.25s ease;
+}
+
+.footer ul li:hover {
+    opacity: 0.75;
+}
+
+.contact-info p {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.88rem;
+    margin-bottom: 0.6rem;
+    color: #e5e7eb;
+}
+
+.contact-info i {
+    font-size: 1rem;
+    color: #e5e7eb;
+}
+
+.footer-bottom {
+    margin-top: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.footer-bottom p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #d1d5db;
+    white-space: nowrap;
+}
+
+.footer-divider {
+    display: none;
+}
