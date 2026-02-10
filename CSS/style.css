@@ -367,3 +367,126 @@ body {
 .footer-divider {
     display: none;
 }
+
+
+/* Mejoras en la navegación */
+.transition-all { transition: all 0.3s ease-in-out; }
+.nav-icons img { transition: transform 0.2s; }
+.nav-icons img:hover { transform: scale(1.2); }
+
+/* Corregir alineación de tarjetas de equipo */
+.cards-flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centra las tarjetas si sobran */
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.team-card {
+    flex: 0 1 300px; /* Tamaño base fijo para que se acomoden solas */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Animación sutil para los contadores */
+.counter {
+    font-weight: 700;
+    transition: all 0.5s ease;
+}
+
+/* Fondo para sección de equipo para separar del blanco */
+.team-bg {
+    background-color: #fbfbfb;
+}
+
+
+/* Transición suave para la Navbar y Tarjetas */
+.navbar {
+    transition: all 0.4s ease-in-out;
+}
+
+.team-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    border: 1px solid #f0f0f0; /* Color inicial */
+}
+
+.counter {
+    display: inline-block;
+    min-width: 80px;
+}
+
+/* --- Efecto de Agrandado (Hover) --- */
+
+/* Aplicar a las tarjetas de Historia y de Valores */
+.card, .value-card {
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                box-shadow 0.3s ease, 
+                z-index 0s !important;
+    cursor: pointer;
+    position: relative; /* Necesario para el z-index */
+    z-index: 1;
+}
+
+/* Estado al pasar el mouse */
+.card:hover, .value-card:hover {
+    transform: scale(1.1) !important; /* Aumenta el tamaño un 10% */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2) !important;
+    z-index: 10; /* La coloca por encima de las demás */
+    border-color: #9913F2 !important; /* Resalta el borde con tu color morado */
+}
+
+/* --- Control de visibilidad del párrafo --- */
+
+/* 1. Escondemos el párrafo por defecto dentro de las tarjetas */
+.card p, .value-card p {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.4s ease-in-out;
+    margin-top: 0;
+}
+
+/* 2. Cuando pasamos el mouse por la tarjeta, mostramos el párrafo */
+.card:hover p, .value-card:hover p {
+    opacity: 1;
+    max-height: 200px; /* Un valor lo suficientemente alto para el texto */
+    margin-top: 15px; /* Espaciado que aparece al mostrarse */
+}
+
+/* 3. Mantenemos el efecto de agrandar que ya tenías */
+.card, .value-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.card:hover, .value-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+/* --- Centrado de títulos en Nuestra Historia --- */
+
+/* Centra el H2 principal y el párrafo de subtítulo */
+.history h2, 
+.history .subtitle {
+    text-align: center;
+    width: 100%;
+    display: block;
+}
+
+/* Centra los títulos (H3) dentro de cada tarjeta */
+.card h3 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* Asegura que el contenedor de las tarjetas esté centrado */
+.history-cards {
+    display: flex;
+    justify-content: center; /* Centra las tarjetas horizontalmente */
+    gap: 30px;
+    flex-wrap: wrap;
+}
