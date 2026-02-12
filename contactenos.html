@@ -23,8 +23,8 @@
                 <ul class="navbar-nav ms-3">
                     <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Productos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Acerca de Nosotros</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="#">Contacto</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./index.html">Acerca de Nosotros</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./contactenos.html">Contacto</a></li>
                 </ul>
 
                 <form class="d-flex ms-auto" role="search">
@@ -48,6 +48,7 @@
         <h1>Contáctenos</h1>
         <p>¿Tienes alguna pregunta? Estamos aquí para ayudarte.</p>
     </header>
+
 
     <section class="container my-4 ">
         <div class="row text-center">
@@ -74,6 +75,112 @@
             </div>
         </div>
     </section>
+
+
+    <main class="container my5">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="formulario">
+                    <h4>Envíanos un Mensaje</h4>
+                    <form>
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre Completo</label>
+                            <input type="text" class="form-control" placeholder="Tu nombre" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Correo Electrónico</label>
+                            <input type="email" class="form-control" placeholder="tu@email.com" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="tel" class="form-label">Teléfono</label>
+                            <input type="tel" class="form-control" placeholder="Tu nombre" required pattern="[0-9]{7,15}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="mensaje" class="form-label">Mensaje</label>
+                            <textarea class="form-control" id="mensaje" rows="2" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary, btn-lg w-100">Enviar Mensaje</button>
+                    </form>
+                </div>
+            </div>
+
+
+            <div class="col-md-5">
+                <h5 class="mb-3">Preguntas Frecuentes</h5>
+                <div class="accordion">
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#pregunta1">
+                                ¿Cuál es el tiempo de entrega?
+                            </button>
+                        </h2>
+                        <div id="pregunta1" class="accordion-collapse collapse">
+                            <div class="accordion-body">Entre 3 y 7 días hábiles.</div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" >
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#pregunta2">
+                                ¿Ofrecen devoluciones?
+                            </button>
+                        </h2>
+                        <div id="pregunta2" class="accordion-collapse collapse" >
+                            <div class="accordion-body">Sí, dentro de los primeros 15 días.</div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" >
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#pregunta3">
+                                ¿Cómo puedo rastrear mi pedido?
+                            </button>
+                        </h2>
+                        <div id="pregunta3" class="accordion-collapse collapse" >
+                            <div class="accordion-body">Recibirás un número de seguimiento por correo electrónico.</div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" >
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#pregunta4">
+                                ¿Los productos son artesanales?
+                            </button>
+                        </h2>
+                        <div id="pregunta4" class="accordion-collapse collapse" >
+                            <div class="accordion-body">Sí, todos los productos son elaborados por artesanos locales.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" >
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#pregunta5">
+                                ¿Cómo puedo vender mis productos en la plataforma?
+                            </button>
+                        </h2>
+                        <div id="pregunta5" class="accordion-collapse collapse" >
+                            <div class="accordion-body">Contáctanos en ventas@hilonacional.com para más información.</div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" >
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#pregunta6">
+                                ¿Qué métodos de pago aceptan?
+                            </button>
+                        </h2>
+                        <div id="pregunta6" class="accordion-collapse collapse" >
+                            <div class="accordion-body">Aceptamos tarjetas de crédito, débito y PayPal.</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </main>
 
     <footer class="footer">
         <div class="container footer-content">
