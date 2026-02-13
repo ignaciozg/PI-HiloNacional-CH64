@@ -1,0 +1,232 @@
+/* =====================================
+   ACERCA DE – ESTILOS EXCLUSIVOS
+====================================== */
+
+
+/* ===== HERO ===== */
+
+.hero {
+    background: linear-gradient(135deg, #8e2de2, #9913F2);
+    color: #ffffff;
+    text-align: center;
+    padding: 5rem 1.5rem;
+}
+
+.hero h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+
+/* ===== ESTADÍSTICAS ===== */
+
+.stats {
+    background-color: #f9fafb;
+    padding: 4rem 1.5rem;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat h2 {
+    color: #8e2de2;
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+.stat p {
+    font-weight: 500;
+    color: #555;
+}
+
+
+/* ===== HISTORIA ===== */
+
+.history {
+    padding: 4rem 1.5rem;
+    text-align: center;
+}
+
+.history h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.history .subtitle {
+    color: #6b7280;
+    margin-bottom: 3rem;
+}
+
+.history-cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.history-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 300px;
+    border: 1px solid #f0f0f0;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    transition: all 0.3s ease;
+}
+
+.history-card h3 {
+    color: #8e2de2;
+    margin-bottom: 1rem;
+}
+
+.history-card p {
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.history-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+}
+
+
+/* ===== VALORES ===== */
+
+.values {
+    padding: 4rem 1.5rem;
+    text-align: center;
+    background-color: #fbfbfb;
+}
+
+.values h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.values .subtitle {
+    color: #6b7280;
+    margin-bottom: 3rem;
+}
+
+.values-cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.value-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 240px;
+    border: 1px solid #f0f0f0;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.value-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+}
+
+.value-card .icon {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 1rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #8e2de2, #4a00e0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.4rem;
+}
+
+
+/* ===== MANIFIESTO ===== */
+
+.manifesto {
+    background: linear-gradient(135deg, #8e2de2, #4a00e0);
+    color: #ffffff;
+    padding: 4rem 1.5rem;
+    text-align: center;
+}
+
+.manifesto h2 {
+    margin-bottom: 1rem;
+}
+
+.manifesto p {
+    max-width: 800px;
+    margin: 0 auto;
+    opacity: 0.9;
+}
+
+
+/* ===== EQUIPO ===== */
+
+.section {
+    padding: 4rem 1.5rem;
+}
+
+.cards-flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.team-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 2rem;
+    flex: 0 1 300px;
+    text-align: center;
+    border: 1px solid #f0f0f0;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+}
+
+.team-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+}
+
+.circle-img {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.circle-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.team-card .role {
+    color: #8e2de2;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.team-card p {
+    font-size: 0.95rem;
+    color: #6b7280;
+}
