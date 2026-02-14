@@ -41,8 +41,9 @@ a:hover {
     color: #9913F2;
 }
 
+
 /* =====================================
-   NAVBAR GLOBAL
+    NAVBAR GLOBAL
 ====================================== */
 
 .navbar {
@@ -97,7 +98,7 @@ a:hover {
 
 
 /* =====================================
-   FOOTER GLOBAL
+    FOOTER GLOBAL
 ====================================== */
 
 .footer {
@@ -172,7 +173,7 @@ a:hover {
 }
 
 /* =====================================
-   UTILIDADES GENERALES
+    UTILIDADES GENERALES
 ====================================== */
 
 .text-center { text-align: center; }
@@ -186,7 +187,7 @@ img {
 }
 
 /* =====================================
-   RESPONSIVE GLOBAL
+    RESPONSIVE GLOBAL
 ====================================== */
 
 /* Tablets */
@@ -239,4 +240,316 @@ img {
         padding-left: 1rem;
         padding-right: 1rem;
     }
+}
+
+
+/* =====================================
+    MODO OSCURO (DARK MODE)
+====================================== */
+
+/* 1. Variables por defecto (Tema Claro) */
+:root {
+    --bg-body: #ffffff;
+    --text-main: #111827;
+    --text-muted: #374151;
+    --bg-nav: #ffffff;
+    --bg-card: #ffffff;
+    --bg-input: #F3F3F5;
+    --border-color: #e5e7eb;
+    --nav-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* 2. Variables para Tema Oscuro */
+[data-theme="dark"] {
+    --bg-body: #0f172a;      /* Azul muy oscuro */
+    --text-main: #f3f4f6;    /* Blanco humo */
+    --text-muted: #9ca3af;   /* Gris claro */
+    --bg-nav: #1e293b;       /* Azul grisáceo oscuro */
+    --bg-card: #1e293b;
+    --bg-input: #334155;
+    --border-color: #374151;
+    --nav-shadow: 0 2px 6px rgba(0,0,0,0.5);
+}
+
+/* 3. Aplicación de variables */
+body {
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+p, h1, h2, h3, h4, h5, h6, .accordion-button {
+    color: var(--text-main) !important;
+}
+
+/* Navbar */
+.navbar {
+    background-color: var(--bg-nav) !important;
+    box-shadow: var(--nav-shadow);
+}
+
+.nav-link {
+    color: var(--text-main) !important;
+}
+
+/* Iconos del Navbar en modo oscuro (Invertir color si son SVG negros) */
+[data-theme="dark"] .nav-icons img, 
+[data-theme="dark"] .navbar-brand img {
+    filter: invert(1) brightness(2); /* Vuelve blancos los iconos negros */
+}
+
+/* Botón del toggle */
+#theme-toggle i {
+    color: var(--text-main);
+    transition: transform 0.3s ease;
+}
+#theme-toggle:hover i {
+    transform: rotate(15deg);
+}
+
+/* Cards y Acordeones */
+.card, .accordion-item, .accordion-button {
+    background-color: var(--bg-card);
+    border-color: var(--border-color);
+    color: var(--text-main);
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: var(--bg-input); /* Un poco más claro al abrir */
+    color: var(--text-main);
+    box-shadow: none;
+}
+
+
+/* Formularios e Inputs */
+.form-control {
+    background-color: var(--bg-input);
+    border-color: var(--border-color);
+    color: var(--text-main);
+}
+
+.form-control:focus {
+    background-color: var(--bg-input); /* Mantiene el color oscuro al enfocar */
+    color: var(--text-main);
+    border-color: #9913F2;
+}
+
+.form-control::placeholder {
+    color: var(--text-muted);
+}
+
+.input-group-text {
+    background-color: var(--bg-input);
+    border-color: var(--border-color);
+    color: var(--text-main);
+}
+
+/* =================================================
+    CORRECCIÓN PARA TARJETAS Y COMPONENTES
+================================================= */
+
+/* Forzamos el color en las tarjetas cuando está en modo oscuro */
+[data-theme="dark"] .card {
+    background-color: var(--bg-card) !important; /* El !important asegura que sobreescriba a Bootstrap */
+    border-color: var(--border-color);
+    color: var(--text-main);
+}
+
+/* Corregir el texto dentro de la tarjeta para que no sea gris oscuro */
+[data-theme="dark"] .card h5,
+[data-theme="dark"] .card p {
+    color: var(--text-main);
+}
+
+/* Corregir Acordeones (Preguntas Frecuentes) */
+[data-theme="dark"] .accordion-item {
+    background-color: var(--bg-card);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .accordion-button {
+    background-color: var(--bg-card);
+    color: var(--text-main);
+    box-shadow: none; /* Quita el brillo azul al abrir */
+}
+
+[data-theme="dark"] .accordion-button:not(.collapsed) {
+    background-color: var(--bg-input); /* Un poco más claro al estar abierto */
+    color: #fff;
+    box-shadow: inset 0 -1px 0 rgba(0,0,0,.125);
+}
+
+/* Iconos dentro de las tarjetas (Email, Teléfono, Ubicación) */
+/* Esto invierte el color para que se vean blancos en fondo oscuro */
+[data-theme="dark"] .card img {
+    filter: invert(1) brightness(2); 
+}
+
+/* =================================================
+    CORRECCIÓN ESPECÍFICA PARA EL CUERPO DEL ACORDEÓN
+   ================================================= */
+
+[data-theme="dark"] .accordion-body {
+    background-color: var(--bg-card); /* Mantiene el azul oscuro */
+    color: var(--text-main) !important; /* Asegura que el texto sea blanco humo */
+    border-top: 1px solid var(--border-color); /* Separa sutilmente el cuerpo del encabezado */
+}
+
+/* Opcional: Si quieres que el fondo sea ligeramente distinto al abrirse */
+[data-theme="dark"] .accordion-collapse {
+    background-color: rgba(255, 255, 255, 0.03); 
+}
+
+/* =================================================
+    CORRECCIÓN FORMULARIO DE CONTACTO
+================================================= */
+
+/* Fondo oscuro para el contenedor del formulario */
+[data-theme="dark"] .formulario {
+    background-color: var(--bg-card);
+    color: var(--text-main);
+    /* Si tu formulario original tenía sombra, la suavizamos para modo oscuro */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); 
+    border: 1px solid var(--border-color); /* Opcional: para definir mejor el borde */
+}
+
+/* Asegurar que las etiquetas (labels) se vean blancas */
+[data-theme="dark"] .formulario label {
+    color: var(--text-main);
+}
+
+/* Asegurar que el título "Envíanos un Mensaje" se vea blanco */
+[data-theme="dark"] .formulario h4 {
+    color: var(--text-main);
+}
+
+/* =================================================
+    CORRECCIÓN LOGO NAVBAR
+================================================= */
+
+/* Asegura que el logo mantenga sus colores originales */
+[data-theme="dark"] .navbar-brand img {
+    filter: none !important;
+}
+
+/* =================================================
+    CORRECCIÓN HERO (CABECERA)
+================================================= */
+
+/* Forzamos que el título y el texto del banner sean siempre blancos */
+.hero h1,
+.hero p {
+    color: #ffffff !important;
+}
+
+.footer p,h6{
+    color: white !important;
+}
+
+/* Invierte el color del logo SOLO en modo oscuro */
+[data-theme="dark"] .navbar-brand img {
+    filter: invert(1) brightness(2);
+    transition: filter 0.3s ease;
+}
+
+
+
+/* =================================================
+    CORRECCIÓN RESPONSIVA (MÓVIL)
+================================================= */
+
+/* 1. Hacer visible el icono del menú en Modo Oscuro (lo vuelve blanco) */
+[data-theme="dark"] .navbar-toggler-icon {
+    filter: invert(1);
+}
+
+/* 2. Cambiar el color del borde del botón de menú en Modo Oscuro */
+[data-theme="dark"] .navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* 3. Asegurar que los enlaces del menú móvil se vean bien */
+@media (max-width: 991px) {
+    [data-theme="dark"] .navbar-collapse {
+        background-color: var(--bg-nav); /* Fondo oscuro en el menú desplegable */
+    }
+    
+    /* Separar un poco los iconos en móvil */
+    .nav-icons {
+        margin-top: 15px;
+        gap: 20px !important; /* Más espacio entre iconos en el cel */
+    }
+}
+
+
+/* =====================================
+    DARK MODE - CONECTANDO TALENTOS
+====================================== */
+
+/* HERO */
+[data-theme="dark"] .hero {
+    background-color: #0f172a;
+}
+
+[data-theme="dark"] .hero-content h1,
+[data-theme="dark"] .hero-content p {
+    color: #ffffff !important;
+}
+
+/* STATS */
+[data-theme="dark"] .stats {
+    background-color: #1e293b;
+}
+
+[data-theme="dark"] .stat h2,
+[data-theme="dark"] .stat p {
+    color: var(--text-main);
+}
+
+/* HISTORY SECTION */
+[data-theme="dark"] .history {
+    background-color: var(--bg-body);
+}
+
+[data-theme="dark"] .history .card {
+    background-color: var(--bg-card);
+    color: var(--text-main);
+    border-color: var(--border-color);
+}
+
+/* VALUES */
+[data-theme="dark"] .values {
+    background-color: var(--bg-body);
+}
+
+[data-theme="dark"] .value-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+}
+
+/* MANIFESTO */
+[data-theme="dark"] .manifesto {
+    background-color: #1e293b;
+    color: var(--text-main);
+}
+
+/* TEAM SECTION */
+[data-theme="dark"] .team-bg {
+    background-color: var(--bg-body);
+}
+
+[data-theme="dark"] .team-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+}
+
+/* Links dentro de tarjetas */
+[data-theme="dark"] .team-card a {
+    color: var(--text-main);
+}
+
+[data-theme="dark"] .team-card a:hover {
+    color: #9913F2;
 }
