@@ -553,3 +553,15 @@ p, h1, h2, h3, h4, h5, h6, .accordion-button {
 [data-theme="dark"] .team-card a:hover {
     color: #9913F2;
 }
+
+
+.iconsalign{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+[data-theme="dark"] .iconsalign {
+filter: invert(1) brightness(2);
+}
