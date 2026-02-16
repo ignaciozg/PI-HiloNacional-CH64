@@ -565,3 +565,18 @@ p, h1, h2, h3, h4, h5, h6, .accordion-button {
 [data-theme="dark"] .iconsalign {
 filter: invert(1) brightness(2);
 }
+
+/* Estilo general para el logo */
+.footer-logo {
+    display: block;
+    margin: 0 auto; /* centra en móvil */
+    max-width: 150px; /* tamaño máximo por defecto */
+}
+
+/* En pantallas grandes */
+@media (min-width: 992px) {
+    .footer-logo {
+        max-width: 100px; /* reduce el tamaño en escritorio */
+        margin: 0; /* opcional: alinearlo a la izquierda */
+    }
+}
