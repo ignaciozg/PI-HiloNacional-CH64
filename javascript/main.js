@@ -128,3 +128,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 }); // <--- CIERRE FINAL DEL DOMContentLoaded
 
+document.addEventListener("DOMContentLoaded", () => {
+    fetch("./footer.html")
+    .then(res => res.text())
+    .then(html => document.getElementById("footer").insertAdjacentHTML("beforeend", html));
+});
+
