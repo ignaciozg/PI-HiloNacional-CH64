@@ -35,48 +35,68 @@ document.getElementById("formulario").addEventListener("submit", function(e) {
         return;
     }
 
-    // ✅ TELÉFONO (FORMATO FLEXIBLE)
-const valorTelefono = telefono.value.trim();
+    // ✅ TELÉFONO (FORMATO PROFESIONAL)
+    const valorTelefono = telefono.value.trim();
+    const soloNumeros = valorTelefono.replace(/\D/g, ""); 
+    
+    const regexTelCompleto = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
+    
+    // Formato
+    if (!regexTelCompleto.test(valorTelefono)) {
+        telefono.setCustomValidity("Ingresa un formato válido (ej: +52 (331) 123-4567)");
+    } 
+    // 10 numeros min
+    else if (soloNumeros.length < 10) {
+        telefono.setCustomValidity("El número debe tener al menos 10 dígitos reales.");
+    }
+    // No empezar con 0
+    else if (soloNumeros.startsWith("0")) {
+        telefono.setCustomValidity("Un número de teléfono real no puede empezar con 0.");
+    }
+    // No numeros repetidos
+    else if (new Set(soloNumeros).size === 1) {
+        telefono.setCustomValidity("No se permiten números repetidos (ej: 111...).");
+    }
+    else if (soloNumeros.match(/0{5,}/)) { 
+        // No mas de 5 0
+        telefono.setCustomValidity("Por favor, ingresa un número de teléfono real.");
+    }
+    else if (soloNumeros === "1234567890" || soloNumeros === "1234567891") {
+        telefono.setCustomValidity("Ingresa un número real, no una secuencia.");
+    }
+    else {
+        telefono.setCustomValidity("");
+    }
 
-// Expresion de ihateregex
-const regexTelCompleto = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
-
-if (!regexTelCompleto.test(valorTelefono)) {
-    telefono.setCustomValidity("Ingresa un formato válido (ej: +52 (331) 123-4567 o 10 dígitos)");
-    telefono.reportValidity();
-    return;
-} else {
-    // Limpiar la validación si el número es correcto
-    telefono.setCustomValidity("");
-}
+    if (!telefono.checkValidity()) {
+        telefono.reportValidity();
+        return;
+    }
 
     // ✅ MENSAJE
   mensaje.setCustomValidity(""); // Limpiamos errores previos
 
 const valorMensaje = mensaje.value.trim();
 
-// 1. Regex para detectar letras repetidas (más de 3 veces seguidas)
-// Ejemplo: bloquear "holaaaaaa" o ".......", pero permitir "acción"
+// Regex para detectar letras repetidas 
 const regexRepeticion = /(.)\1{3,}/;
 
-// 2. Contar palabras (dividimos por espacios y filtramos los vacíos)
+// Contar palabras 
 const palabras = valorMensaje.split(/\s+/).filter(p => p.length > 0);
 
-// --- EMPIEZAN LAS VALIDACIONES REALES ---
-
-// A. Validar longitud básica
+// Validar longitud básica
 if (valorMensaje.length < 20) {
     mensaje.setCustomValidity("❌ El mensaje es muy corto (mínimo 20 caracteres).");
 } 
-// B. Validar si hay letras/símbolos repetidos sin sentido (ej: "aaaaa" o ".....")
+// Validar si hay letras o simbolos repetidos sin sentido
 else if (regexRepeticion.test(valorMensaje)) {
     mensaje.setCustomValidity("❌ El mensaje tiene demasiados caracteres repetidos.");
 }
-// C. Validar que tenga al menos 3 palabras (un mensaje real tiene estructura)
+// Validar que tenga al menos 3 palabras 
 else if (palabras.length < 3) {
     mensaje.setCustomValidity("❌ Por favor, escribe una frase completa (mínimo 3 palabras).");
 }
-// D. Validar que no sea solo "basura" numérica o de símbolos
+// Validar que no sea solo basura numérica 
 else if (!/[a-zA-ZñÑáéíóúÁÉÍÓÚ]/.test(valorMensaje)) {
     mensaje.setCustomValidity("❌ El mensaje debe contener texto legible.");
 }
