@@ -7,6 +7,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================
     // 1. LÓGICA DE DARK MODE
     // ==========================================
+     fetch("componentes/navbar.html")
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("navbar-container").innerHTML = data;
+
+      // 👇 Ahora que la navbar existe, iniciamos el dark mode
+      initTheme();
+    });
+
     const themeToggleBtn = document.getElementById('theme-toggle');
     const themeIcon = themeToggleBtn ? themeToggleBtn.querySelector('i') : null;
     const htmlElement = document.documentElement;
