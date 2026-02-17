@@ -96,7 +96,7 @@ else if (regexRepeticion.test(valorMensaje)) {
 else if (palabras.length < 3) {
     mensaje.setCustomValidity("❌ Por favor, escribe una frase completa (mínimo 3 palabras).");
 }
-// Validar que no sea solo basura numérica 
+// Validar que no sea solo javabasura numérica 
 else if (!/[a-zA-ZñÑáéíóúÁÉÍÓÚ]/.test(valorMensaje)) {
     mensaje.setCustomValidity("❌ El mensaje debe contener texto legible.");
 }
