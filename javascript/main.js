@@ -128,19 +128,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 }); // <--- CIERRE FINAL DEL DOMContentLoaded
 
-async function loadComponent(id, file) {
-    const container = document.getElementById(id);
-    if (container) {
-        try {
-            const response = await fetch(file);
-            const html = await response.text();
-            container.innerHTML = html;
-        } catch (error) {
-            console.error("Error cargando " + file, error);
-        }
-    }
-}
-
 document.addEventListener("DOMContentLoaded", () => {
-    loadComponent("footer", "./footer.html");
+    fetch("./footer.html")
+    .then(res => res.text())
+    .then(html => document.getElementById("footer").insertAdjacentHTML("beforeend", html));
 });
+
