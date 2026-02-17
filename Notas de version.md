@@ -70,3 +70,42 @@ Se reemplazó el icono de fuente (*) por un SVG en línea para mayor nitidez.*
 
 *Limpieza HTML: Se eliminaron scripts duplicados en index.html y contenedores vacíos (<div id="footer">) en páginas que ya tenían el footer hardcoded.*
 
+*Plaintext
+HILO-NACIONAL/  <-- Carpeta Raíz del Proyecto
+│
+├── index.html           (Página de Inicio)
+├── acerca-de.html       (Página Acerca de Nosotros)
+├── contactenos.html     (Página de Contacto)
+├── footer.html          (Archivo parcial para inyección)
+│
+├── CSS/
+│   ├── main.css         (Estilos globales, variables y Dark Mode)
+│   ├── acercade.css     (Estilos específicos para acerca-de.html)
+│   └── contactenos.css  (Estilos específicos para contactenos.html)
+│
+├── javascript/
+│   ├── main.js          (Lógica principal: Navbar, Dark Mode, Ver Más)
+│   └── validaciones.js  (Lógica exclusiva del formulario de contacto)
+│
+├── componentes/
+│   └── navbar.html      (Archivo parcial del menú para index.html)
+│
+└── assets/              (Todas tus imágenes e iconos)
+    ├── hilo_nacional.svg
+    ├── hilo_nacional_white.png
+    ├── logoFooter.svg
+    ├── icono_perfil.svg
+    ├── icono_corazon.svg
+    ├── Icono_carrito.svg
+    ├── email.svg
+    ├── telefono.svg
+    ├── ubicacion.svg
+    ├── linkedin.svg
+    ├── github.svg
+    ├── person-circle.svg
+    ├── mar2.jpg
+    ├── Gabi.png
+    ├── fotoatziri.jpeg
+    ├── Hector.png
+    └── ZG.jpeg
+
