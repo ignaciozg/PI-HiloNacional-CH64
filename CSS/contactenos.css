@@ -133,3 +133,39 @@ main.container {
     margin-top: 3rem;
     margin-bottom: 3rem;
 }
+
+/* --- Estilos para Validaciones --- */
+
+/* Contenedor del mensaje de error */
+.error-text {
+    color: #dc3545; 
+    font-size: 0.75rem;
+    font-weight: 500;
+    display: block;
+    margin-top: 4px;
+    min-height: 1.1rem; 
+    transition: all 0.2s ease;
+}
+
+.form-control.is-invalid {
+    border-color: #dc3545 !important;
+    background-image: none; 
+}
+
+/* En modo oscuro */
+[data-theme="dark"] .error-text {
+    color: #ff6b6b;
+}
+
+[data-theme="dark"] .form-control.is-invalid {
+    border-color: #ff6b6b !important;
+}
+
+@keyframes fadeInError {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.error-text:not(:empty) {
+    animation: fadeInError 0.3s ease forwards;
+}
