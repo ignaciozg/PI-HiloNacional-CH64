@@ -14,8 +14,22 @@ body {
     line-height: 1.6;
     background-color: var(--bg-body);
     color: var(--text-main);
+
+}
+body.theme-ready {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+/* Previene flash en componentes antes de aplicar el tema */
+.card,
+.formulario,
+.accordion-item {
+    background-color: var(--bg-card);
+    transition: none !important;
+}
+
+
+
 
 /* ===== 2. VARIABLES DE MODO OSCURO ===== */
 :root {
