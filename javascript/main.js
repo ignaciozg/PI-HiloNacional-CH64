@@ -1,6 +1,9 @@
 /**
  * main.js - Versión Final Optimizada
  */
+window.addEventListener("load", () => {
+  document.body.classList.add("theme-ready");
+});
 
 document.addEventListener('DOMContentLoaded', () => {
 

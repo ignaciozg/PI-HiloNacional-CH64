@@ -23,9 +23,9 @@
 .card {
     border: 1px solid var(--border-color);
     border-radius: 12px;
-    transition: all 0.3s ease;
     background-color: var(--bg-card);
     color: var(--text-main);
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* NO el color */
 }
 
 .card h5 {
@@ -134,38 +134,17 @@ main.container {
     margin-bottom: 3rem;
 }
 
-/* --- Estilos para Validaciones --- */
 
-/* Contenedor del mensaje de error */
-.error-text {
-    color: #dc3545; 
-    font-size: 0.75rem;
-    font-weight: 500;
-    display: block;
-    margin-top: 4px;
-    min-height: 1.1rem; 
-    transition: all 0.2s ease;
+/* Para que no cargue el boostrap antes que el efecto dark*/
+.card,
+.accordion-item,
+.accordion-button,
+.formulario {
+    background-color: var(--bg-card) !important;
+    color: var(--text-main) !important;
 }
-
-.form-control.is-invalid {
-    border-color: #dc3545 !important;
-    background-image: none; 
-}
-
-/* En modo oscuro */
-[data-theme="dark"] .error-text {
-    color: #ff6b6b;
-}
-
-[data-theme="dark"] .form-control.is-invalid {
-    border-color: #ff6b6b !important;
-}
-
-@keyframes fadeInError {
-    from { opacity: 0; transform: translateY(-5px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.error-text:not(:empty) {
-    animation: fadeInError 0.3s ease forwards;
+.form-control {
+    background-color: var(--bg-input) !important;
+    color: var(--text-main) !important;
+    border-color: var(--border-color) !important;
 }
