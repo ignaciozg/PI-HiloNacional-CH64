@@ -1,0 +1,118 @@
+/* ---BANNER--- */
+.category-banner {
+    background: linear-gradient(90deg, #9913F2 0%, #F213A4 100%);
+    border-radius: 20px; /* Redondeado */
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+/* ---CATEGORÍAS--- */
+.filter-btn {
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-card);
+    color: var(--text-main);
+    padding: 6px 18px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.filter-btn.active {
+    background-color: #111827;
+    color: white;
+    border-color: #111827;
+}
+
+.filter-btn:hover:not(.active) {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+/* ---TARJETAS PRODUCTO--- */
+.product-card {
+    background: transparent !important;
+    border: none !important;
+    transition: transform 0.3s ease; /* Efecto */
+    cursor: pointer;
+}
+
+.product-card:hover {
+    transform: translateY(-8px); /* La tarjeta sube al pasar el mouse */
+}
+
+.product-img-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    background-color: var(--bg-input);
+}
+
+.product-img-wrapper img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover; /* Animación de zoom suave */
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.product-card:hover img {
+    transform: scale(1.1); /* Zoom de la imagen */
+}
+
+/* ---CORAZON--- */
+.btn-wishlist {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: none;
+    display: flex;
+    align-items: center;    justify-content: center;
+    color: #111827;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    z-index: 2;
+}
+
+.btn-wishlist:hover {
+    background-color: #ff4757;
+    color: white !important;
+    transform: scale(1.1);
+}
+
+/* Textos y Precios */
+.product-category {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    margin-top: 12px;
+    margin-bottom: 4px;
+}
+
+.product-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 4px;
+}
+
+.product-price {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+/* Dark Mode */
+[data-theme="dark"] .filter-btn.active {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+[data-theme="dark"] .btn-wishlist {
+    background-color: var(--bg-nav);
+    color: var(--text-main);
+}
