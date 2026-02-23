@@ -204,3 +204,26 @@ function initVerMas() {
         });
     });
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const productCards = document.querySelectorAll(".product-card");
+
+  productCards.forEach(card => {
+    card.addEventListener("click", () => {
+      const title = card.querySelector(".product-title").textContent;
+      const category = card.querySelector(".product-category").textContent;
+      const price = card.querySelector(".product-price").textContent;
+      const imgSrc = card.querySelector("img").getAttribute("src");
+
+      // Insertar datos en el modal
+      document.getElementById("productModalLabel").textContent = title;
+      document.getElementById("productModalDesc").textContent = `Categoría: ${category}`;
+      document.getElementById("productModalPrice").textContent = price;
+      document.getElementById("productModalImg").setAttribute("src", imgSrc);
+
+      // Mostrar modal
+      const modal = new bootstrap.Modal(document.getElementById("productModal"));
+      modal.show();
+    });
+  });
+});
