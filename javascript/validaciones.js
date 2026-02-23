@@ -1,113 +1,87 @@
 document.getElementById("formulario").addEventListener("submit", function(e) {
     e.preventDefault();
 
-    const nombre = document.getElementById("nombre");
-    const correo = document.getElementById("correo");
-    const telefono = document.getElementById("telefono");
-    const mensaje = document.getElementById("mensaje-texto");
+    // Referencias y limpieza inicial
+    const campos = {
+        nombre: document.getElementById("nombre"),
+        correo: document.getElementById("correo"),
+        telefono: document.getElementById("telefono"),
+        mensaje: document.getElementById("mensaje-texto")
+    };
 
-    // Limpiar mensajes previos
-    [nombre, correo, telefono, mensaje].forEach(campo => campo.setCustomValidity(""));
+    function limpiarErrores() {
+        Object.keys(campos).forEach(id => {
+            const spanError = document.getElementById("error-" + (id === "mensaje" ? "mensaje" : id));
+            if (spanError) spanError.innerText = "";
+            campos[id].classList.remove("is-invalid");
+        });
+    }
 
-    // ✅ NOMBRE
-    const valorNombre = nombre.value.trim();
+    limpiarErrores();
+    let esValido = true;
+
+    // --- FUNCION AUXILIAR PARA MOSTRAR ERROR ---
+    const setError = (id, msg) => {
+        const targetId = id === "mensaje" ? "error-mensaje" : "error-" + id;
+        document.getElementById(targetId).innerText = msg;
+        campos[id].classList.add("is-invalid");
+        esValido = false;
+    };
+
+    // ✅ VALIDACIÓN NOMBRE
+    const valorNombre = campos.nombre.value.trim();
     const regexNombre = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
-
     if (valorNombre.length < 3) {
-        nombre.setCustomValidity("El nombre debe tener al menos 3 caracteres");
-        nombre.reportValidity();
-        return;
+        setError("nombre", "Mínimo 3 caracteres.");
+    } else if (!regexNombre.test(valorNombre)) {
+        setError("nombre", "Solo se permiten letras.");
     }
 
-    if (!regexNombre.test(valorNombre)) {
-        nombre.setCustomValidity("El nombre solo debe contener letras");
-        nombre.reportValidity();
-        return;
-    }
-
-    // ✅ CORREO
-    const valorCorreo = correo.value.trim();
+    // ✅ VALIDACIÓN CORREO
+    const valorCorreo = campos.correo.value.trim();
     const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
     if (!regexCorreo.test(valorCorreo)) {
-        correo.setCustomValidity("Ingresa un correo válido (ej: usuario@correo.com)");
-        correo.reportValidity();
-        return;
+        setError("correo", "Ingresa un correo válido (ej: usuario@correo.com).");
     }
 
-    // ✅ TELÉFONO (FORMATO PROFESIONAL)
-    const valorTelefono = telefono.value.trim();
-    const soloNumeros = valorTelefono.replace(/\D/g, ""); 
-    
+    // ✅ VALIDACIÓN TELÉFONO 
+    const valorTelefono = campos.telefono.value.trim();
+    const soloNumeros = valorTelefono.replace(/\D/g, "");
     const regexTelCompleto = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
-    
-    // Formato
+
     if (!regexTelCompleto.test(valorTelefono)) {
-        telefono.setCustomValidity("Ingresa un formato válido (ej: +52 (331) 123-4567)");
-    } 
-    // 10 numeros min
-    else if (soloNumeros.length < 10) {
-        telefono.setCustomValidity("El número debe tener al menos 10 dígitos reales.");
-    }
-    // No empezar con 0
-    else if (soloNumeros.startsWith("0")) {
-        telefono.setCustomValidity("Un número de teléfono real no puede empezar con 0.");
-    }
-    // No numeros repetidos
-    else if (new Set(soloNumeros).size === 1) {
-        telefono.setCustomValidity("No se permiten números repetidos (ej: 111...).");
-    }
-    else if (soloNumeros.match(/0{5,}/)) { 
-        // No mas de 5 0
-        telefono.setCustomValidity("Por favor, ingresa un número de teléfono real.");
-    }
-    else if (soloNumeros === "1234567890" || soloNumeros === "1234567891") {
-        telefono.setCustomValidity("Ingresa un número real, no una secuencia.");
-    }
-    else {
-        telefono.setCustomValidity("");
+        setError("telefono", "Formato inválido (ej: +52 331 123 4567).");
+    } else if (soloNumeros.length < 10) {
+        setError("telefono", "El número debe tener al menos 10 dígitos.");
+    } else if (soloNumeros.startsWith("0")) {
+        setError("telefono", "No puede empezar con 0.");
+    } else if (new Set(soloNumeros).size === 1) {
+        setError("telefono", "No se permiten números repetidos (ej: 111...).");
+    } else if (soloNumeros.match(/0{5,}/)) {
+        setError("telefono", "Ingresa un número de teléfono real.");
+    } else if (soloNumeros === "1234567890" || soloNumeros === "1234567891") {
+        setError("telefono", "No uses secuencias numéricas.");
     }
 
-    if (!telefono.checkValidity()) {
-        telefono.reportValidity();
-        return;
+    // ✅ VALIDACIÓN MENSAJE 
+    const valorMensaje = campos.mensaje.value.trim();
+    const regexRepeticion = /(.)\1{3,}/;
+    const palabras = valorMensaje.split(/\s+/).filter(p => p.length > 0);
+
+    if (valorMensaje.length < 10) {
+        setError("mensaje", "Mínimo 10 caracteres.");
+    } else if (regexRepeticion.test(valorMensaje)) {
+        setError("mensaje", "Demasiados caracteres repetidos.");
+    } else if (palabras.length < 3) {
+        setError("mensaje", "Escribe una frase completa (mínimo 3 palabras).");
+    } else if (!/[a-zA-ZñÑáéíóúÁÉÍÓÚ]/.test(valorMensaje)) {
+        setError("mensaje", "El mensaje debe contener texto legible.");
     }
 
-    // ✅ MENSAJE
-  mensaje.setCustomValidity(""); // Limpiamos errores previos
-
-const valorMensaje = mensaje.value.trim();
-
-// Regex para detectar letras repetidas 
-const regexRepeticion = /(.)\1{3,}/;
-
-// Contar palabras 
-const palabras = valorMensaje.split(/\s+/).filter(p => p.length > 0);
-
-// Validar longitud básica
-if (valorMensaje.length < 20) {
-    mensaje.setCustomValidity("❌ El mensaje es muy corto (mínimo 20 caracteres).");
-} 
-// Validar si hay letras o simbolos repetidos sin sentido
-else if (regexRepeticion.test(valorMensaje)) {
-    mensaje.setCustomValidity("❌ El mensaje tiene demasiados caracteres repetidos.");
-}
-// Validar que tenga al menos 3 palabras 
-else if (palabras.length < 3) {
-    mensaje.setCustomValidity("❌ Por favor, escribe una frase completa (mínimo 3 palabras).");
-}
-// Validar que no sea solo javabasura numérica 
-else if (!/[a-zA-ZñÑáéíóúÁÉÍÓÚ]/.test(valorMensaje)) {
-    mensaje.setCustomValidity("❌ El mensaje debe contener texto legible.");
-}
-
-// Mostrar el error si algo falló
-if (!mensaje.checkValidity()) {
-    mensaje.reportValidity();
-    return;
-}
-
-    // ✅ TODO OK
-    alert("Formulario enviado correctamente 🎉");
-    document.getElementById("formulario").reset();
+    // --- ENVIAR SI TODO ESTÁ BIEN ---
+    if (esValido) {
+        alert("¡Formulario de Hilo Nacional enviado con éxito! 🎉");
+        document.getElementById("formulario").reset();
+    }
+    
 });

@@ -1,7 +1,4 @@
-
-/* ===== HERO ===== */
-
-
+/* Hero Específico */
 .hero {
     background: linear-gradient(135deg, #7c3aed, #ec4899);
     color: #ffffff;
@@ -22,24 +19,24 @@
     color: rgba(255, 255, 255, 0.9);
 }
 
-
-/* ===== TARJETAS DE CONTACTO ===== */
-
+/* Tarjetas */
 .card {
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--border-color);
     border-radius: 12px;
-    transition: all 0.3s ease;
-    background-color: #ffffff;
+    background-color: var(--bg-card);
+    color: var(--text-main);
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* NO el color */
 }
 
 .card h5 {
     font-weight: 600;
     margin-top: 0.5rem;
+    color: var(--text-main);
 }
 
 .card p {
     font-size: 0.85rem;
-    color: #6b7280;
+    color: var(--text-muted);
 }
 
 .card:hover {
@@ -47,40 +44,42 @@
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
-/* ===== FORMULARIO ===== */
+[data-theme="dark"] .card img {
+    filter: invert(1) brightness(2);
+}
 
+/* Formulario */
 .formulario {
-    background-color: #ffffff;
+    background-color: var(--bg-card);
     padding: 2rem;
     border-radius: 12px;
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--border-color);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    color: var(--text-main);
 }
 
 .formulario h4 {
     font-weight: 600;
     margin-bottom: 1.2rem;
+    color: var(--text-main);
 }
 
 .form-label {
     font-size: 0.85rem;
     font-weight: 500;
-    color: #374151;
+    color: var(--text-main);
 }
 
 .form-control {
     border-radius: 8px;
     font-size: 0.85rem;
     padding: 0.6rem 0.75rem;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
 }
 
-.form-control:focus {
-    border-color: #7c3aed;
-    box-shadow: 0 0 0 0.2rem rgba(124, 58, 237, 0.15);
-}
-
-/* BOTÓN */
-
+/* Botón */
 .btn-primary {
     background-color: #0f172a;
     border: none;
@@ -94,37 +93,58 @@
     background-color: #1e293b;
 }
 
-/* ===== ACORDEÓN ===== */
+[data-theme="dark"] .btn-primary {
+    background-color: #9913F2;
+}
+[data-theme="dark"] .btn-primary:hover {
+    background-color: #7b1fa2;
+}
 
+/* Acordeón */
 .accordion-item {
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--border-color);
     border-radius: 8px;
     margin-bottom: 0.6rem;
     overflow: hidden;
+    background-color: var(--bg-card);
 }
 
 .accordion-button {
     font-size: 0.85rem;
     font-weight: 500;
-    background-color: #ffffff;
+    background-color: var(--bg-card);
+    color: var(--text-main);
 }
 
 .accordion-button:not(.collapsed) {
-    background-color: #f9fafb;
-    color: #7c3aed;
+    background-color: var(--bg-input);
+    color: var(--text-main);
     box-shadow: none;
 }
 
 .accordion-body {
     font-size: 0.85rem;
-    color: #6b7280;
-    background-color: #ffffff;
+    color: var(--text-muted);
+    background-color: var(--bg-card);
 }
 
-/* ===== ESPACIADO GENERAL ===== */
-
+/* Espaciado */
 main.container {
     margin-top: 3rem;
     margin-bottom: 3rem;
 }
 
+
+/* Para que no cargue el boostrap antes que el efecto dark*/
+.card,
+.accordion-item,
+.accordion-button,
+.formulario {
+    background-color: var(--bg-card) !important;
+    color: var(--text-main) !important;
+}
+.form-control {
+    background-color: var(--bg-input) !important;
+    color: var(--text-main) !important;
+    border-color: var(--border-color) !important;
+}
