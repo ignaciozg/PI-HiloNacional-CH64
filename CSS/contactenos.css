@@ -23,9 +23,9 @@
 .card {
     border: 1px solid var(--border-color);
     border-radius: 12px;
-    transition: all 0.3s ease;
     background-color: var(--bg-card);
     color: var(--text-main);
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* NO el color */
 }
 
 .card h5 {
@@ -132,4 +132,19 @@
 main.container {
     margin-top: 3rem;
     margin-bottom: 3rem;
+}
+
+
+/* Para que no cargue el boostrap antes que el efecto dark*/
+.card,
+.accordion-item,
+.accordion-button,
+.formulario {
+    background-color: var(--bg-card) !important;
+    color: var(--text-main) !important;
+}
+.form-control {
+    background-color: var(--bg-input) !important;
+    color: var(--text-main) !important;
+    border-color: var(--border-color) !important;
 }
