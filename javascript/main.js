@@ -206,24 +206,39 @@ function initVerMas() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const productCards = document.querySelectorAll(".product-card");
+    const productCards = document.querySelectorAll(".product-card");
 
-  productCards.forEach(card => {
-    card.addEventListener("click", () => {
-      const title = card.querySelector(".product-title").textContent;
-      const category = card.querySelector(".product-category").textContent;
-      const price = card.querySelector(".product-price").textContent;
-      const imgSrc = card.querySelector("img").getAttribute("src");
+    productCards.forEach(card => {
+        card.addEventListener("click", () => {
+        const title = card.querySelector(".product-title").textContent;
+        const category = card.querySelector(".product-category").textContent;
+        const price = card.querySelector(".product-price").textContent;
+        const imgSrc = card.querySelector("img").getAttribute("src");
+        const description = card.dataset.description || "Sin descripción disponible";
 
-      // Insertar datos en el modal
-      document.getElementById("productModalLabel").textContent = title;
-      document.getElementById("productModalDesc").textContent = `Categoría: ${category}`;
-      document.getElementById("productModalPrice").textContent = price;
-      document.getElementById("productModalImg").setAttribute("src", imgSrc);
+        const fabric = card.dataset.fabric || null;
+        const material = card.dataset.material || null;
+        const care = card.dataset.care || null;
 
-      // Mostrar modal
-      const modal = new bootstrap.Modal(document.getElementById("productModal"));
-      modal.show();
+        document.getElementById("productModalLabel").textContent = title;
+        document.getElementById("productModalDesc").textContent = description;
+        document.getElementById("productModalPrice").textContent = price;
+        document.getElementById("productModalImg").setAttribute("src", imgSrc);
+
+        document.getElementById("sizeSection").classList.toggle("d-none", category !== "Hombre" && category !== "Mujer");
+        document.getElementById("fabricSection").classList.toggle("d-none", !fabric);
+        document.getElementById("materialSection").classList.toggle("d-none", !material);
+        document.getElementById("careSection").classList.toggle("d-none", !care);
+
+        if (fabric) document.getElementById("productFabric").textContent = fabric;
+        if (material) document.getElementById("productMaterial").textContent = material;
+        if (care) document.getElementById("productCare").textContent = care;
+
+        const modal = new bootstrap.Modal(document.getElementById("productModal"));
+        modal.show();
+        });
     });
-  });
 });
+
+
+
