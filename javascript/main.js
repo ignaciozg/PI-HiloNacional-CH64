@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 0. CARGAR FOOTER
     const footerContainer = document.getElementById("footer");
     if (footerContainer) {
-        fetch("./footer.html")
+        fetch("../componentes/footer.html")
             .then(res => res.text())
             .then(html => footerContainer.insertAdjacentHTML("beforeend", html));
     }
