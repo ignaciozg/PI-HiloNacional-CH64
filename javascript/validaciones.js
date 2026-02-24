@@ -80,8 +80,11 @@ document.getElementById("formulario").addEventListener("submit", function(e) {
 
     // --- ENVIAR SI TODO ESTÁ BIEN ---
     if (esValido) {
-        alert("¡Formulario de Hilo Nacional enviado con éxito! 🎉");
-        document.getElementById("formulario").reset();
+        Swal.fire({
+        title: "¡Formulario de Hilo Nacional enviado con éxito!",
+        icon: "success",
+        draggable: true
+        });
     }
     
 });
