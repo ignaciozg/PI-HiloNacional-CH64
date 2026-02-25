@@ -241,4 +241,37 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+//----mostrar favoritos y carrito en todas las paginas
+async function cargarComponentes() {
+    try {
+        // 1. Cargar Navbar
+        const navRes = await fetch('./componentes/navbar.html');
+        if (navRes.ok) {
+            const navHtml = await navRes.text();
+            const container = document.getElementById('navbar-container');
+            if (container) {
+                container.innerHTML = navHtml;
+                
+                // Una vez inyectado, activamos la lógica que vive en productos.js
+                // Usamos window para asegurar que detecte las funciones globales
+                if (typeof window.inicializarUI === 'function') window.inicializarUI();
+                if (typeof window.setupTheme === 'function') window.setupTheme();
+                if (typeof window.setupSearch === 'function') window.setupSearch();
+            }
+        }
 
+        // 2. Cargar Footer (Opcional, si tienes el archivo)
+        const footRes = await fetch('./componentes/footer.html');
+        if (footRes.ok) {
+            const footHtml = await footRes.text();
+            const footContainer = document.getElementById('footer-container');
+            if (footContainer) footContainer.innerHTML = footHtml;
+        }
+
+    } catch (error) {
+        console.error("Error cargando componentes globales:", error);
+    }
+}
+
+// Se ejecuta automáticamente al cargar cualquier página que lo incluya
+document.addEventListener("DOMContentLoaded", cargarComponentes);
