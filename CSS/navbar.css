@@ -1,0 +1,80 @@
+/* NAVBAR FIJO REAL */
+.fixed-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1055;
+}
+
+/* FONDO */
+.custom-navbar {
+    background-color: var(--bg-body, #ffffff);
+    border-bottom: 1px solid #e5e7eb;
+    transition: all 0.3s ease;
+}
+
+/* ESPACIO PARA QUE NO TAPE CONTENIDO */
+body {
+    padding-top: 80px;
+}
+
+/* LOGO */
+#nav-logo {
+    height: 40px;
+}
+
+/* LINKS */
+.custom-navbar .nav-link {
+    color: var(--text-main, #111827);
+    font-weight: 500;
+}
+
+.custom-navbar .nav-link:hover {
+    color: #7c3aed;
+}
+
+/* ICONOS */
+.nav-icons img {
+    transition: transform 0.2s ease;
+    cursor: pointer;
+}
+
+.nav-icons img:hover {
+    transform: scale(1.1);
+}
+
+/* BUSCADOR */
+.buscar {
+    border-radius: 20px;
+}
+
+/* SOMBRA AL SCROLL */
+.custom-navbar.scrolled {
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+}
+
+/* DARK MODE */
+[data-theme="dark"] .custom-navbar {
+    background-color: #0f172a;
+    border-bottom: 1px solid #1f2937;
+}
+
+[data-theme="dark"] .custom-navbar .nav-link {
+    color: #ffffff;
+}
+
+[data-theme="dark"] .input-group-text,
+[data-theme="dark"] .form-control {
+    background-color: #1f2937;
+    color: #ffffff;
+    border-color: #374151;
+}
+
+.navbar-toggler {
+    border: none;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}

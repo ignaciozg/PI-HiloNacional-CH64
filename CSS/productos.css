@@ -1,5 +1,5 @@
 /* =====================================
-   ESTILOS ESPECÍFICOS DE PRODUCTOS
+    ESTILOS ESPECÍFICOS DE PRODUCTOS
 ====================================== */
 
 /* --- BANNER --- */
@@ -197,4 +197,13 @@ color: white;
 @keyframes popIn {
     0% { transform: translate(100%, -100%) scale(0); }
     100% { transform: translate(100%, -100%) scale(1); }
+}
+
+
+[data-theme="dark"] .flex-grow-1{
+    color: white;
+}
+
+[data-theme="dark"] .fw-bold{
+    color: white;
 }

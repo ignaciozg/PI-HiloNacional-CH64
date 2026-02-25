@@ -243,6 +243,8 @@
     text-decoration: underline;
 }
 
+[data-theme="dark"] .iconsalign { filter: invert(1) brightness(2); }
+
 /* Responsivo */
 @media(max-width: 900px){
     .stats, .values-cards, .history-cards, .cards-flex {
@@ -251,3 +253,4 @@
     }
     .team-card { flex: 0 1 100%; }
 }
+

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -56,20 +56,24 @@
   </div>
 
   <div class="offcanvas offcanvas-end card" tabindex="-1" id="offcanvasCarrito">
-    <div class="offcanvas-header border-bottom border-secondary">
-      <h5 class="fw-bold mb-0">Mi Carrito</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-    </div>
-    <div class="offcanvas-body d-flex flex-column">
-      <div id="lista-carrito" class="flex-grow-1"></div>
-      <div class="p-3 border-top border-secondary">
-        <div class="d-flex justify-content-between mb-2">
-          <span>Total:</span> <span id="total-carrito" class="fw-bold" style="color: var(--primary-color);">$0.00</span>
-        </div>
-        <button class="btn w-100 rounded-pill py-2 text-white" style="background-color: var(--primary-color);">Pagar</button>
+  <div class="offcanvas-header border-bottom border-secondary">
+    <h5 class="fw-bold mb-0">Mi Carrito</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body d-flex flex-column">
+    <div id="lista-carrito" class="flex-grow-1"></div>
+    
+    <div class="p-3 border-top border-secondary mt-auto">
+      <div class="d-flex justify-content-between mb-3">
+        <span class="fw-bold">Total estimado:</span> 
+        <span id="total-carrito" class="flex-grow-1" style="color: var(--primary-color);">$0.00</span>
       </div>
+      <button class="btn w-100 rounded-pill py-2 text-white fw-bold shadow-sm" style="background-color: var(--primary-color);">
+        Continuar al Pago
+      </button>
     </div>
   </div>
+</div>
 
   <div class="modal fade" id="productModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
