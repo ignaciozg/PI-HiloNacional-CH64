@@ -1,5 +1,5 @@
 /* =====================================
-   ESTILOS ESPECÍFICOS DE PRODUCTOS
+    ESTILOS ESPECÍFICOS DE PRODUCTOS
 ====================================== */
 
 /* --- BANNER --- */
@@ -197,4 +197,33 @@ color: white;
 @keyframes popIn {
     0% { transform: translate(100%, -100%) scale(0); }
     100% { transform: translate(100%, -100%) scale(1); }
+}
+
+
+[data-theme="dark"] .flex-grow-1{
+    color: white;
+}
+
+[data-theme="dark"] .fw-bold{
+    color: white;
+}
+
+/* Evita que los dropdowns se cierren bruscamente y asegura colores */
+.dropdown-menu {
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-card);
+}
+
+/* Forzar color de texto en dropdowns para que no hereden el blanco del banner */
+.dropdown-menu p, .dropdown-menu h6 {
+    color: var(--text-main) !important;
+}
+
+/* Estilo para que el scroll no sea tosco */
+.overflow-auto::-webkit-scrollbar {
+    width: 5px;
+}
+.overflow-auto::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 10px;
 }
