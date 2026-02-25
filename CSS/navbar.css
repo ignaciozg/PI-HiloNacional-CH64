@@ -12,6 +12,7 @@
     background-color: var(--bg-body, #ffffff);
     border-bottom: 1px solid #e5e7eb;
     transition: all 0.3s ease;
+
 }
 
 /* ESPACIO PARA QUE NO TAPE CONTENIDO */
@@ -20,9 +21,7 @@ body {
 }
 
 /* LOGO */
-#nav-logo {
-    height: 40px;
-}
+
 
 /* LINKS */
 .custom-navbar .nav-link {
@@ -78,3 +77,4 @@ body {
 .navbar-toggler:focus {
     box-shadow: none;
 }
+
