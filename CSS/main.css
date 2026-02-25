@@ -107,7 +107,7 @@ a:hover {
 }
 
 /* Corrección Iconos Navbar Dark Mode */
-[data-theme="dark"] .nav-icons img {
+[data-theme="dark"] .nav-icons img:not(.dropdown-menu img) {
     filter: invert(1) brightness(2);
 }
 
@@ -121,6 +121,16 @@ a:hover {
     color: var(--text-main);
     transition: transform 0.3s ease;
 }
+
+
+[data-theme="dark"] .flex-grow-1{
+    color: white;
+}
+
+[data-theme="dark"] .fw-bold{
+    color: white;
+}
+
 
 /* =====================================
    BARRA DE BÚSQUEDA UNIFICADA (Lupa integrada)
@@ -281,4 +291,32 @@ img {
 
 [data-theme="dark"] .navbar-toggler {
     border-color: rgba(255, 255, 255, 0.5);
+}
+
+.dropdown-menu img, 
+#lista-carrito-dropdown img, 
+#lista-favoritos-dropdown img {
+    filter: none !important; /* Anula cualquier invert() o brightness() */
+    object-fit: cover;
+    border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .p-3{
+    background-color: var(--bg-card) !important;
+}
+
+.dropdown-menu {
+    width: 400px !important; /* Aumentamos de 350px a 400px */
+    padding: 1.25rem !important; /* Más espacio interno */
+    border-radius: 18px !important; /* Bordes más suaves */
+    border: 1px solid var(--border-color) !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2) !important;
+}
+
+@media (max-width: 576px) {
+    .nav-icons .dropdown-menu {
+        width: 320px !important; /* Un poco más pequeño en celulares para que no desborde */
+        position: absolute;
+        right: -50px; /* Ajusta la posición para que no se corte en la orilla */
+    }
 }

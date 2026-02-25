@@ -71,7 +71,7 @@
     padding: 25px;
     max-width: 300px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    text-align: left;
+    text-align: center;
     transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
                 box-shadow 0.3s ease;
     position: relative;
@@ -243,8 +243,6 @@
     text-decoration: underline;
 }
 
-[data-theme="dark"] .iconsalign { filter: invert(1) brightness(2); }
-
 /* Responsivo */
 @media(max-width: 900px){
     .stats, .values-cards, .history-cards, .cards-flex {
@@ -254,3 +252,35 @@
     .team-card { flex: 0 1 100%; }
 }
 
+
+
+/* Quitar la flecha de dropdown */
+.no-caret::after {
+    display: none !important;
+}
+
+/* Forzar visibilidad del texto frente al Hero de Acerca-de */
+.dropdown-menu {
+    margin-top: 15px !important;
+    border: none;
+    z-index: 3000 !important;
+}
+
+/* Evitar que los párrafos del dropdown se oculten por el CSS de acercade */
+.dropdown-menu p {
+    opacity: 1 !important;
+    max-height: none !important;
+    display: block !important;
+    color: var(--text-main) !important;
+    font-size: 0.85rem !important;
+    margin-top: 0 !important;
+}
+
+[data-theme="dark"] .dropdown-menu {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .bg-light {
+    background-color: rgba(255,255,255,0.05) !important;
+}
