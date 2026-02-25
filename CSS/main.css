@@ -111,10 +111,7 @@ a:hover {
     filter: invert(1) brightness(2);
 }
 
-/* Aseguramos que el logo NO tenga filtro (JS cambia la imagen) */
-[data-theme="dark"] .navbar-brand img {
-    filter: none !important;
-}
+
 
 /* Botón Toggle */
 #theme-toggle i {
@@ -257,11 +254,11 @@ a:hover {
 .mt-4 { margin-top: 1.5rem; }
 .mb-4 { margin-bottom: 1.5rem; }
 
-img {
+/* img {
     max-width: 100%;
     height: auto;
     display: block;
-}
+} */
 
 @media (max-width: 992px) {
     .footer-content {
@@ -319,4 +316,9 @@ img {
         position: absolute;
         right: -50px; /* Ajusta la posición para que no se corte en la orilla */
     }
+}
+
+[data-theme="dark"] .nav-logo{
+    filter: brightness(100%)
+    invert(1)
 }

@@ -47,9 +47,11 @@ document.addEventListener('DOMContentLoaded', () => {
 // 1. TEMA OSCURO
 function initTheme() {
     const themeToggleBtn = document.getElementById('theme-toggle');
-    if (!themeToggleBtn) return;
+    if (!themeToggleBtn) {
+        console.error("No se encontró el botón con ID 'theme-toggle'");
+        return;
+    }
 
-    // Clonar para limpiar eventos
     const newBtn = themeToggleBtn.cloneNode(true);
     themeToggleBtn.parentNode.replaceChild(newBtn, themeToggleBtn);
 
@@ -62,36 +64,37 @@ function initTheme() {
         localStorage.setItem('theme', theme);
 
         if (theme === 'dark') {
-            if(themeIcon) {
-                themeIcon.classList.remove('bi-moon-fill');
-                themeIcon.classList.add('bi-sun-fill');
+            if (themeIcon) {
+                themeIcon.className = 'bi bi-sun-fill'; // Usamos className para asegurar el cambio
                 themeIcon.style.color = '#fbbf24';
             }
-            if (logoImg) logoImg.src = './assets/hilo_nacional_white.png';
+            if (logoImg) logoImg.src = '../assets/logo22.png';
         } else {
-            if(themeIcon) {
-                themeIcon.classList.remove('bi-sun-fill');
-                themeIcon.classList.add('bi-moon-fill');
+            if (themeIcon) {
+                themeIcon.className = 'bi bi-moon-fill';
                 themeIcon.style.color = '';
             }
-            if (logoImg) logoImg.src = './assets/hilo_nacional.svg';
+            // Asegúrate de que este nombre sea el correcto
+            if (logoImg) logoImg.src = '../assets/logo23-Photoroom.png'; 
         }
     };
 
     const savedTheme = localStorage.getItem('theme');
     const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-    if (savedTheme) {
-        applyVisuals(savedTheme);
-    } else if (systemPrefersDark) {
-        applyVisuals('dark');
-    }
+    applyVisuals(savedTheme || (systemPrefersDark ? 'dark' : 'light'));
 
     newBtn.addEventListener('click', () => {
-        const currentTheme = htmlElement.getAttribute('data-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        const newTheme = htmlElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
         applyVisuals(newTheme);
     });
+}
+
+// ESTO ES LO QUE HACE QUE FUNCIONE:
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTheme);
+} else {
+    initTheme();
 }
 
 // 2. NAVBAR SCROLL
