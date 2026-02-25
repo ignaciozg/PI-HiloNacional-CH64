@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 0. CARGAR FOOTER
     const footerContainer = document.getElementById("footer");
     if (footerContainer) {
-        fetch("./footer.html")
+        fetch("../componentes/footer.html")
             .then(res => res.text())
             .then(html => footerContainer.insertAdjacentHTML("beforeend", html));
     }
@@ -204,3 +204,74 @@ function initVerMas() {
         });
     });
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const productCards = document.querySelectorAll(".product-card");
+
+    productCards.forEach(card => {
+        card.addEventListener("click", () => {
+        const title = card.querySelector(".product-title").textContent;
+        const category = card.querySelector(".product-category").textContent;
+        const price = card.querySelector(".product-price").textContent;
+        const imgSrc = card.querySelector("img").getAttribute("src");
+        const description = card.dataset.description || "Sin descripción disponible";
+
+        const fabric = card.dataset.fabric || null;
+        const material = card.dataset.material || null;
+        const care = card.dataset.care || null;
+
+        document.getElementById("productModalLabel").textContent = title;
+        document.getElementById("productModalDesc").textContent = description;
+        document.getElementById("productModalPrice").textContent = price;
+        document.getElementById("productModalImg").setAttribute("src", imgSrc);
+
+        document.getElementById("sizeSection").classList.toggle("d-none", category !== "Hombre" && category !== "Mujer");
+        document.getElementById("fabricSection").classList.toggle("d-none", !fabric);
+        document.getElementById("materialSection").classList.toggle("d-none", !material);
+        document.getElementById("careSection").classList.toggle("d-none", !care);
+
+        if (fabric) document.getElementById("productFabric").textContent = fabric;
+        if (material) document.getElementById("productMaterial").textContent = material;
+        if (care) document.getElementById("productCare").textContent = care;
+
+        const modal = new bootstrap.Modal(document.getElementById("productModal"));
+        modal.show();
+        });
+    });
+});
+
+
+//----mostrar favoritos y carrito en todas las paginas
+async function cargarComponentes() {
+    try {
+        // 1. Cargar Navbar
+        const navRes = await fetch('./componentes/navbar.html');
+        if (navRes.ok) {
+            const navHtml = await navRes.text();
+            const container = document.getElementById('navbar-container');
+            if (container) {
+                container.innerHTML = navHtml;
+                
+                // Una vez inyectado, activamos la lógica que vive en productos.js
+                // Usamos window para asegurar que detecte las funciones globales
+                if (typeof window.inicializarUI === 'function') window.inicializarUI();
+                if (typeof window.setupTheme === 'function') window.setupTheme();
+                if (typeof window.setupSearch === 'function') window.setupSearch();
+            }
+        }
+
+        // 2. Cargar Footer (Opcional, si tienes el archivo)
+        const footRes = await fetch('./componentes/footer.html');
+        if (footRes.ok) {
+            const footHtml = await footRes.text();
+            const footContainer = document.getElementById('footer-container');
+            if (footContainer) footContainer.innerHTML = footHtml;
+        }
+
+    } catch (error) {
+        console.error("Error cargando componentes globales:", error);
+    }
+}
+
+// Se ejecuta automáticamente al cargar cualquier página que lo incluya
+document.addEventListener("DOMContentLoaded", cargarComponentes);
