@@ -1,0 +1,31 @@
+  body {
+            background-color: #f4f6f9;
+        }
+
+        .titulo-principal {
+            font-weight: 700;
+        }
+
+        .subtitulo-principal {
+            color: #6c757d;
+        }
+
+        .card-form {
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .seccion-titulo {
+            font-weight: 600;
+        }
+
+        .icon-box {
+            width: 40px;
+            height: 40px;
+            background-color: #e9ecef;
+            border-radius: 8px;
+        }
+
+        .required {
+            color: red;
+        }
