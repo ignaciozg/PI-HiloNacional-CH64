@@ -11,7 +11,6 @@
 </head>
 <body>
 
-
 <div id="navbar-container"></div>
 
 <div class="container py-5">
@@ -34,7 +33,7 @@
             <!-- Información básica -->
             <div class="d-flex align-items-center mb-4">
                 <i class="bi bi-box"></i>
-                <h5  class="seccion-titulo mb-0">Información básica</h5>
+                <h5  class="seccion-titulo mb-0"> Información básica</h5>
             </div>
 
             <h6 class="mb-4 text-muted">Detalles principales del producto</h6>
@@ -109,6 +108,115 @@
         </div>
     </div>
 
+<!--Tallas/Tamaños-->
+<div class="container py-5">
+
+  <!-- CARD PRINCIPAL -->
+  <div class="card shadow-sm p-4 mb-4">
+    <h5 class="mb-3">Tallas / Tamaños</h5>
+    <p class="text-muted small">Selecciona las tallas disponibles o agrega tallas personalizadas</p>
+
+    <!-- Tallas de ropa -->
+    <div class="mb-3">
+      <label class="form-label fw-semibold">Tallas de Ropa</label>
+      <div class="d-flex flex-wrap gap-2">
+        <input type="checkbox" class="btn-check" id="xs" autocomplete="off">
+        <label class="btn btn-outline-secondary btn-sm rounded-pill" for="xs">XS</label>
+
+        <input type="checkbox" class="btn-check" id="s" autocomplete="off">
+        <label class="btn btn-outline-secondary btn-sm rounded-pill" for="s">S</label>
+
+        <input type="checkbox" class="btn-check" id="m" autocomplete="off">
+        <label class="btn btn-outline-secondary btn-sm rounded-pill" for="m">M</label>
+
+        <input type="checkbox" class="btn-check" id="l" autocomplete="off">
+        <label class="btn btn-outline-secondary btn-sm rounded-pill" for="l">L</label>
+
+        <input type="checkbox" class="btn-check" id="xl" autocomplete="off">
+        <label class="btn btn-outline-secondary btn-sm rounded-pill" for="xl">XL</label>
+
+        <input type="checkbox" class="btn-check" id="xxl" autocomplete="off">
+        <label class="btn btn-outline-secondary btn-sm rounded-pill" for="xxl">XXL</label>
+      </div>
+    </div>
+
+    <!-- Tallas de calzado -->
+    <div class="mb-3">
+      <label class="form-label fw-semibold">Tallas de Calzado</label>
+      <div class="d-flex flex-wrap gap-2">
+        <input type="checkbox" class="btn-check" id="35" autocomplete="off">
+        <label class="btn btn-outline-secondary btn-sm rounded-pill" for="35">35</label>
+
+        <input type="checkbox" class="btn-check" id="36" autocomplete="off">
+        <label class="btn btn-outline-secondary btn-sm rounded-pill" for="36">36</label>
+
+        <input type="checkbox" class="btn-check" id="37" autocomplete="off">
+        <label class="btn btn-outline-secondary btn-sm rounded-pill" for="37">37</label>
+
+        <input type="checkbox" class="btn-check" id="38" autocomplete="off">
+        <label class="btn btn-outline-secondary btn-sm rounded-pill" for="38">38</label>
+
+        <input type="checkbox" class="btn-check" id="39" autocomplete="off">
+        <label class="btn btn-outline-secondary btn-sm rounded-pill" for="39">39</label>
+      </div>
+    </div>
+
+    <!-- Tallas numéricas -->
+    <div class="mb-3">
+      <label class="form-label fw-semibold">Tallas Numéricas (Pantalones)</label>
+      <div class="d-flex flex-wrap gap-2">
+        <input type="checkbox" class="btn-check" id="28" autocomplete="off">
+        <label class="btn btn-outline-secondary btn-sm rounded-pill" for="28">28</label>
+
+        <input type="checkbox" class="btn-check" id="30" autocomplete="off">
+        <label class="btn btn-outline-secondary btn-sm rounded-pill" for="30">30</label>
+
+        <input type="checkbox" class="btn-check" id="32" autocomplete="off">
+        <label class="btn btn-outline-secondary btn-sm rounded-pill" for="32">32</label>
+      </div>
+    </div>
+
+    <!-- Talla personalizada -->
+    <div class="mb-3">
+      <label class="form-label fw-semibold">Talla Personalizada</label>
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Ej: Único, 2XL, etc.">
+        <button class="btn btn-outline-secondary" type="button">+</button> <!--aca hay que crear un desplegable personalizado-->
+      </div>
+    </div>
+
+  </div>
+
+  <!-- IMAGEN DEL PRODUCTO -->
+  <div class="card shadow-sm p-4">
+    <h5 class="mb-3">Imagen del Producto</h5>
+    <p class="text-muted small">Sube una imagen o proporciona una URL</p>
+
+    <div class="mb-3">
+      <label class="form-label fw-semibold">URL de la Imagen</label>
+      <input type="text" class="form-control" placeholder="https://ejemplo.com/imagen.jpg">
+    </div>
+
+    <!-- Separador -->
+    <div class="d-flex align-items-center my-3">
+      <hr class="flex-grow-1">
+      <span class="mx-2 text-muted small">o</span>
+      <hr class="flex-grow-1">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label fw-semibold">Subir Archivo</label>
+      <input type="file" class="form-control">
+    </div>
+
+    <!-- Botones finales --> <!--aqui hay que ligar con js-->
+    <div class="d-flex justify-content-end gap-2 mt-4">
+      <button class="btn btn-outline-secondary">Limpiar Formulario</button>
+      <button class="btn btn-dark">Agregar Producto</button>
+    </div>
+
+    </div>
+</div>
 </div>
 
   <div id="footer"></div>
