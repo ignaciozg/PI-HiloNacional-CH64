@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="./CSS/agregarProductos.css">
+    <link rel="stylesheet" href="./CSS/agregarProductos.css">
 </head>
 <body>
 
@@ -211,15 +211,170 @@
 
     <!-- Botones finales --> <!--aqui hay que ligar con js-->
     <div class="d-flex justify-content-end gap-2 mt-4">
-      <button class="btn btn-outline-secondary">Limpiar Formulario</button>
-      <button class="btn btn-dark">Agregar Producto</button>
+      <button type="reset" class="btn btn-outline-secondary">Limpiar Formulario</button>
+      <button type="submit" class="btn btn-dark">Agregar Producto</button>
     </div>
 
     </div>
 </div>
+
+
+<!-- SECCIÓN INVENTARIO -->
+    <h3 class="fw-bold mb-4">Mis Productos</h3>
+        <div class="card shadow-sm p-4 mb-4">
+            <h5>Inventario</h5>
+            <p class="text-muted">Gestiona tu inventario de productos y su visibilidad</p>
+
+            <div class="list-group ">
+
+
+                <div class="list-group-item d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center gap-3">
+                        <img src="blusa.jpg" alt="Blusa Elegante Blanca" class="img-thumbnail" style="width:80px; height:auto;">
+                        <div>
+                            <h6 class="mb-1">Blusa Elegante Blanca</h6>
+                            <small class="text-muted">Mujer</small><br>
+                            <small class="text-muted">Tallas: XS, S, M, L, XL</small>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-start gap-3">
+                        <div class="d-flex flex-column align-items-end">
+                            <span class="fw-bold mb-1">$49.99</span>
+                            <span class="badge bg-dark">Nuevo</span>
+                        </div>
+                        <div class="d-flex flex-column gap-1">
+                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-eye"></i></button>
+                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i></button>
+                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="list-group-item d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center gap-3">
+                        <img src="camisa.jpg" alt="Camisa Casual Hombre" class="img-thumbnail" style="width:80px; height:auto;">
+                        <div>
+                            <h6 class="mb-1">Camisa Casual Hombre</h6>
+                            <small class="text-muted">Hombre</small><br>
+                            <small class="text-muted">Tallas: S, M, L, XL, XXL</small>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-start gap-3">
+                        <div class="d-flex flex-column align-items-end">
+                            <span class="fw-bold mb-1">$39.99</span>
+                            <span class="badge bg-primary">Activo</span>
+                        </div>
+                        <div class="d-flex flex-column gap-1">
+                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-eye"></i></button>
+                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i></button>
+                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="list-group-item d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center gap-3">
+                        <img src="vestido.jpg" alt="Vestido de Verano" class="img-thumbnail" style="width:80px; height:auto;">
+                        <div>
+                            <h6 class="mb-1">Vestido de Verano</h6>
+                            <small class="text-muted">Mujer</small><br>
+                            <small class="text-muted">Tallas: XS, S, M, L</small>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-start gap-3">
+                        <div class="d-flex flex-column align-items-end">
+                            <span class="fw-bold mb-1">$64.99</span>
+                            <span class="badge bg-dark">Nuevo</span>
+                        </div>
+                        <div class="d-flex flex-column gap-1">
+                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-eye"></i></button>
+                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i></button>
+                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="list-group-item d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center gap-3">
+                        <img src="jeans.jpg" alt="Jeans Denim Clásico" class="img-thumbnail" style="width:80px; height:auto;">
+                        <div>
+                            <h6 class="mb-1">Jeans Denim Clásico</h6>
+                            <small class="text-muted">Hombre</small><br>
+                            <small class="text-muted">Tallas: 28, 30, 32, 34, 36</small>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-start gap-3">
+                        <div class="d-flex flex-column align-items-end">
+                            <span class="fw-bold mb-1">$79.99</span>
+                            <span class="badge bg-primary">Activo</span>
+                        </div>
+                        <div class="d-flex flex-column gap-1">
+                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-eye"></i></button>
+                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i></button>
+                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="list-group-item d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center gap-3">
+                        <img src="chaqueta.jpg" alt="Chaqueta Urbana" class="img-thumbnail" style="width:80px; height:auto;">
+                        <div>
+                            <h6 class="mb-1">Chaqueta Urbana</h6>
+                            <small class="text-muted">Mujer</small><br>
+                            <small class="text-muted">Tallas: XS, S, M, L, XL</small>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-start gap-3">
+                        <div class="d-flex flex-column align-items-end">
+                            <span class="fw-bold mb-1">$129.99</span>
+                            <span class="badge bg-dark">Nuevo</span>
+                        </div>
+                        <div class="d-flex flex-column gap-1">
+                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-eye"></i></button>
+                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i></button>
+                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="list-group-item d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center gap-3">
+                        <img src="zapatillas.jpg" alt="Zapatillas Deportivas" class="img-thumbnail" style="width:80px; height:auto;">
+                        <div>
+                            <h6 class="mb-1">Zapatillas Deportivas</h6>
+                            <small class="text-muted">Calzado</small><br>
+                            <small class="text-muted">Tallas: 39, 40, 41, 42, 43, 44</small>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-start gap-3">
+                        <div class="d-flex flex-column align-items-end">
+                            <span class="fw-bold mb-1">$89.99</span>
+                            <span class="badge bg-primary">Activo</span>
+                        </div>
+                        <div class="d-flex flex-column gap-1">
+                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-eye"></i></button>
+                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i></button>
+                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
 </div>
 
-  <div id="footer"></div>
+    <div id="footer"></div>
 <script src="./javascript/main.js"></script>
 <link rel="stylesheet" href="./CSS/main.css">
 </body>
