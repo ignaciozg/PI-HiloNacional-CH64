@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hilo Nacional | Crear Cuenta</title>
+
+    <script>
+        const savedTheme = localStorage.getItem("theme");
+        document.documentElement.style.visibility = "hidden";
+        if (savedTheme === "dark") document.documentElement.setAttribute("data-theme", "dark");
+        document.addEventListener("DOMContentLoaded", () => {
+            document.documentElement.style.visibility = "visible";
+            document.body.classList.add("theme-ready");
+        });
+    </script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="./CSS/main.css" />
+    <link rel="stylesheet" href="./CSS/login.css" />
+</head>
+<body>
+
+    <div id="navbar-container"></div>
+
+    <main class="main-registro d-flex align-items-center justify-content-center">
+        <div class="card-registro shadow">
+            <h2 class="titulo-registro">Únete a Hilo Nacional</h2>
+            
+            <div class="selector-rol d-flex mb-4">
+                <button type="button" class="btn-rol active" id="btn-soy-comprador">Soy Comprador</button>
+                <button type="button" class="btn-rol" id="btn-soy-vendedor">Soy Vendedor</button>
+            </div>
+
+            <form id="formulario-registro" novalidate>
+                <input type="hidden" id="rol-usuario" value="comprador">
+
+                <div class="mb-3">
+                    <label for="nombre" class="label-registro">Nombre Completo</label>
+                    <input type="text" id="nombre" class="form-control input-registro" placeholder="Nombre Apellido" required>
+                    <span id="error-nombre" class="error-text"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label for="correo" class="label-registro">Correo Electrónico</label>
+                    <input type="email" id="correo" class="form-control input-registro" placeholder="ejemplo@correo.com" required>
+                    <span id="error-correo" class="error-text"></span>
+                </div>
+
+                <div id="seccion-vendedor" style="display: none;">
+                    <div class="mb-3">
+                        <label for="nombre-negocio" class="label-registro">Nombre del Negocio</label>
+                        <input type="text" id="nombre-negocio" class="form-control input-registro" placeholder="Nombre de tu marca">
+                        <span id="error-negocio" class="error-text"></span>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="label-registro">Contraseña</label>
+                    <input type="password" id="password" class="form-control input-registro" placeholder="••••••••" required>
+                    <span id="error-password" class="error-text"></span>
+                </div>
+
+                <div class="mb-4">
+                    <label for="confirm-password" class="label-registro">Confirmar Contraseña</label>
+                    <input type="password" id="confirm-password" class="form-control input-registro" placeholder="••••••••" required>
+                    <span id="error-confirm" class="error-text"></span>
+                </div>
+
+                <button type="submit" class="btn-crear-cuenta">Crear Cuenta</button>
+            </form>
+            
+            <div class="text-center mt-3">
+                <a href="login.html" class="link-login">¿Ya tienes cuenta? Inicia sesión</a>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./javascript/main.js"></script>
+    <script src="./javascript/registro.js"></script>
+</body>
+</html>
