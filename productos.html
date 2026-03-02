@@ -1,105 +1,146 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hilo Nacional | Catálogo</title>
-  <script>
-    const savedTheme = localStorage.getItem("theme") || "light";
-    document.documentElement.setAttribute("data-theme", savedTheme);
-  </script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="./CSS/main.css">
-  <link rel="stylesheet" href="./CSS/productos.css">
-  <link rel="stylesheet" href="./CSS/navbar.css">
- <!--favicon -->
-   <link rel="icon" type="image/svg+xml" href="./assets/logoFooter.svg">
-  <link rel="alternate icon" href="./assets/logoFooter.svg">
-</head>
-<body class="theme-ready">
-  <div id="navbar-container"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hilo Nacional | Catálogo</title>
+    <script>
+      const savedTheme = localStorage.getItem("theme") || "light";
+      document.documentElement.setAttribute("data-theme", savedTheme);
+    </script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="./CSS/main.css" />
+    <link rel="stylesheet" href="./CSS/productos.css" />
+    <link rel="stylesheet" href="./CSS/navbar.css" />
+    <!--favicon -->
+    <link rel="icon" type="image/svg+xml" href="./assets/logoFooter.svg" />
+    <link rel="alternate icon" href="./assets/logoFooter.svg" />
+  </head>
+  <body class="theme-ready">
+    <div id="navbar-container"></div>
 
-  <div class="container mt-4 mb-5">
-    <div class="category-banner shadow-sm p-5 d-flex align-items-center justify-content-center">
+    <div class="container mt-4 mb-5">
+      <div
+        class="category-banner shadow-sm p-5 d-flex align-items-center justify-content-center"
+      >
         <div class="text-center">
-            <h2 class="fw-bold">Nuestro Catálogo</h2>
-            <p class="mb-0">Explora piezas únicas que conservan la tradición en cada fibra</p>
-        </div>
-    </div>
-  </div>
-
-  <div class="container mb-4">
-    <div class="row align-items-center">
-      <div class="col-auto"><h5 class="mb-0 fw-bold">Categorías:</h5></div>
-      <div class="col">
-        <div class="d-flex gap-2 flex-wrap" id="filtros-contenedor">
-          <button class="filter-btn active">Todos</button>
-          <button class="filter-btn">Mujer</button>
-          <button class="filter-btn">Hombre</button>
-          <button class="filter-btn">Accesorios</button>
-          <button class="filter-btn">Calzado</button>
+          <h2 class="fw-bold">Nuestro Catálogo</h2>
+          <p class="mb-0">
+            Explora piezas únicas que conservan la tradición en cada fibra
+          </p>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="container mb-5">
-    <div class="row g-4" id="contenedor-productos"></div>
-  </div>
+    <div class="container mb-4">
+      <div class="row align-items-center">
+        <div class="col-auto"><h5 class="mb-0 fw-bold">Categorías:</h5></div>
+        <div class="col">
+          <div class="d-flex gap-2 flex-wrap" id="filtros-contenedor">
+            <button class="filter-btn active">Todos</button>
+            <button id="filtro-mujer" class="filter-btn">Mujer</button>
+            <button id="filtro-hombre" class="filter-btn">Hombre</button>
+            <button id="filtro-accesorios" class="filter-btn">
+              Accesorios
+            </button>
+            <button id="filtro-calzado" class="filter-btn">Calzado</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  <div id="footer-container"></div>
+    <div class="container mb-5">
+      <div class="row g-4" id="contenedor-productos"></div>
+    </div>
 
-  <div class="modal fade" id="productModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-      <div class="modal-content card border-0 shadow-lg">
-        <div class="modal-header border-0 pb-0"><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
-        <div class="modal-body p-4">
-          <div class="row g-4">
-            <div class="col-md-6 text-center">
-              <img id="productModalImg" src="" class="img-fluid rounded shadow-sm">
-            </div>
-            <div class="col-md-6">
-              <h4 id="productModalLabel" class="fw-bold mb-3"></h4>
-              <p id="productModalDesc" class="small text-muted"></p>
-              <div class="small border-top pt-3 border-secondary">
-                <p class="mb-1"><strong>Material:</strong> <span id="productFabric"></span></p>
-                <p class="mb-1"><strong>Región:</strong> <span id="productRegion"></span></p>
-                <p class="mb-1"><strong>Cuidado:</strong> <span id="productCare"></span></p>
+    <div id="footer-container"></div>
+
+    <div class="modal fade" id="productModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content card border-0 shadow-lg">
+          <div class="modal-header border-0 pb-0">
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body p-4">
+            <div class="row g-4">
+              <div class="col-md-6 text-center">
+                <img
+                  id="productModalImg"
+                  src=""
+                  class="img-fluid rounded shadow-sm"
+                />
               </div>
-              <div id="sizeSection" class="my-3 d-none">
-                <label class="fw-bold small d-block mb-1">Talla:</label>
-                <select id="productSize" class="form-select form-select-sm"></select>
+              <div class="col-md-6">
+                <h4 id="productModalLabel" class="fw-bold mb-3"></h4>
+                <p id="productModalDesc" class="small text-muted"></p>
+                <div class="small border-top pt-3 border-secondary">
+                  <p class="mb-1">
+                    <strong>Material:</strong> <span id="productFabric"></span>
+                  </p>
+                  <p class="mb-1">
+                    <strong>Región:</strong> <span id="productRegion"></span>
+                  </p>
+                  <p class="mb-1">
+                    <strong>Cuidado:</strong> <span id="productCare"></span>
+                  </p>
+                </div>
+                <div id="sizeSection" class="my-3 d-none">
+                  <label class="fw-bold small d-block mb-1">Talla:</label>
+                  <select
+                    id="productSize"
+                    class="form-select form-select-sm"
+                  ></select>
+                </div>
+                <h3
+                  id="productModalPrice"
+                  class="fw-bold mt-4"
+                  style="color: var(--primary-color)"
+                ></h3>
+                <button
+                  id="btn-modal-carrito"
+                  class="btn w-100 rounded-pill mt-3 py-2 text-white fw-bold shadow-sm"
+                  style="background-color: var(--primary-color)"
+                >
+                  Añadir al Carrito
+                </button>
               </div>
-              <h3 id="productModalPrice" class="fw-bold mt-4" style="color: var(--primary-color);"></h3>
-              <button id="btn-modal-carrito" class="btn w-100 rounded-pill mt-3 py-2 text-white fw-bold shadow-sm" style="background-color: var(--primary-color);">
-                Añadir al Carrito
-              </button>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="./javascript/productos.js"></script>
-  <script>
-    // Inyección de componentes
-    Promise.all([
-      fetch('./componentes/navbar.html').then(res => res.text()),
-      fetch('./componentes/footer.html').then(res => res.text()).catch(() => '')
-    ]).then(([nav, foot]) => {
-        document.getElementById('navbar-container').innerHTML = nav;
-        document.getElementById('footer-container').innerHTML = foot;
-        
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./javascript/productos.js"></script>
+    <script>
+      // Inyección de componentes
+      Promise.all([
+        fetch("./componentes/navbar.html").then((res) => res.text()),
+        fetch("./componentes/footer.html")
+          .then((res) => res.text())
+          .catch(() => ""),
+      ]).then(([nav, foot]) => {
+        document.getElementById("navbar-container").innerHTML = nav;
+        document.getElementById("footer-container").innerHTML = foot;
+
         // Inicializar lógica de Navbar (Buscador, Carrito, Tema)
-        if(typeof inicializarUI === 'function') inicializarUI();
-        if(typeof setupTheme === 'function') setupTheme();
-        if(typeof setupSearch === 'function') setupSearch();
-        if(typeof inicializarFiltros === 'function') inicializarFiltros();
-    });
-  </script>
-  <script src="./javascript/main.js"></script>
-</body>
+        if (typeof inicializarUI === "function") inicializarUI();
+        if (typeof setupTheme === "function") setupTheme();
+        if (typeof setupSearch === "function") setupSearch();
+        if (typeof inicializarFiltros === "function") inicializarFiltros();
+      });
+    </script>
+    <script src="./javascript/main.js"></script>
+  </body>
 </html>

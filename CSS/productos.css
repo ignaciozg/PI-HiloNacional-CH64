@@ -4,226 +4,235 @@
 
 /* --- BANNER --- */
 .category-banner {
-    background: linear-gradient(90deg, #9913F2 0%, #F213A4 100%);
-    border-radius: 20px;
-    overflow: hidden;
-    margin-bottom: 2rem;
-    position: relative;
-    border: none;
+  background: linear-gradient(90deg, #9913f2 0%, #f213a4 100%);
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  position: relative;
+  border: none;
 }
 .category-banner p {
-text-align: center;
-color: white;
+  text-align: center;
+  color: white;
 }
 .category-banner h2 {
-text-align: center;
-color: white;
+  text-align: center;
+  color: white;
 }
 
 /* --- CATEGORÍAS --- */
 .filter-btn {
-    border: 1px solid var(--border-color);
-    background-color: var(--bg-card);
-    color: var(--text-main);
-    padding: 8px 20px;
-    border-radius: 50px; /* Estilo más redondeado */
-    font-size: 0.85rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-card);
+  color: var(--text-main);
+  padding: 8px 20px;
+  border-radius: 50px; /* Estilo más redondeado */
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
 }
 
 .filter-btn.active {
-    background-color: var(--text-main);
-    color: var(--bg-body);
-    border-color: var(--text-main);
+  background-color: var(--text-main);
+  color: var(--bg-body);
+  border-color: var(--text-main);
 }
 
 .filter-btn:hover:not(.active) {
-    border-color: var(--primary-color);
-    color: var(--primary-color);
-    transform: translateY(-2px);
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  transform: translateY(-2px);
 }
 
 /* --- TARJETAS PRODUCTO --- */
 .product-card {
-    background: transparent !important;
-    border: none !important;
-    transition: transform 0.3s ease;
-    cursor: pointer;
-    position: relative;
+  background: transparent !important;
+  border: none !important;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  position: relative;
 }
 
 .product-card:hover {
-    transform: translateY(-8px); /* Efecto de elevación */
+  transform: translateY(-8px); /* Efecto de elevación */
 }
 
 .product-img-wrapper {
-    position: relative;
-    overflow: hidden;
-    border-radius: 15px;
-    background-color: var(--bg-input);
-    /* Contenedor del Hover */
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
+  background-color: var(--bg-input);
+  /* Contenedor del Hover */
 }
 
 .product-img-wrapper img {
-    width: 100%;
-    aspect-ratio: 3 / 4;
-    object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 /* --- EFECTO HOVER DESCRIPCIÓN --- */
 /* Usamos pseudo-elementos para mostrar la info técnica del JS sin romper el diseño */
 .product-card::before {
-    content: attr(data-description);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.75);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 20px;
-    font-size: 0.8rem;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 1;
-    border-radius: 15px;
-    pointer-events: none; /* Permite hacer click a través del texto */
+  content: attr(data-description);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  font-size: 0.8rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+  border-radius: 15px;
+  pointer-events: none; /* Permite hacer click a través del texto */
 }
 
 .product-card:hover::before {
-    opacity: 1;
+  opacity: 1;
 }
 
 .product-card:hover img {
-    transform: scale(1.1); /* Zoom suave */
+  transform: scale(1.1); /* Zoom suave */
 }
 
 /* --- BOTÓN FAVORITOS (CORAZÓN) --- */
 .btn-wishlist {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.9);
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #111827;
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    z-index: 10; /* Siempre encima del hover */
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #111827;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10; /* Siempre encima del hover */
 }
 
 .btn-wishlist:hover {
-    background-color: #ff4757 !important;
-    color: white !important;
-    transform: scale(1.15);
+  background-color: #ff4757 !important;
+  color: white !important;
+  transform: scale(1.15);
 }
 
 .btn-wishlist.text-danger {
-    color: #ff4757 !important;
+  color: #ff4757 !important;
 }
 
 /* --- TEXTOS Y PRECIOS --- */
 .product-category {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    color: var(--text-muted);
-    margin-top: 12px;
-    margin-bottom: 2px;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--text-muted);
+  margin-top: 12px;
+  margin-bottom: 2px;
 }
 
 .product-title {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--text-main);
-    margin-bottom: 4px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; /* Corta texto largo con puntos suspensivos */
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Corta texto largo con puntos suspensivos */
 }
 
 .product-price {
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: var(--primary-color);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--primary-color);
 }
 
 /* --- AJUSTES MODO OSCURO --- */
 [data-theme="dark"] .filter-btn.active {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
 }
 
 [data-theme="dark"] .btn-wishlist {
-    background-color: var(--bg-nav);
-    color: var(--text-main);
+  background-color: var(--bg-nav);
+  color: var(--text-main);
 }
 
 [data-theme="dark"] .product-card::before {
-    background: rgba(153, 19, 242, 0.85); /* Tono morado translúcido en dark mode */
+  background: rgba(
+    153,
+    19,
+    242,
+    0.85
+  ); /* Tono morado translúcido en dark mode */
 }
 
 /* --- MODALES Y OFF-CANVAS --- */
 .modal-content.card {
-    border: 1px solid var(--border-color);
+  border: 1px solid var(--border-color);
 }
 
 .btn-primary {
-    background-color: var(--primary-color) !important;
-    border: none !important;
-    transition: opacity 0.3s ease;
+  background-color: var(--primary-color) !important;
+  border: none !important;
+  transition: opacity 0.3s ease;
 }
 
 .btn-primary:hover {
-    opacity: 0.9;
+  opacity: 0.9;
 }
 
 /* Animación para el badge de los contadores */
 .badge {
-    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 @keyframes popIn {
-    0% { transform: translate(100%, -100%) scale(0); }
-    100% { transform: translate(100%, -100%) scale(1); }
+  0% {
+    transform: translate(100%, -100%) scale(0);
+  }
+  100% {
+    transform: translate(100%, -100%) scale(1);
+  }
 }
 
-
-[data-theme="dark"] .flex-grow-1{
-    color: white;
+[data-theme="dark"] .flex-grow-1 {
+  color: white;
 }
 
-[data-theme="dark"] .fw-bold{
-    color: white;
+[data-theme="dark"] .fw-bold {
+  color: white;
 }
 
 /* Evita que los dropdowns se cierren bruscamente y asegura colores */
 .dropdown-menu {
-    border: 1px solid var(--border-color);
-    background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-card);
 }
 
 /* Forzar color de texto en dropdowns para que no hereden el blanco del banner */
-.dropdown-menu p, .dropdown-menu h6 {
-    color: var(--text-main) !important;
+.dropdown-menu p,
+.dropdown-menu h6 {
+  color: var(--text-main) !important;
 }
 
 /* Estilo para que el scroll no sea tosco */
 .overflow-auto::-webkit-scrollbar {
-    width: 5px;
+  width: 5px;
 }
 .overflow-auto::-webkit-scrollbar-thumb {
-    background: var(--primary-color);
-    border-radius: 10px;
+  background: var(--primary-color);
+  border-radius: 10px;
 }
