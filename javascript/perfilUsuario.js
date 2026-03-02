@@ -54,6 +54,83 @@ async function cargarFooter() {
     }
 }
 
+//-----------DIRECCIONES--------------------------------------------
+document.addEventListener("DOMContentLoaded", function() {
+
+    const form = document.querySelector("form");
+
+    form.addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        let valido = true;
+
+        const nombre = document.getElementById("nombre");
+        const apellidos = document.getElementById("apellidos");
+        const cp = document.getElementById("cp");
+        const pais = document.getElementById("pais");
+
+        /* ===== VALIDAR NOMBRE ===== */
+        if (nombre.value.trim().length < 2) {
+            nombre.classList.add("is-invalid");
+            valido = false;
+        } else {
+            nombre.classList.remove("is-invalid");
+            nombre.classList.add("is-valid");
+        }
+
+        /* ===== VALIDAR APELLIDOS ===== */
+        if (apellidos.value.trim().length < 2) {
+            apellidos.classList.add("is-invalid");
+            valido = false;
+        } else {
+            apellidos.classList.remove("is-invalid");
+            apellidos.classList.add("is-valid");
+        }
+
+        /* ===== VALIDAR CODIGO POSTAL (México 5 dígitos) ===== */
+        const cpRegex = /^[0-9]{5}$/;
+
+        if (!cpRegex.test(cp.value)) {
+            cp.classList.add("is-invalid");
+            valido = false;
+        } else {
+            cp.classList.remove("is-invalid");
+            cp.classList.add("is-valid");
+        }
+
+        /* ===== VALIDAR PAIS ===== */
+        if (pais.value.trim().length < 2) {
+            pais.classList.add("is-invalid");
+            valido = false;
+        } else {
+            pais.classList.remove("is-invalid");
+            pais.classList.add("is-valid");
+        }
+
+        /* ===== SI TODO ES VALIDO ===== */
+        if (valido) {
+
+            alert("Dirección guardada correctamente ✅");
+
+            form.reset();
+
+            // quitar clases visuales
+            form.querySelectorAll(".is-valid").forEach(el => {
+                el.classList.remove("is-valid");
+            });
+
+        }
+
+    });
+
+});
+
+
+
+
+
+
+
 // --- LÓGICA DEL TEMA (CAMBIO DE LOGO CLARO/OSCURO) ---
 
 function initTheme() {
@@ -122,5 +199,10 @@ function initNavbarScroll() {
             navbar.classList.remove('shadow-sm');
             navbar.style.padding = "15px 0";
         }
+
+
+
     });
+
+
 }
