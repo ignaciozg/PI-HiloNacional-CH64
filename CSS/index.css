@@ -1,0 +1,214 @@
+/* =========================================
+   Estilos Específicos de Inicio
+========================================= */
+
+/* Tipografía */
+.font-poppins {
+  font-family: "Poppins", sans-serif;
+}
+.font-inter {
+  font-family: "Inter", sans-serif;
+  color: white;
+}
+
+/* Gradientes */
+.hero-gradient {
+  background: linear-gradient(90deg, #f97316 0%, #ef4444 50%, #dc2626 100%);
+}
+
+.cta-gradient {
+  background: linear-gradient(90deg, #9333ea 0%, #db2777 50%, #e11d48 100%);
+}
+
+/* Iconos de Características */
+.icon-box {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--box-bg);
+  color: var(--box-text);
+}
+
+.icon-purple {
+  background-color: #f3e8ff;
+  color: #9333ea;
+}
+
+.icon-pink {
+  background-color: #fce7f3;
+  color: #db2777;
+}
+
+/* Interacciones Tarjetas de Producto */
+.product-card {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.btn-wishlist {
+  transition: color 0.3s ease;
+}
+
+.btn-wishlist:hover {
+  color: #ef4444 !important; /* Rojo al pasar el mouse */
+}
+
+/* Animaciones de Botones */
+.hero-btn:hover {
+  background-color: #f8f9fa;
+}
+
+.cta-btn {
+  transition: transform 0.3s ease;
+}
+
+.cta-btn:hover {
+  transform: scale(1.05);
+}
+
+.fw-bold {
+  color: white;
+}
+.fw-bold2 {
+  color: black;
+}
+
+.h5 {
+  color: black;
+}
+
+h3 {
+  color: black;
+}
+
+.btn {
+  color: black;
+}
+
+.card-title {
+  color: black;
+}
+
+.card-text {
+  color: black;
+}
+
+/* =========================================
+   Carrusel de Productos (Scroll Horizontal)
+========================================= */
+.carousel-track {
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  /* Ocultar la barra de scroll en distintos navegadores */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE y Edge */
+}
+
+.carousel-track::-webkit-scrollbar {
+  display: none; /* Chrome, Safari y Opera */
+}
+
+.carousel-item-card {
+  scroll-snap-align: start; /* Hace que al hacer scroll, se frene justo en la tarjeta */
+}
+
+/* =========================================
+   DARK MODE STYLES
+========================================= */
+
+/* Definición de variables para facilitar el cambio */
+:root {
+  --bg-body: #ffffff;
+  --text-main: #111827;
+  --text-muted: #374151;
+  --bg-nav: #ffffff;
+  --bg-card: #ffffff;
+  --bg-input: #f3f3f5;
+  --border-color: #e5e7eb;
+  --nav-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  --primary-color: #9913f2;
+  --
+  --color-scheme: light dark;
+}
+
+[data-theme="dark"] {
+  --bg-color: #0f172a;
+  --card-bg: #1e1e1e;
+  --text-main: #f8f9fa;
+  --text-muted: #b0b0b0;
+  --border-color: #333333;
+}
+
+/* Aplicación de estilos */
+body[data-theme="dark"],
+[data-theme="dark"] .bg-light {
+  background-color: var(--bg-color) !important;
+  color: var(--text-main);
+}
+
+/* Ajuste de tarjetas y contenedores */
+[data-theme="dark"] .card,
+[data-theme="dark"] .modal-content,
+[data-theme="dark"] .carousel-item-card {
+  background-color: var(--card-bg) !important;
+  border-color: var(--border-color);
+}
+
+/* Ajuste de textos específicos */
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] .fw-bold2,
+[data-theme="dark"] .card-title,
+[data-theme="dark"] .card-text {
+  color: var(--text-main) !important;
+}
+
+[data-theme="dark"] .text-muted,
+[data-theme="dark"] p.font-inter:not(.hero-gradient p) {
+  color: var(--text-muted) !important;
+}
+
+/* Ajuste de iconos (Cajas de ventajas) */
+[data-theme="dark"] .icon-purple {
+  background-color: #2d1b4e;
+  color: #c084fc;
+}
+
+[data-theme="dark"] .icon-pink {
+  background-color: #4c1d37;
+  color: #f472b6;
+}
+
+/* Inputs y Selects del Modal */
+[data-theme="dark"] .form-select,
+[data-theme="dark"] .form-control {
+  background-color: #1e293b;
+  color: white;
+  border-color: #444;
+}
+
+/* Botones de control del carrusel */
+[data-theme="dark"] .btn-outline-secondary {
+  color: var(--text-main);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .modal-body {
+  background-color: #1e293b;
+}
+
+[data-theme="dark"] .modal-header {
+  background-color: #1e293b;
+}

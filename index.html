@@ -1,45 +1,229 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hilo Nacional | Inicio</title>
-  <head>
-  <script>
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
-      document.documentElement.setAttribute("data-theme", "dark");
-    }
-  </script>
-
-  <link rel="stylesheet" href="css/main.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hilo Nacional | Conectando Talentos</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="./CSS/main.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./CSS/index.css">
+    <link rel="stylesheet" href="./CSS/productos.css">
+    <link rel="icon" type="image/svg+xml" href="./assets/logoFooter.svg">
+    <link rel="alternate icon" href="./assets/logoFooter.svg">    
 </head>
+<body class="bg-light">
 
-  
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-  
-  <link rel="stylesheet" href="./CSS/main.css">
-  
-  <link rel="icon" type="image/svg+xml" href="./assets/logoFooter.svg">
-  <link rel="alternate icon" href="./assets/logoFooter.svg">
-</head>
+    <div id="navbar-container"></div>
 
-<body>
+    <!-- HEADER HERO CLASS -->
+    <main>
+        <section class="hero-gradient text-white d-flex align-items-center" style="min-height: 500px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-lg-6">
+                        <h1 class="display-4 fw-bold font-poppins mb-3">Apoyamos el Talento Local</h1>
+                        <p class="lead font-inter mb-4">Descubre productos únicos hechos por artesanos y diseñadores nacionales.</p>
+                        <a href="./productos.html">
+                        <button class="btn btn-light text-dark fw-bold px-4 py-2 rounded-3 d-inline-flex align-items-center gap-2 shadow-sm hero-btn">
+                            Ver Catálogo <i class="bi bi-arrow-right"></i>
+                        </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <div id="navbar-container"></div>
+            <!-- VENTAJAS -->
+        <section class="container py-5">
+            <div class="row g-4 text-center justify-content-center">
+                <div class="col-md-4 col-sm-6">
+                    <div class="icon-box icon-purple mx-auto mb-3">
+                        <i class="bi bi-stars fs-3"></i>
+                    </div>
+                    <div class="cardstext">
+                    <h3 class="h5 fw-bold font-poppins">Productos Únicos</h3>
+                    <p class="text-muted small font-inter">Diseños exclusivos que no encontrarás en otro lugar.</p>
+                </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="icon-box icon-pink mx-auto mb-3">
+                        <i class="bi bi-graph-up-arrow fs-3"></i>
+                    </div>
+                    <h3 class="h5 fw-bold font-poppins">Calidad Superior</h3>
+                    <p class="text-muted small font-inter">Productos elaborados con materiales de primera calidad.</p>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="icon-box icon-purple mx-auto mb-3">
+                        <i class="bi bi-box-seam fs-3"></i>
+                    </div>
+                    <h3 class="h5 fw-bold font-poppins">Envío Rápido</h3>
+                    <p class="text-muted small font-inter">Recibe tus productos en tiempo récord.</p>
+                </div>
+            </div>
+        </section>
 
-  <div class="container mt-5 text-center">
-      <h1>Bienvenida a Hilo Nacional</h1>
-      <p>Conectando el talento artesanal con el mundo.</p>
 
-      <h2>En desarrollo...</h2>
+            <!-- CARROUSEL DE NOVEDADES -->
+        <section class="container py-4">
+            <div class="d-flex justify-content-between align-items-end mb-4">
+                <div>
+                    <h2 class="fw-bold2 font-poppins mb-1">Novedades</h2>
+                    <p class="text-muted small font-inter mb-0">Los productos más recientes de nuestra colección</p>
+                </div>
+                <a href="./productos.html">
+                <button  class="btn btn-outline-secondary btn-sm fw-bold font-inter">Ver Todo <i class="bi bi-arrow-right"></i></button>
+                </a>
+            </div>
+    </div>
+    
+        <div class="carousel-container overflow-hidden mx-n2 px-2">
+        <div class="carousel-track d-flex gap-3 pb-3" id="carrusel-novedades">
+            </div>
+        </div>
+        <div class="d-flex justify-content-center gap-3 mt-4 w-100">
+            <button class="btn btn-outline-secondary rounded-circle btn-sm d-flex align-items-center justify-content-center" id="btn-prev-novedades" style="width: 40px; height: 40px;">
+                <i class="bi bi-chevron-left"></i>
+            </button>
+            <button class="btn btn-outline-secondary rounded-circle btn-sm d-flex align-items-center justify-content-center" id="btn-next-novedades" style="width: 40px; height: 40px;">
+                <i class="bi bi-chevron-right"></i>
+            </button>
+        </div>
+</section>
+<div class="modal fade" id="productModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content card border-0 shadow-lg">
+        <div class="modal-header border-0 pb-0"><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+        <div class="modal-body p-4">
+          <div class="row g-4">
+            <div class="col-md-6 text-center">
+              <img id="productModalImg" src="" class="img-fluid rounded shadow-sm">
+            </div>
+            <div class="col-md-6">
+              <h4 id="productModalLabel" class="fw-bold mb-3"></h4>
+              <p id="productModalDesc" class="small text-muted"></p>
+              <div class="small border-top pt-3 border-secondary">
+                <p class="mb-1"><strong>Material:</strong> <span id="productFabric"></span></p>
+                <p class="mb-1"><strong>Región:</strong> <span id="productRegion"></span></p>
+                <p class="mb-1"><strong>Cuidado:</strong> <span id="productCare"></span></p>
+              </div>
+              <div id="sizeSection" class="my-3 d-none">
+                <label class="fw-bold small d-block mb-1">Talla:</label>
+                <select id="productSize" class="form-select form-select-sm"></select>
+              </div>
+              <h3 id="productModalPrice" class="fw-bold mt-4" style="color: var(--primary-color);"></h3>
+              <button id="btn-modal-carrito" class="btn w-100 rounded-pill mt-3 py-2 text-white fw-bold shadow-sm" style="background-color: var(--primary-color);">
+                Añadir al Carrito
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div id="footer"></div>
+            <!-- CARROUSEL DE LO MAS VENDIDOS -->
+          <section class="container py-4">
+            <div class="d-flex justify-content-between align-items-end mb-4">
+                <div>
+                    <h2 class="fw-bold2 font-poppins mb-1">Más Vendidos</h2>
+                    <p class="text-muted small font-inter mb-0">Los faoritos de nuestros clientes</p>
+                </div>
+                <a href="./productos.html">
+                <button  class="btn btn-outline-secondary btn-sm fw-bold font-inter">Ver Todo <i class="bi bi-arrow-right"></i></button>
+                </a>
+            </div>
+    </div>
+    
+        <div class="carousel-container overflow-hidden mx-n2 px-2">
+        <div class="carousel-track d-flex gap-3 pb-3" id="carrusel-novedades">
+            </div>
+        </div>
+        <div class="d-flex justify-content-center gap-3 mt-4 w-100">
+            <button class="btn btn-outline-secondary rounded-circle btn-sm d-flex align-items-center justify-content-center" id="btn-prev-novedades" style="width: 40px; height: 40px;">
+                <i class="bi bi-chevron-left"></i>
+            </button>
+            <button class="btn btn-outline-secondary rounded-circle btn-sm d-flex align-items-center justify-content-center" id="btn-next-novedades" style="width: 40px; height: 40px;">
+                <i class="bi bi-chevron-right"></i>
+            </button>
+        </div>
+</section>
+<div class="modal fade" id="productModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content card border-0 shadow-lg">
+        <div class="modal-header border-0 pb-0"><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+        <div class="modal-body p-4">
+          <div class="row g-4">
+            <div class="col-md-6 text-center">
+              <img id="productModalImg" src="" class="img-fluid rounded shadow-sm">
+            </div>
+            <div class="col-md-6">
+              <h4 id="productModalLabel" class="fw-bold mb-3"></h4>
+              <p id="productModalDesc" class="small text-muted"></p>
+              <div class="small border-top pt-3 border-secondary">
+                <p class="mb-1"><strong>Material:</strong> <span id="productFabric"></span></p>
+                <p class="mb-1"><strong>Región:</strong> <span id="productRegion"></span></p>
+                <p class="mb-1"><strong>Cuidado:</strong> <span id="productCare"></span></p>
+              </div>
+              <div id="sizeSection" class="my-3 d-none">
+                <label class="fw-bold small d-block mb-1">Talla:</label>
+                <select id="productSize" class="form-select form-select-sm"></select>
+              </div>
+              <h3 id="productModalPrice" class="fw-bold mt-4" style="color: var(--primary-color);"></h3>
+              <button id="btn-modal-carrito" class="btn w-100 rounded-pill mt-3 py-2 text-white fw-bold shadow-sm" style="background-color: var(--primary-color);">
+                Añadir al Carrito
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+            <!-- COLECCIONES -->
+        <section class="container py-5">
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="p-4 p-lg-5 rounded-4 text-white d-flex flex-column justify-content-between h-100 shadow-sm" style="background-color: #2563eb; min-height: 220px;">
+                        <div>
+                            <h3 class="fw-bold font-poppins mb-2">Colección Dama</h3>
+                            <p class="font-inter opacity-75 mb-4">Descubre las últimas tendencias en moda femenina</p>
+                        </div>
+                            <a href="./productos.html#filtro-mujer">
+                        <button class="btn btn-light text-dark fw-bold font-inter align-self-start">Explorar</button>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="p-4 p-lg-5 rounded-4 text-white d-flex flex-column justify-content-between h-100 shadow-sm" style="background-color: #1e293b; min-height: 220px;">
+                        <div>
+                            <h3 class="fw-bold font-poppins mb-2">Colección Caballero</h3>
+                            <p class="font-inter opacity-75 mb-4">Estilo y elegancia para el hombre moderno</p>
+                        </div>
+                        <a href="./productos.html#filtro-hombre">
+                        <button class="btn btn-light text-dark fw-bold font-inter align-self-start">Explorar</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="./javascript/main.js"></script>
-  <script src="./javascript/productos.js"></script>
+        <section class="cta-gradient text-white text-center py-5 mt-4">
+            <div class="container py-4">
+                <h2 class="display-6 fw-bold font-poppins mb-3">¿Eres un artesano o diseñador?</h2>
+                <p class="lead font-inter opacity-75 mb-4">Únete a nuestra comunidad y vende tus productos</p>
+                <button class="btn btn-light btn-lg rounded-pill fw-bold font-inter text-danger px-5 shadow cta-btn">
+                    Registrarme como Vendedor
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer"></div>
+    <script src="./javascript/main.js"></script>
+    <script src="./javascript/productos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
 </body>
 </html>
