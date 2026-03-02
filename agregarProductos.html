@@ -25,6 +25,8 @@
     <div class="mb-4">
         <h3 class="fw-bold">Agregar producto</h3>
     </div>
+    <!-- SE AGREGA CONTENEDOR ALERTAS-->
+    <div id="alertContainer" class="mb-3"></div>
 
     <!-- TARJETA FORMULARIO -->
     <div class="card card-form p-4">
@@ -38,7 +40,7 @@
 
             <h6 class="mb-4 text-muted">Detalles principales del producto</h6>
 
-            <form>
+            <form id="formProducto">
 
                 <!-- Nombre y Categoría -->
                 <div class="row mb-3">
@@ -46,19 +48,21 @@
                         <label class="form-label">
                             Nombre del producto <span class="required">*</span>
                         </label>
-                        <input type="text" class="form-control" placeholder="Ej. Playera deportiva">
+                        <input type="text" id="nombre" class="form-control" placeholder="Ej. Playera deportiva">
+                        <span id="error-nombre" class="error-text"></span>
                     </div>
 
                     <div class="col-md-6">
                         <label class="form-label">
                             Categoría <span class="required">*</span>
                         </label>
-                        <select class="form-select">
+                        <select id="categoria" class="form-select">
                             <option selected disabled>Selecciona una categoría</option>
                             <option>Hombre</option>
                             <option>Mujer</option>
                             <option>Unisex</option>
                         </select>
+                        <span id="error-categoria" class="error-text"></span>
                     </div>
                 </div>
 
@@ -67,7 +71,8 @@
                     <label class="form-label">
                         Descripción <span class="required">*</span>
                     </label>
-                    <textarea class="form-control" rows="3" placeholder="Describe el producto..."></textarea>
+                    <textarea id="descripcion" class="form-control" rows="3" placeholder="Describe el producto..."></textarea>
+                    <span id="error-descripcion" class="error-text"></span>
                 </div>
 
                 <!-- Material y Precio -->
@@ -76,14 +81,16 @@
                         <label class="form-label">
                             Material <span class="required">*</span>
                         </label>
-                        <input type="text" class="form-control" placeholder="Ej. Algodón">
+                        <input type="text" id="material" class="form-control" placeholder="Ej. Algodón">
+                        <span id="error-material" class="error-text"></span> </div>
                     </div>
 
                     <div class="col-md-6">
                         <label class="form-label">
                             Precio <span class="required">*</span>
                         </label>
-                        <input type="number" class="form-control" placeholder="$0.00">
+                        <input type="number" id="precio" class="form-control" placeholder="$0.00">
+                        <span id="error-precio" class="error-text"></span>
                     </div>
                 </div>
 
@@ -92,7 +99,8 @@
                     <label class="form-label">
                         Stock disponible <span class="required">*</span>
                     </label>
-                        <input type="number" class="form-control" placeholder="Cantidad disponible">
+                        <input type="number" id="stock" class="form-control" placeholder="Cantidad disponible">
+                        <span id="error-stock" class="error-text"></span>
                 </div>
 
                 <!-- Etiqueta -->
@@ -100,7 +108,8 @@
                     <label class="form-label">
                         Etiqueta del producto
                     </label>
-                    <input type="text" class="form-control" placeholder="Ej. Nuevo, Oferta, Edición limitada">
+                    <input type="text" id="etiqueta" class="form-control" placeholder="Ej. Nuevo, Oferta, Edición limitada">
+                    <span id="error-etiqueta" class="error-text"></span>
                 </div>
 
             </form>
@@ -114,6 +123,7 @@
   <!-- CARD PRINCIPAL -->
   <div class="card shadow-sm p-4 mb-4">
     <h5 class="mb-3">Tallas / Tamaños</h5>
+    <span id="error-tallas" class="error-text"></span> </div>
     <p class="text-muted small">Selecciona las tallas disponibles o agrega tallas personalizadas</p>
 
     <!-- Tallas de ropa -->
@@ -180,7 +190,7 @@
     <div class="mb-3">
       <label class="form-label fw-semibold">Talla Personalizada</label>
       <div class="input-group">
-        <input type="text" class="form-control" placeholder="Ej: Único, 2XL, etc.">
+        <input type="text" id="tallaPersonalizada" class="form-control" placeholder="Ej: Único, 2XL, etc.">
         <button class="btn btn-outline-secondary" type="button">+</button> <!--aca hay que crear un desplegable personalizado-->
       </div>
     </div>
@@ -189,12 +199,13 @@
 
   <!-- IMAGEN DEL PRODUCTO -->
   <div class="card shadow-sm p-4">
+    
     <h5 class="mb-3">Imagen del Producto</h5>
     <p class="text-muted small">Sube una imagen o proporciona una URL</p>
 
     <div class="mb-3">
       <label class="form-label fw-semibold">URL de la Imagen</label>
-      <input type="text" class="form-control" placeholder="https://ejemplo.com/imagen.jpg">
+      <input type="text" id="urlImagen" class="form-control" placeholder="https://ejemplo.com/imagen.jpg">
     </div>
 
     <!-- Separador -->
@@ -211,8 +222,8 @@
 
     <!-- Botones finales --> <!--aqui hay que ligar con js-->
     <div class="d-flex justify-content-end gap-2 mt-4">
-      <button type="reset" class="btn btn-outline-secondary">Limpiar Formulario</button>
-      <button type="submit" class="btn btn-dark">Agregar Producto</button>
+      <button type="button" id="btnLimpiar" class="btn btn-outline-secondary">Limpiar Formulario</button>
+      <button type="button" id="btnAgregar" class="btn btn-dark">Agregar Producto</button>
     </div>
 
     </div>
@@ -375,7 +386,10 @@
 </div>
 
     <div id="footer"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="./javascript/main.js"></script>
+<script src="./javascript/agregarProductos.js"></script>
 <link rel="stylesheet" href="./CSS/main.css">
 </body>
 </html>
