@@ -1,162 +1,166 @@
-
 .perfil-container {
-    margin-top: 2rem;
+  margin-top: 2rem;
 }
 
 /* ===== 1. SIDEBAR (TARJETA DE USUARIO) ===== */
 .perfil-card {
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 18px;
-    padding: 2rem 1.5rem;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
 }
 
 .perfil-avatar {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #7b2ff7, #f107a3);
-    color: white;
-    font-size: 28px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1rem auto;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7b2ff7, #f107a3);
+  color: white;
+  font-size: 28px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem auto;
 }
 
 .perfil-email {
-    font-size: 0.85rem;
-    color: var(--text-muted);
+  font-size: 0.85rem;
+  color: var(--text-muted);
 }
 
 .perfil-card hr {
-    border-color: var(--border-color);
-    opacity: 0.1;
+  border-color: var(--border-color);
+  opacity: 0.1;
 }
 
 /* ===== 2. TABS (NAVEGACIÓN DE PERFIL) ===== */
 .perfil-tabs {
-    background-color: #f1f5f9; /* Fondo gris suave como la imagen */
-    border-radius: 50px;
-    padding: 6px;
-    border: 1px solid var(--border-color);
-    display: flex;
-    gap: 0.5rem;
+  background-color: #f1f5f9; /* Fondo gris suave como la imagen */
+  border-radius: 50px;
+  padding: 6px;
+  border: 1px solid var(--border-color);
+  display: flex;
+  gap: 0.5rem;
 }
 
 .perfil-tabs .nav-link {
-    border-radius: 50px;
-    padding: 0.6rem 1.5rem;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: #64748b !important;
-    transition: all 0.25s ease;
-    display: flex;
-    align-items: center;
-    border: none !important;
+  border-radius: 50px;
+  padding: 0.6rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #64748b !important;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  border: none !important;
 }
 
 .perfil-tabs .nav-link i {
-    font-size: 1.1rem;
+  font-size: 1.1rem;
 }
 
 .perfil-tabs .nav-link.active {
-    background-color: #ffffff !important;
-    color: #1e293b !important;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  background-color: #ffffff !important;
+  color: #1e293b !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 /* ===== 3. HISTORIAL Y TARJETAS DE PEDIDO ===== */
 .historial-card {
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 18px;
-    padding: 2rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
 }
 
 .pedido-card {
-    border: 1px solid var(--border-color);
-    border-radius: 14px;
-    padding: 1.2rem;
-    margin-bottom: 1rem;
-    transition: background-color 0.2s ease;
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 1.2rem;
+  margin-bottom: 1rem;
+  transition: background-color 0.2s ease;
 }
 
 .pedido-card:hover {
-    background-color: var(--bg-input);
+  background-color: var(--bg-input);
 }
 
 .pedido-meta {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    margin-top: 4px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 4px;
 }
 
 /* ===== 4. BADGES (ESTILO CÁPSULA IMAGEN) ===== */
 .badge-entregado {
-    background-color: #d1fae5 !important; /* Verde pastel */
-    color: #065f46 !important;           /* Verde oscuro */
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 4px 12px;
-    border-radius: 50px;
-    border: none;
+  background-color: #d1fae5 !important; /* Verde pastel */
+  color: #065f46 !important; /* Verde oscuro */
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 50px;
+  border: none;
 }
 
 .badge-transito {
-    background-color: #dbeafe !important; /* Azul pastel */
-    color: #1e40af !important;           /* Azul oscuro */
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 4px 12px;
-    border-radius: 50px;
-    border: none;
+  background-color: #dbeafe !important; /* Azul pastel */
+  color: #1e40af !important; /* Azul oscuro */
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 50px;
+  border: none;
 }
 
 /* ===== 5. PRECIOS Y ENLACES (DETALLES) ===== */
 .pedido-total {
-    text-align: right;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .pedido-total strong {
-    font-size: 1.1rem;
-    display: block;
+  font-size: 1.1rem;
+  display: block;
 }
 
 .pedido-total a {
-    color: #0d6efd !important;      /* Azul de enlace */
-    text-decoration: underline !important; /* Subrayado como la imagen */
-    font-size: 0.85rem;
-    margin-top: 4px;
+  color: #0d6efd !important; /* Azul de enlace */
+  text-decoration: underline !important; /* Subrayado como la imagen */
+  font-size: 0.85rem;
+  margin-top: 4px;
 }
 
 .pedido-total a:hover {
-    color: #0a58ca !important;
+  color: #0a58ca !important;
 }
 
 /* ===== 6. ADAPTACIÓN MODO OSCURO ===== */
 [data-theme="dark"] .perfil-tabs {
-    background-color: #1e293b;
+  background-color: #1e293b;
 }
 
 [data-theme="dark"] .perfil-tabs .nav-link.active {
-    background-color: #334155 !important;
-    color: #f8fafc !important;
+  background-color: #334155 !important;
+  color: #f8fafc !important;
 }
 
 [data-theme="dark"] .badge-entregado {
-    background-color: #065f46 !important;
-    color: #d1fae5 !important;
+  background-color: #065f46 !important;
+  color: #d1fae5 !important;
 }
 
 [data-theme="dark"] .badge-transito {
-    background-color: #1e40af !important;
-    color: #dbeafe !important;
+  background-color: #1e40af !important;
+  color: #dbeafe !important;
+}
+
+/* Quita la flechita del dropdown en el icono de perfil */
+.dropdown-toggle::after {
+  display: none !important;
 }

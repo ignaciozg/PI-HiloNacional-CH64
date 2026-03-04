@@ -30,17 +30,21 @@
     <div class="row g-4">
 
         <!-- ===== SIDEBAR ===== -->
-        <div class="col-12 col-md-4 col-lg-3">
-            <div class="perfil-card">
-                <div class="perfil-avatar">J</div>
-                <h6 class="mt-2 mb-0">Juan Perez</h6>
-                <div class="perfil-email">juan@email.com</div>
-                <hr>
-                <button class="btn btn-outline-secondary btn-sm w-100">
-                    Cerrar sesión
-                </button>
-            </div>
-        </div>
+<div class="col-12 col-md-4 col-lg-3">
+    <div class="perfil-card">
+        <div class="perfil-avatar" id="sidebar-avatar"></div>
+        
+        <h6 class="mt-2 mb-0" id="sidebar-nombre"></h6>
+        
+        <div class="perfil-email" id="sidebar-email"></div>
+        
+        <hr>
+        
+        <button class="btn btn-outline-secondary btn-sm w-100">
+            <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+        </button>
+    </div>
+</div>
 
         <!-- ===== CONTENIDO PRINCIPAL ===== -->
         <div class="col-12 col-md-8 col-lg-9">
@@ -228,16 +232,53 @@
                 </div>
 
                 <!-- ================= CONFIGURACIÓN ================= -->
-                <div class="tab-pane fade" id="configuracion">
-                    <div class="historial-card">
-                        <h6>Configuración</h6>
-                        <p>Nomas pa que el Nacho lo ponga  -Gabi</p>
-                    </div>
-                </div>
+<div class="tab-pane fade" id="configuracion">
+    <div class="config-card">
+        <h3>Configuración de la Cuenta</h3>
+        <p class="subtitle">Actualiza tu información personal</p>
 
+        <form class="row g-3 needs-validation" id="form-configuracion" novalidate>
+            <div class="col-md-6">
+                <label class="form-label">Nombre *</label>
+                <input type="text" id="config-nombre" class="form-control" value="" required placeholder="Ingrese su nombre">
+                <div class="invalid-feedback">Ingrese un nombre válido.</div>
             </div>
-        </div>
 
+            <div class="col-md-6">
+                <label class="form-label">Apellidos *</label>
+                <input type="text" id="config-apellidos" class="form-control" value="" required placeholder="Ingrese sus apellidos">
+                <div class="invalid-feedback">Ingrese un apellido válido.</div>
+            </div>
+
+            <div class="col-12">
+                <label class="form-label">Email *</label>
+                <input type="email" id="config-email" class="form-control" value="" required placeholder="correo@ejemplo.com">
+                <div class="invalid-feedback">Ingrese un correo válido.</div>
+            </div>
+
+            <div class="col-12">
+                <label class="form-label">Teléfono</label>
+                <input type="text" id="config-telefono" class="form-control" value="" placeholder="Ingrese su número de teléfono">
+            </div>
+
+            <hr class="form-divider my-4">
+
+            <div class="col-md-6">
+                <label class="form-label">Contraseña Actual</label>
+                <input type="password" id="config-pass-actual" class="form-control" placeholder="********">
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Nueva Contraseña</label>
+                <input type="password" id="config-pass-nueva" class="form-control" placeholder="********">
+            </div>
+
+            <div class="col-12 mt-4">
+                <button class="btn btn-dark w-100" type="submit">
+                    Guardar Cambios
+                </button>
+            </div>
+        </form>
     </div>
 </div>
 
