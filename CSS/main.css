@@ -332,3 +332,28 @@ a:hover {
 #filtro-mujer {
   scroll-margin-top: 100px;
 }
+
+/* Quita la flechita del dropdown en el icono de perfil */
+.dropdown-toggle::after {
+  display: none !important;
+}
+
+/* Estilos específicos para cuando el tema es oscuro */
+[data-theme="dark"] .dropdown-menu {
+  background-color: #1e293b; /* Un gris muy oscuro casi negro */
+  border-color: #495057;
+  color: #dee2e6;
+}
+
+[data-theme="dark"] .dropdown-item {
+  color: #dee2e6;
+}
+
+[data-bs-theme="dark"] .dropdown-item:hover {
+  background-color: #1e293b; /* Gris ligeramente más claro al pasar el mouse */
+  color: #fff;
+}
+
+[data-theme="dark"] .dropdown-divider {
+  border-top: 1px solid #495057;
+}

@@ -32,9 +32,24 @@
             <i class="bi bi-moon-fill" style="font-size: 1.2rem;"></i>
         </button>
 
-        <a href="registro.html" class="nav-link p-0">
-          <img src="./assets/icono_perfil.svg" alt="Perfil de usuario" width="24"/>
-        </a> <!--Lo cambie por registro-->
+        <!-- Dropdown perfil -->
+        <div class="nav-item dropdown">
+          <a href="#" class="nav-link p-0 dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="./assets/icono_perfil.svg" alt="Perfil de usuario" width="24"/>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="userDropdown">
+          <li><a class="dropdown-item" href="../perfilUsuario.html"><i class="bi bi-person me-2"></i>Mi Perfil</a></li>
+          <li><a class="dropdown-item" href="../registro-vendedor.html"><i class="bi bi-person me-2"></i>Crea tu cuenta</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li>
+            <a class="dropdown-item" href="../login-vendedor.html" id="authButton">
+              <i class="bi bi-box-arrow-in-right me-2" id="authIcon"></i>
+              <span id="authText">Iniciar Sesión</span>
+            </a>
+          </li>
+          </ul>
+        </div>
+        </a> 
         
         <div class="dropdown">
           <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" class="position-relative nav-link p-0 text-decoration-none no-caret">
