@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
         confirmButtonColor: "#000",
       }).then(() => {
         form.reset();
-        window.location.href = "login.html";
+        window.location.href = "login-comprador.html";
       });
     });
   };
