@@ -74,3 +74,9 @@ html[data-theme='dark'] .tabs-pill a.active{
 .container-narrow{
     max-width:680px
 }
+
+/*-----------botones vendedor-comprador------------*/
+.tipo-activo {
+  background-color: white !important;
+  box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+}
