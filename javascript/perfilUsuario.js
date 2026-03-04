@@ -275,3 +275,45 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+// ================== API DE PAISES ==================
+document.addEventListener("DOMContentLoaded", function() {
+
+    const selectPais = document.getElementById("pais");
+    if (!selectPais) return;
+
+    fetch("https://restcountries.com/v3.1/all?fields=name")
+        .then(res => {
+            if (!res.ok) {
+                throw new Error("Error en la API");
+            }
+            return res.json();
+        })
+        .then(data => {
+
+            // ahora sí data es array
+            data.sort((a, b) =>
+                a.name.common.localeCompare(b.name.common)
+            );
+
+            data.forEach(pais => {
+                const option = document.createElement("option");
+                option.value = pais.name.common;
+                option.textContent = pais.name.common;
+                selectPais.appendChild(option);
+            });
+
+            new TomSelect("#pais", {
+                create: false,
+                sortField: {
+                    field: "text",
+                    direction: "asc"
+                }
+            });
+
+        })
+        .catch(error => {
+            console.error("Error cargando países:", error);
+        });
+
+});
