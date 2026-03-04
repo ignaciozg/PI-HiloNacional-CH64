@@ -77,7 +77,7 @@ form.addEventListener("submit", async (e) => {
       text: error.message,
     });
   }
-});
+
 
 function mostrarCargando() {
   Swal.fire({
