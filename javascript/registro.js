@@ -1,150 +1,150 @@
-/**
- * registro_logica.js - Lógica de Registro Hilo Nacional
- */
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById("formulario-registro");
-    const btnComprador = document.getElementById("btn-soy-comprador");
-    const btnVendedor = document.getElementById("btn-soy-vendedor");
-    const seccionVendedor = document.getElementById("seccion-vendedor");
-    const rolInput = document.getElementById("rol-usuario");
+// registro.js - Validaciones y registro de Comprador/Vendedor
 
-    // --- 1. CAMBIO DE ROL (INTERACTIVIDAD) ---
-    const cambiarRol = (esVendedor) => {
-        if (esVendedor) {
-            btnVendedor.classList.add('active');
-            btnComprador.classList.remove('active');
-            seccionVendedor.style.display = "block";
-            rolInput.value = "vendedor";
-        } else {
-            btnComprador.classList.add('active');
-            btnVendedor.classList.remove('active');
-            seccionVendedor.style.display = "none";
-            rolInput.value = "comprador";
+document.addEventListener("DOMContentLoaded", () => {
+  // Utilidades compartidas
+  const regex = {
+    nombre: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/,
+    email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+  };
+
+  const limpiarErrores = (form) => {
+    [...form.querySelectorAll(".is-invalid")].forEach(el => el.classList.remove("is-invalid"));
+    // limpiar estados de error
+    [...form.querySelectorAll('[id^="error-"]')].forEach(el => el.textContent = "");
+  };
+
+  const setError = (input, msg) => {
+    input.classList.add("is-invalid");
+    const span = document.getElementById(`error-${input.id}`);
+    if (span) span.textContent = msg;
+  };
+
+  const correoDuplicado = (correo) => {
+    const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+    return usuarios.some(u => (u.email || u.correo) === correo);
+  };
+
+  const guardarUsuario = (usuario) => {
+    const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+    usuarios.push(usuario);
+    localStorage.setItem("usuarios", JSON.stringify(usuarios));
+  };
+
+  const validarYRegistrar = (form, tipo) => {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      limpiarErrores(form);
+
+      // Campos comunes
+      const nombre = form.querySelector("#nombre");
+      const email = form.querySelector("#email");
+      const password = form.querySelector("#password");
+      const confirm = form.querySelector("#confirm");
+
+      // Campos de vendedor
+      const negocio = form.querySelector("#negocio");
+      const descripcion = form.querySelector("#descripcion");
+
+      let esValido = true;
+
+      // Nombre
+      const vNombre = nombre?.value.trim() || "";
+      if (!vNombre || vNombre.length < 3) {
+        setError(nombre, "Mínimo 3 caracteres.");
+        esValido = false;
+      } else if (!regex.nombre.test(vNombre)) {
+        setError(nombre, "Solo se permiten letras.");
+        esValido = false;
+      }
+
+      // Email
+      const vEmail = email?.value.trim() || "";
+      if (!regex.email.test(vEmail)) {
+        setError(email, "Ingresa un correo válido.");
+        esValido = false;
+      } else if (correoDuplicado(vEmail)) {
+        setError(email, "Este correo ya está registrado.");
+        esValido = false;
+      }
+
+      // Password
+      const vPass = password?.value || "";
+      const vConf = confirm?.value || "";
+      if (vPass.length < 6) {
+        setError(password, "Mínimo 6 caracteres.");
+        esValido = false;
+      }
+      if (vPass !== vConf) {
+        setError(confirm, "Las contraseñas no coinciden.");
+        esValido = false;
+      }
+
+      // validaciones para campos extras del vendedor
+      if (tipo === "vendedor") {
+        const vNegocio = negocio?.value.trim() || "";
+        const vDesc = descripcion?.value.trim() || "";
+        if (vNegocio.length < 3) {
+          setError(negocio, "El nombre del negocio es obligatorio (mínimo 3 caracteres).");
+          esValido = false;
         }
-    };
-
-    btnComprador.addEventListener('click', () => cambiarRol(false));
-    btnVendedor.addEventListener('click', () => cambiarRol(true));
-
-    // --- 2. VALIDACIÓN Y GUARDADO ---
-    form.addEventListener("submit", function(e) {
-        e.preventDefault();
-
-        // Referencias a campos
-        const campos = {
-            nombre: document.getElementById("nombre"),
-            correo: document.getElementById("correo"),
-            password: document.getElementById("password"),
-            confirm: document.getElementById("confirm-password"),
-            negocio: document.getElementById("nombre-negocio")
-        };
-
-        // Limpiar estados de error previos
-        document.querySelectorAll(".error-text").forEach(el => el.innerText = "");
-        document.querySelectorAll(".form-control").forEach(el => el.classList.remove("is-invalid"));
-
-        let esValido = true;
-
-        const setError = (id, msg) => {
-            const errorSpan = document.getElementById("error-" + id);
-            if (errorSpan) errorSpan.innerText = msg;
-            campos[id].classList.add("is-invalid");
-            esValido = false;
-        };
-
-        // ✅ VALIDACIÓN NOMBRE (Mínimo 3 letras)
-        const regexNombre = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
-        if (campos.nombre.value.trim().length < 3) {
-            setError("nombre", "Mínimo 3 caracteres.");
-        } else if (!regexNombre.test(campos.nombre.value.trim())) {
-            setError("nombre", "Solo se permiten letras.");
+        if (vDesc.length < 10) {
+          setError(descripcion, "Describe tu negocio (mínimo 10 caracteres).");
+          esValido = false;
         }
+      }
 
-        // ✅ VALIDACIÓN CORREO (Formato estándar)
-        const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!regexCorreo.test(campos.correo.value.trim())) {
-            setError("correo", "Ingresa un correo válido.");
-        }
+      if (!esValido) return;
 
-        // ✅ VALIDACIÓN NEGOCIO (Solo si es vendedor)
-        if (rolInput.value === "vendedor" && campos.negocio.value.trim().length < 3) {
-            setError("negocio", "El nombre de tu marca es obligatorio.");
-        }
-
-        // ✅ VALIDACIÓN PASSWORD (Seguridad)
-        if (campos.password.value.length < 8) {
-            setError("password", "Mínimo 8 caracteres.");
-        }
-
-        // ✅ VALIDACIÓN CONFIRMACIÓN
-        if (campos.confirm.value !== campos.password.value) {
-            setError("confirm", "Las contraseñas no coinciden.");
-        }
-
-        // --- PROCESAMIENTO FINAL ---
-        if (esValido) {
-            // Estructura del Documento NoSQL (JSON)
-            const nuevoUsuario = {
+      const usuario = {
         id: Date.now(),
-        nombre: campos.nombre.value.trim(),
-        email: campos.correo.value.trim(),
-        password: campos.password.value,
-        rol: rolInput.value,
-        datos_vendedor: rolInput.value === "vendedor" 
-            ? { marca: campos.negocio.value.trim() } 
-            : null,
-        fecha_creacion: new Date().toISOString()
-    };
+        nombre: vNombre,
+        email: vEmail,
+        password: vPass,
+        rol: tipo,
+        fecha_creacion: new Date().toISOString(),
+      };
 
-    const usuariosGuardados = JSON.parse(localStorage.getItem("usuarios")) || [];
+      if (tipo === "vendedor") {
+        usuario.datos_vendedor = {
+          marca: negocio?.value.trim() || "",
+          descripcion: descripcion?.value.trim() || "",
+        };
+      }
 
-    const correoExiste = usuariosGuardados.some(
-        u => u.email === nuevoUsuario.email
-    );
+      guardarUsuario(usuario);
 
-    if (correoExiste) {
-        Swal.fire({
-            icon: "error",
-            title: "Correo ya registrado",
-            text: "Este correo ya tiene una cuenta."
-        });
-        return;
-    }
-
-    usuariosGuardados.push(nuevoUsuario);
-
-    localStorage.setItem("usuarios", JSON.stringify(usuariosGuardados));
-
-    Swal.fire({
+      Swal.fire({
         title: "¡Cuenta creada con éxito!",
-        text: `Bienvenido/a ${nuevoUsuario.nombre}`,
+        text: `Bienvenido/a ${usuario.nombre}`,
         icon: "success",
-        confirmButtonColor: "#9913f2"
-    }).then(() => {
+        confirmButtonColor: "#000",
+      }).then(() => {
         form.reset();
         window.location.href = "login.html";
+      });
     });
-        }
-    });
+  };
+
+  const formComprador = document.getElementById("form-comprador");
+  if (formComprador) validarYRegistrar(formComprador, "comprador");
+
+  const formVendedor = document.getElementById("form-vendedor");
+  if (formVendedor) validarYRegistrar(formVendedor, "vendedor");
 });
-// 🔥 FIX SOLO PARA REGISTRO
+
+// el fix de tema 
 document.addEventListener("DOMContentLoaded", () => {
-
-    const esperarNavbar = setInterval(() => {
-        const themeBtn = document.getElementById("theme-toggle");
-
-        if (themeBtn) {
-            clearInterval(esperarNavbar);
-
-            themeBtn.addEventListener("click", () => {
-                const html = document.documentElement;
-                const currentTheme = html.getAttribute("data-theme");
-                const newTheme = currentTheme === "dark" ? "light" : "dark";
-
-                html.setAttribute("data-theme", newTheme);
-                localStorage.setItem("theme", newTheme);
-            });
-        }
-
-    }, 100);
+  const esperarNavbar = setInterval(() => {
+    const themeBtn = document.getElementById("theme-toggle");
+    if (themeBtn) {
+      clearInterval(esperarNavbar);
+      themeBtn.addEventListener("click", () => {
+        const html = document.documentElement;
+        const currentTheme = html.getAttribute("data-theme");
+        const newTheme = currentTheme === "dark" ? "light" : "dark";
+        html.setAttribute("data-theme", newTheme);
+        localStorage.setItem("theme", newTheme);
+      });
+    }
+  }, 100);
 });
