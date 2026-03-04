@@ -1,207 +1,249 @@
 <!doctype html>
 <html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hilo Nacional | Crear Cuenta</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Hilo Nacional | Crear Cuenta</title>
+    <!-- Script ANTI-FLASH -->
+    <script>
+      const savedTheme = localStorage.getItem("theme");
+      document.documentElement.style.visibility = "hidden";
 
-  <!-- Script ANTI-FLASH -->
-  <script>
-    const savedTheme = localStorage.getItem("theme");
-    document.documentElement.style.visibility = "hidden";
+      if (savedTheme === "dark") {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
 
-    if (savedTheme === "dark") {
-      document.documentElement.setAttribute("data-theme", "dark");
-    }
+      document.addEventListener("DOMContentLoaded", () => {
+        document.documentElement.style.visibility = "visible";
+        document.body.classList.add("theme-ready");
+      });
+    </script>
 
-    document.addEventListener("DOMContentLoaded", () => {
-      document.documentElement.style.visibility = "visible";
-      document.body.classList.add("theme-ready");
-    });
-  </script>
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="./CSS/main.css" />
+    <link rel="stylesheet" href="./CSS/registro-comprador.css" />
+    <link rel="stylesheet" href="./CSS/registro-vendedor.css" />
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="./CSS/main.css" />
-  <link rel="stylesheet" href="./CSS/registro-comprador.css" />
-  <link rel="stylesheet" href="./CSS/registro-vendedor.css" />
+    <!-- Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
 
-  <!-- Icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/svg+xml" href="./assets/logoFooter.svg" />
+  </head>
 
-  <link rel="icon" type="image/svg+xml" href="./assets/logoFooter.svg">
-</head>
+  <body>
+    <div id="navbar-container"></div>
 
-<body>
+    <main class="bg-light py-5 min-vh-60">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8 col-xl-7">
+            <h1 class="text-center fs-1 lh-base my-2">Crear Cuenta</h1>
+            <p class="text-center text-secondary mb-3">
+              Únete a nuestra comunidad
+            </p>
 
-  <div id="navbar-container"></div>
+            <!-- Toggle -->
+            <nav
+              class="d-flex gap-2 bg-secondary-subtle rounded-pill p-1 mx-auto mb-3"
+              style="max-width: 26rem"
+            >
+              <button
+                id="btnComprador"
+                class="flex-fill text-center py-2 px-3 rounded-pill fw-semibold border-0 d-flex align-items-center justify-content-center gap-2"
+              >
+                <img src="assets/icono_comprador.svg" width="18" />
+                Comprador
+              </button>
 
-  <main class="bg-light py-5 min-vh-60">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-8 col-xl-7">
+              <button
+                id="btnVendedor"
+                class="flex-fill text-center py-2 px-3 rounded-pill fw-semibold border-0 d-flex align-items-center justify-content-center gap-2 tipo-activo"
+              >
+                <img src="assets/icono_vendedor.svg" width="18" />
+                Vendedor
+              </button>
+            </nav>
 
-          <h1 class="text-center fs-1 lh-base my-2">Crear Cuenta</h1>
-          <p class="text-center text-secondary mb-3">Únete a nuestra comunidad</p>
+            <!-- Card -->
+            <section class="card p-4 border rounded-4 shadow-sm">
+              <div class="card-body p-0">
+                <h3 id="cardTitle" class="h5 mb-1">Registro de Comprador</h3>
 
-          <!-- Toggle -->
-          <nav class="d-flex gap-2 bg-secondary-subtle rounded-pill p-1 mx-auto mb-3"
-               style="max-width:26rem">
-
-            <button id="btnComprador"
-              class="flex-fill text-center py-2 px-3 rounded-pill fw-semibold border-0 d-flex align-items-center justify-content-center gap-2">
-              <img src="assets/icono_comprador.svg" width="18">
-              Comprador
-            </button>
-
-            <button id="btnVendedor"
-              class="flex-fill text-center py-2 px-3 rounded-pill fw-semibold border-0 d-flex align-items-center justify-content-center gap-2 tipo-activo">
-              <img src="assets/icono_vendedor.svg" width="18">
-              Vendedor
-            </button>
-
-          </nav>
-
-          <!-- Card -->
-          <section class="card p-4 border rounded-4 shadow-sm">
-            <div class="card-body p-0">
-
-              <h3 id="cardTitle" class="h5 mb-1">
-                Registro de Comprador
-              </h3>
-
-              <p id="cardSubtitle" class="text-secondary mb-3">
-                Crea tu cuenta para empezar a comprar productos únicos
-              </p>
-
-              <form id="registroForm" novalidate>
-
-                <!-- Campo negocio (solo vendedor) -->
-                <div id="campoNegocio" class="mb-3 d-none">
-                  <label class="form-label fw-semibold">Nombre del Negocio</label>
-                  <input type="text" class="form-control bg-light border rounded-3 py-2 px-3"
-                         placeholder="Nombre de tu marca o negocio">
-                </div>
-
-                <!-- Campo descripcion (solo vendedor) -->
-                <div id="campoDescripcion" class="mb-3 d-none">
-                  <label class="form-label fw-semibold">Descripción</label>
-                  <textarea class="form-control bg-light border rounded-3 py-2 px-3"
-                            placeholder="Cuéntanos sobre tus productos..."></textarea>
-                </div>
-
-                <!-- Nombre -->
-                <div class="mb-3">
-                  <label class="form-label fw-semibold">Nombre Completo</label>
-                  <input type="text" class="form-control bg-light border rounded-3 py-2 px-3"
-                         placeholder="Tu nombre" required>
-                </div>
-
-                <!-- Email -->
-                <div class="mb-3">
-                  <label class="form-label fw-semibold">Email</label>
-                  <input type="email" class="form-control bg-light border rounded-3 py-2 px-3"
-                         placeholder="tu@email.com" required>
-                </div>
-
-                <!-- Password -->
-                <div class="mb-3">
-                  <label class="form-label fw-semibold">Contraseña</label>
-                  <input type="password" class="form-control bg-light border rounded-3 py-2 px-3"
-                         minlength="6" placeholder="********" required>
-                </div>
-
-                <!-- Confirm -->
-                <div class="mb-3">
-                  <label class="form-label fw-semibold">Confirmar Contraseña</label>
-                  <input type="password" class="form-control bg-light border rounded-3 py-2 px-3"
-                         minlength="6" placeholder="********" required>
-                </div>
-
-                <button class="btn btn-dark w-100 rounded-3 fw-bold mt-2"
-                        type="submit">
-                  Crear Cuenta
-                </button>
-
-                <p class="mt-2 text-center">
-                  ¿Ya tienes cuenta?
-                  <a id="loginLink"
-                     class="text-primary fw-semibold text-decoration-none"
-                     href="./login.html">
-                     Inicia sesión
-                  </a>
+                <p id="cardSubtitle" class="text-secondary mb-3">
+                  Crea tu cuenta para empezar a comprar productos únicos
                 </p>
 
-              </form>
+                <form id="registroForm" novalidate>
+                  <!-- Campo negocio (solo vendedor) -->
+                  <div id="campoNegocio" class="mb-3 d-none">
+                    <label class="form-label fw-semibold"
+                      >Nombre del Negocio</label
+                    >
+                    <input
+                      type="text"
+                      id="negocio"
+                      class="form-control"
+                      placeholder="El nombre de tu negocio"
+                    />
+                  </div>
 
+                  <!-- Campo descripcion (solo vendedor) -->
+                  <div id="campoDescripcion" class="mb-3 d-none">
+                    <label class="form-label fw-semibold">Descripción</label>
+                    <textarea
+                      id="descripcion"
+                      class="form-control"
+                      placeholder="Cuentanos hacerca de tus productos"
+                    ></textarea>
+                  </div>
+
+                  <!-- Nombre -->
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold"
+                      >Nombre Completo</label
+                    >
+                    <input
+                      type="text"
+                      id="nombre"
+                      class="form-control"
+                      placeholder="Tu nombre"
+                      required
+                    />
+                  </div>
+
+                  <!-- Email -->
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold">Email</label>
+                    <input
+                      type="email"
+                      id="email"
+                      class="form-control"
+                      placeholder="tu@email.com"
+                      required
+                    />
+                  </div>
+
+                  <!-- Password -->
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold">Contraseña</label>
+                    <input
+                      type="password"
+                      id="password"
+                      class="form-control"
+                      placeholder="********"
+                      required
+                    />
+                  </div>
+
+                  <!-- Confirm -->
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold"
+                      >Confirmar Contraseña</label
+                    >
+                    <input
+                      type="password"
+                      id="confirm"
+                      class="form-control"
+                      placeholder="********"
+                      required
+                    />
+                  </div>
+
+                  <button
+                    class="btn btn-dark w-100 rounded-3 fw-bold mt-2"
+                    type="submit"
+                  >
+                    Crear Cuenta
+                  </button>
+
+                  <p class="mt-2 text-center">
+                    ¿Ya tienes cuenta?
+                    <a
+                      id="loginLink"
+                      class="text-primary fw-semibold text-decoration-none"
+                      href="./login.html"
+                    >
+                      Inicia sesión
+                    </a>
+                  </p>
+                </form>
+              </div>
+            </section>
+
+            <div class="text-center mt-3">
+              <a class="text-secondary text-decoration-none" href="index.html">
+                Volver al inicio
+              </a>
             </div>
-          </section>
-
-          <div class="text-center mt-3">
-            <a class="text-secondary text-decoration-none" href="index.html">
-              Volver al inicio
-            </a>
           </div>
-
         </div>
       </div>
-    </div>
-  </main>
+    </main>
 
-  <div id="footer"></div>
+    <div id="footer"></div>
 
-  <!-- Bootstrap -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="./javascript/main.js"></script>
-  <script src="./javascript/productos.js"></script>
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./javascript/main.js"></script>
+    <script src="./javascript/productos.js"></script>
+    <script src="./javascript/registro.js"></script>
 
-  <!-- Script dinámico -->
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
+    <!-- Script dinámico -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const btnComprador = document.getElementById("btnComprador");
+        const btnVendedor = document.getElementById("btnVendedor");
 
-      const btnComprador = document.getElementById("btnComprador");
-      const btnVendedor = document.getElementById("btnVendedor");
+        const title = document.getElementById("cardTitle");
+        const subtitle = document.getElementById("cardSubtitle");
 
-      const title = document.getElementById("cardTitle");
-      const subtitle = document.getElementById("cardSubtitle");
+        const campoNegocio = document.getElementById("campoNegocio");
+        const campoDescripcion = document.getElementById("campoDescripcion");
 
-      const campoNegocio = document.getElementById("campoNegocio");
-      const campoDescripcion = document.getElementById("campoDescripcion");
+        function activarComprador() {
+          title.textContent = "Registro de Comprador";
+          subtitle.textContent =
+            "Crea tu cuenta para empezar a comprar productos únicos";
 
-      function activarComprador() {
-        title.textContent = "Registro de Comprador";
-        subtitle.textContent = "Crea tu cuenta para empezar a comprar productos únicos";
+          campoNegocio.classList.add("d-none");
+          campoDescripcion.classList.add("d-none");
 
-        campoNegocio.classList.add("d-none");
-        campoDescripcion.classList.add("d-none");
+          btnComprador.classList.add("bg-white", "shadow-sm");
+          btnVendedor.classList.remove("bg-white", "shadow-sm");
+        }
 
-        btnComprador.classList.add("bg-white", "shadow-sm");
-        btnVendedor.classList.remove("bg-white", "shadow-sm");
-      }
+        function activarVendedor() {
+          title.textContent = "Registro de Vendedor";
+          subtitle.textContent =
+            "Únete como vendedor y comparte tus productos artesanales";
 
-      function activarVendedor() {
-        title.textContent = "Registro de Vendedor";
-        subtitle.textContent = "Únete como vendedor y comparte tus productos artesanales";
+          campoNegocio.classList.remove("d-none");
+          campoDescripcion.classList.remove("d-none");
 
-        campoNegocio.classList.remove("d-none");
-        campoDescripcion.classList.remove("d-none");
+          btnVendedor.classList.add("bg-white", "shadow-sm");
+          btnComprador.classList.remove("bg-white", "shadow-sm");
+        }
 
-        btnVendedor.classList.add("bg-white", "shadow-sm");
-        btnComprador.classList.remove("bg-white", "shadow-sm");
-      }
-
-      btnComprador.addEventListener("click", activarComprador);
-      btnVendedor.addEventListener("click", activarVendedor);
-
-    });
-  </script>
-
-</body>
+        btnComprador.addEventListener("click", activarComprador);
+        btnVendedor.addEventListener("click", activarVendedor);
+      });
+    </script>
+  </body>
 </html>
