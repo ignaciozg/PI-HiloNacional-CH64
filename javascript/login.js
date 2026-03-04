@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-
   const btnComprador = document.getElementById("btnComprador");
   const btnVendedor = document.getElementById("btnVendedor");
 
@@ -12,8 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
     subtitle.textContent = "Accede a tu cuenta para realizar compras";
     registerLink.href = "./registro.html";
 
-    btnComprador.classList.add("tipo-activo");
-    btnVendedor.classList.remove("tipo-activo");
+    btnComprador.classList.add("bg-white", "shadow-sm", "tipo-activo");
+    btnVendedor.classList.remove("bg-white", "shadow-sm", "tipo-activo");
+
   }
 
   function activarVendedor() {
@@ -21,13 +21,15 @@ document.addEventListener("DOMContentLoaded", () => {
     subtitle.textContent = "Accede a tu panel de vendedor";
     registerLink.href = "./registro.html";
 
-    btnVendedor.classList.add("tipo-activo");
-    btnComprador.classList.remove("tipo-activo");
+
+    btnVendedor.classList.add("bg-white", "shadow-sm", "tipo-activo");
+    btnComprador.classList.remove("bg-white", "shadow-sm", "tipo-activo");
+
   }
 
   btnComprador.addEventListener("click", activarComprador);
   btnVendedor.addEventListener("click", activarVendedor);
 
+
+  activarComprador(); 
 });
-
-

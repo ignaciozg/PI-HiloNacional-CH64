@@ -29,6 +29,7 @@
   <link rel="stylesheet" href="./CSS/main.css" />
   <link rel="stylesheet" href="./CSS/registro.css" />
 
+
   <!-- Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
 
@@ -51,7 +52,7 @@
           <p class="text-center text-secondary mb-3">Únete a nuestra comunidad</p>
 
           <!-- Toggle -->
-          <nav class="d-flex gap-2 bg-secondary-subtle rounded-pill p-1 mx-auto mb-3 "
+          <nav class="d-flex gap-2 bg-secondary-subtle rounded-pill p-1 mx-auto mb-3"
                style="max-width:26rem">
 
             <button id="btnComprador"
@@ -61,7 +62,7 @@
             </button>
 
             <button id="btnVendedor"
-              class="flex-fill text-center py-2 px-3 rounded-pill fw-semibold border-0 d-flex align-items-center justify-content-center gap-2 ">
+              class="flex-fill text-center py-2 px-3 rounded-pill fw-semibold border-0 d-flex align-items-center justify-content-center gap-2">
               <img src="assets/icono_vendedor.svg" width="18">
               Vendedor
             </button>
@@ -85,8 +86,9 @@
                 <!-- Campo negocio (solo vendedor) -->
                 <div id="campoNegocio" class="mb-3 d-none">
                   <label class="form-label fw-semibold">Nombre del Negocio</label>
-                  <input id="negocio" type="text" class="form-control bg-light border rounded-3 py-2 px-3"
+                  <input id="negocio"  type="text" class="form-control bg-light border rounded-3 py-2 px-3"
                          placeholder="Nombre de tu marca o negocio">
+                  <span id="error-negocio" class="text-danger small"></span>
                 </div>
 
                 <!-- Campo descripcion (solo vendedor) -->
@@ -94,6 +96,7 @@
                   <label class="form-label fw-semibold">Descripción</label>
                   <textarea id="descripcion" class="form-control bg-light border rounded-3 py-2 px-3"
                             placeholder="Cuéntanos sobre tus productos..."></textarea>
+                  <span id="error-descripcion" class="text-danger small"></span>
                 </div>
 
                 <!-- Nombre -->
@@ -101,6 +104,7 @@
                   <label class="form-label fw-semibold">Nombre Completo</label>
                   <input id="nombre" type="text" class="form-control bg-light border rounded-3 py-2 px-3"
                          placeholder="Tu nombre" required>
+                  <span id="error-nombre" class="text-danger small"></span>
                 </div>
 
                 <!-- Email -->
@@ -108,6 +112,7 @@
                   <label class="form-label fw-semibold">Email</label>
                   <input id="email" type="email" class="form-control bg-light border rounded-3 py-2 px-3"
                          placeholder="tu@email.com" required>
+                  <span id="error-email" class="text-danger small"></span>
                 </div>
 
                 <!-- Password -->
@@ -115,6 +120,7 @@
                   <label class="form-label fw-semibold">Contraseña</label>
                   <input id="password" type="password" class="form-control bg-light border rounded-3 py-2 px-3"
                          minlength="6" placeholder="********" required>
+                  <span id="error-password" class="text-danger small"></span>
                 </div>
 
                 <!-- Confirm -->
@@ -122,6 +128,7 @@
                   <label class="form-label fw-semibold">Confirmar Contraseña</label>
                   <input id="confirm" type="password" class="form-control bg-light border rounded-3 py-2 px-3"
                          minlength="6" placeholder="********" required>
+                  <span id="error-confirm" class="text-danger small"></span>
                 </div>
 
                 <button class="btn btn-dark w-100 rounded-3 fw-bold mt-2"
@@ -160,6 +167,48 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="./javascript/main.js"></script>
   <script src="./javascript/productos.js"></script>
+
+  <!-- Script dinámico -->
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const btnComprador = document.getElementById("btnComprador");
+  const btnVendedor = document.getElementById("btnVendedor");
+
+  const title = document.getElementById("cardTitle");
+  const subtitle = document.getElementById("cardSubtitle");
+
+  const campoNegocio = document.getElementById("campoNegocio");
+  const campoDescripcion = document.getElementById("campoDescripcion");
+
+  function activarComprador() {
+    title.textContent = "Registro de Comprador";
+    subtitle.textContent = "Crea tu cuenta para empezar a comprar productos únicos";
+
+    campoNegocio.classList.add("d-none");
+    campoDescripcion.classList.add("d-none");
+
+    btnComprador.classList.add("bg-white", "shadow-sm", "tipo-activo");
+    btnVendedor.classList.remove("bg-white", "shadow-sm", "tipo-activo");
+  }
+
+  function activarVendedor() {
+    title.textContent = "Registro de Vendedor";
+    subtitle.textContent = "Únete como vendedor y comparte tus productos artesanales";
+
+    campoNegocio.classList.remove("d-none");
+    campoDescripcion.classList.remove("d-none");
+
+    btnVendedor.classList.add("bg-white", "shadow-sm", "tipo-activo");
+    btnComprador.classList.remove("bg-white", "shadow-sm", "tipo-activo");
+  }
+
+  btnComprador.addEventListener("click", activarComprador);
+  btnVendedor.addEventListener("click", activarVendedor);
+
+  activarComprador();
+});
+
+  </script>
 
 </body>
 </html>
