@@ -1,35 +1,24 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Hilo Nacional | Iniciar Sesión</title>
 
-    <!-- Script ANTI-FLASH -->
-    <script>
-      const savedTheme = localStorage.getItem("theme");
-      document.documentElement.style.visibility = "hidden";
-      if (savedTheme === "dark") {
-        document.documentElement.setAttribute("data-theme", "dark");
-      }
-      document.addEventListener("DOMContentLoaded", () => {
-        document.documentElement.style.visibility = "visible";
-        document.body.classList.add("theme-ready");
-      });
-    </script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hilo Nacional | Iniciar Sesión</title>
 
-    <!-- Bootstrap -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
-    />
+  <!-- Script ANTI-FLASH -->
+  <script>
+    const savedTheme = localStorage.getItem("theme");
+    document.documentElement.style.visibility = "hidden";
+    if (savedTheme === "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+    }
+    document.addEventListener("DOMContentLoaded", () => {
+      document.documentElement.style.visibility = "visible";
+      document.body.classList.add("theme-ready");
+    });
+  </script>
 
-<<<<<<< HEAD
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -37,66 +26,20 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="CSS/login.css">
-=======
-    <!-- CSS -->
-    <link rel="stylesheet" href="CSS/registro-comprador.css" />
-    <link rel="stylesheet" href="CSS/login.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
-    />
 
-    <!-- Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Inter:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
 
-    <link rel="icon" type="image/svg+xml" href="./assets/logoFooter.svg" />
-  </head>
->>>>>>> 54fef33f13fc808b10a42bcf004f3d7d9b37ec8b
+  <link rel="icon" type="image/svg+xml" href="./assets/logoFooter.svg">
+</head>
 
-  <body>
-    <div id="navbar-container"></div>
+<body>
 
-    <main class="login-wrap bg-light">
-      <div class="container container-narrow">
-        <!-- Título -->
-        <div class="text-center mb-4">
-          <h1 class="display-6 login-title mb-2">Bienvenido</h1>
-          <p class="login-sub">Inicia sesión en tu cuenta</p>
-        </div>
+  <div id="navbar-container"></div>
 
-        <!-- Toggle Comprador / Vendedor -->
-        <nav
-          class="d-flex gap-2 bg-secondary-subtle rounded-pill p-1 mx-auto mb-3"
-          style="max-width: 26rem"
-        >
-          <button
-            id="btnComprador"
-            class="flex-fill text-center py-2 px-3 rounded-pill fw-semibold border-0 d-flex align-items-center justify-content-center gap-2"
-          >
-            <img src="assets/icono_comprador.svg" width="18" />
-            Comprador
-          </button>
+  <main class="login-wrap bg-light">
+    <div class="container container-narrow">
 
-          <button
-            id="btnVendedor"
-            class="flex-fill text-center py-2 px-3 rounded-pill fw-semibold border-0 bg-transparent d-flex align-items-center justify-content-center gap-2"
-          >
-            <img src="assets/icono_vendedor.svg" width="18" />
-            Vendedor
-          </button>
-        </nav>
-
-        <!-- Card -->
-        <div class="card shadow-sm mx-auto login-card" style="max-width: 560px">
-          <div class="card-body p-4 p-md-5">
-            <h5 id="loginTitle" class="fw-semibold mb-1">
-              Iniciar Sesión como Comprador
-            </h5>
-
-<<<<<<< HEAD
       <!-- Título -->
       <div class="text-center mb-4">
         <h1 class="display-6 login-title mb-2">Bienvenido</h1>
@@ -157,86 +100,22 @@
               <a id="registerLink" class="text-primary fw-semibold text-decoration-none" href="./registro.html">
                 Regístrate
               </a>
-=======
-            <p id="loginSubtitle" class="text-muted mb-4">
-              Accede a tu cuenta para realizar compras
->>>>>>> 54fef33f13fc808b10a42bcf004f3d7d9b37ec8b
             </p>
-
-            <form id="form-login" novalidate>
-              <div class="mb-3">
-                <label class="form-label">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  class="form-control"
-                  placeholder="tu@email.com"
-                  required
-                />
-                <div class="invalid-feedback">Ingresa un correo válido.</div>
-              </div>
-
-              <div class="mb-3">
-                <label class="form-label">Contraseña</label>
-                <div class="input-group">
-                  <input
-                    type="password"
-                    id="loginPassword"
-                    class="form-control"
-                    placeholder="*******"
-                    required
-                  />
-                  <button
-                    class="btn btn-outline-secondary"
-                    type="button"
-                    id="btnToggleLoginPass"
-                  >
-                    <i class="bi bi-eye" id="loginEyeIcon"></i>
-                  </button>
-                </div>
-                <div class="invalid-feedback">
-                  La contraseña debe tener al menos 6 caracteres.
-                </div>
-              </div>
-
-              <button
-                class="btn btn-dark w-100 rounded-3 fw-bold mt-2"
-                type="submit"
-              >
-                Iniciar Sesión
-              </button>
-            </form>
-
-            <div class="text-center mt-3">
-              <p>
-                ¿No tienes cuenta?
-                <a
-                  id="registerLink"
-                  class="text-primary fw-semibold text-decoration-none"
-                  href="./registro.html"
-                >
-                  Regístrate
-                </a>
-              </p>
-            </div>
           </div>
-        </div>
 
-        <!-- Volver -->
-        <div class="text-center mt-4">
-          <a class="text-secondary text-decoration-none" href="index.html">
-            Volver al inicio
-          </a>
         </div>
       </div>
-    </main>
 
-    <div id="footer"></div>
+      <!-- Volver -->
+      <div class="text-center mt-4">
+        <a class="text-secondary text-decoration-none" href="index.html">
+          Volver al inicio
+        </a>
+      </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    </div>
+  </main>
 
-<<<<<<< HEAD
   <div id="footer"></div>
 
   <!-- Bootstrap JS -->
@@ -248,11 +127,4 @@
   <script src="javascript/login.js"></script>
 
 </body>
-=======
-    <!-- Scripts -->
-    <script src="./javascript/main.js"></script>
-    <script src="./javascript/productos.js"></script>
-    <script src="javascript/login.js"></script>
-  </body>
->>>>>>> 54fef33f13fc808b10a42bcf004f3d7d9b37ec8b
 </html>
