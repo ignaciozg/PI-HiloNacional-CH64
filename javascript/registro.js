@@ -1,18 +1,6 @@
-// registro.js - Validaciones y registro unificado
+// registro.js - Validaciones y registro de Comprador/Vendedor
+
 document.addEventListener("DOMContentLoaded", () => {
-  const formRegistro = document.getElementById("registroForm");
-
-  // Si no estamos en la página de registro, detenemos el script
-  if (!formRegistro) return;
-
-  // Variables para saber qué tipo de usuario se está registrando
-  let tipoRegistro = "comprador";
-  const btnComprador = document.getElementById("btnComprador");
-  const btnVendedor = document.getElementById("btnVendedor");
-
-  btnComprador.addEventListener("click", () => (tipoRegistro = "comprador"));
-  btnVendedor.addEventListener("click", () => (tipoRegistro = "vendedor"));
-
   // Utilidades compartidas
   const regex = {
     nombre: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/,
@@ -20,19 +8,20 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const limpiarErrores = (form) => {
-    [...form.querySelectorAll(".is-invalid")].forEach((el) =>
-      el.classList.remove("is-invalid"),
-    );
+    [...form.querySelectorAll(".is-invalid")].forEach(el => el.classList.remove("is-invalid"));
+    // limpiar estados de error
+    [...form.querySelectorAll('[id^="error-"]')].forEach(el => el.textContent = "");
   };
 
   const setError = (input, msg) => {
     input.classList.add("is-invalid");
-    // Si usas spans para errores, aquí se actualizarían. Como usamos SweetAlert, esto pinta el input en rojo.
+    const span = document.getElementById(`error-${input.id}`);
+    if (span) span.textContent = msg;
   };
 
   const correoDuplicado = (correo) => {
     const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
-    return usuarios.some((u) => u.email === correo);
+    return usuarios.some(u => (u.email || u.correo) === correo);
   };
 
   const guardarUsuario = (usuario) => {
@@ -41,106 +30,130 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem("usuarios", JSON.stringify(usuarios));
   };
 
-  // Evento principal de registro
-  formRegistro.addEventListener("submit", (e) => {
-    e.preventDefault(); // Evita que la página se recargue
-    limpiarErrores(formRegistro);
+  const validarYRegistrar = (form, tipo) => {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      limpiarErrores(form);
 
-    const nombre = document.getElementById("nombre");
-    const email = document.getElementById("email");
-    const password = document.getElementById("password");
-    const confirm = document.getElementById("confirm");
-    const negocio = document.getElementById("negocio");
-    const descripcion = document.getElementById("descripcion");
+      // Campos comunes
+      const nombre = form.querySelector("#nombre");
+      const email = form.querySelector("#email");
+      const password = form.querySelector("#password");
+      const confirm = form.querySelector("#confirm");
 
-    let esValido = true;
-    let mensajeError = "";
+      // Campos de vendedor
+      const negocio = form.querySelector("#negocio");
+      const descripcion = form.querySelector("#descripcion");
 
-    // Validaciones básicas
-    const vNombre = nombre.value.trim();
-    if (!vNombre || vNombre.length < 3 || !regex.nombre.test(vNombre)) {
-      setError(nombre);
-      mensajeError =
-        "Ingresa un nombre válido (solo letras, mín. 3 caracteres).";
-      esValido = false;
-    }
+      let esValido = true;
 
-    const vEmail = email.value.trim();
-    if (!regex.email.test(vEmail)) {
-      setError(email);
-      mensajeError = "Ingresa un correo válido.";
-      esValido = false;
-    } else if (correoDuplicado(vEmail)) {
-      setError(email);
-      mensajeError = "Este correo ya está registrado.";
-      esValido = false;
-    }
-
-    const vPass = password.value;
-    const vConf = confirm.value;
-    if (vPass.length < 6) {
-      setError(password);
-      mensajeError = "La contraseña debe tener mínimo 6 caracteres.";
-      esValido = false;
-    } else if (vPass !== vConf) {
-      setError(confirm);
-      mensajeError = "Las contraseñas no coinciden.";
-      esValido = false;
-    }
-
-    // Validaciones extra si es vendedor
-    if (tipoRegistro === "vendedor") {
-      const vNegocio = negocio.value.trim();
-      const vDesc = descripcion.value.trim();
-      if (vNegocio.length < 3) {
-        setError(negocio);
-        mensajeError = "El nombre del negocio es obligatorio.";
+      // Nombre
+      const vNombre = nombre?.value.trim() || "";
+      if (!vNombre || vNombre.length < 3) {
+        setError(nombre, "Mínimo 3 caracteres.");
+        esValido = false;
+      } else if (!regex.nombre.test(vNombre)) {
+        setError(nombre, "Solo se permiten letras.");
         esValido = false;
       }
-      if (vDesc.length < 10) {
-        setError(descripcion);
-        mensajeError = "Describe tu negocio (mínimo 10 caracteres).";
+
+      // Email
+      const vEmail = email?.value.trim() || "";
+      if (!regex.email.test(vEmail)) {
+        setError(email, "Ingresa un correo válido.");
+        esValido = false;
+      } else if (correoDuplicado(vEmail)) {
+        setError(email, "Este correo ya está registrado.");
         esValido = false;
       }
-    }
 
-    // Si hay errores, mostramos alerta y detenemos
-    if (!esValido) {
-      Swal.fire({ icon: "error", title: "Oops...", text: mensajeError });
-      return;
-    }
+      // Password
+      const vPass = password?.value || "";
+      const vConf = confirm?.value || "";
+      if (vPass.length < 6) {
+        setError(password, "Mínimo 6 caracteres.");
+        esValido = false;
+      }
+      if (vPass !== vConf) {
+        setError(confirm, "Las contraseñas no coinciden.");
+        esValido = false;
+      }
 
-    // Si todo es válido, creamos el objeto usuario
-    const nuevoUsuario = {
-      id: Date.now(),
-      nombre: vNombre,
-      email: vEmail,
-      password: vPass,
-      rol: tipoRegistro,
-      fecha_creacion: new Date().toISOString(),
-    };
+      // validaciones para campos extras del vendedor
+      if (tipo === "vendedor") {
+        const vNegocio = negocio?.value.trim() || "";
+        const vDesc = descripcion?.value.trim() || "";
+        if (vNegocio.length < 3) {
+          setError(negocio, "El nombre del negocio es obligatorio (mínimo 3 caracteres).");
+          esValido = false;
+        }
+        if (vDesc.length < 10) {
+          setError(descripcion, "Describe tu negocio (mínimo 10 caracteres).");
+          esValido = false;
+        }
+      }
 
-    if (tipoRegistro === "vendedor") {
-      nuevoUsuario.datos_vendedor = {
-        marca: negocio.value.trim(),
-        descripcion: descripcion.value.trim(),
+      if (!esValido) return;
+
+      const usuario = {
+        id: Date.now(),
+        nombre: vNombre,
+        email: vEmail,
+        password: vPass,
+        rol: tipo,
+        fecha_creacion: new Date().toISOString(),
       };
-    }
 
-    // Guardamos en la base de datos simulada y creamos la sesión
-    guardarUsuario(nuevoUsuario);
-    localStorage.setItem("usuarioActivo", JSON.stringify(nuevoUsuario));
+      if (tipo === "vendedor") {
+        usuario.datos_vendedor = {
+          marca: negocio?.value.trim() || "",
+          descripcion: descripcion?.value.trim() || "",
+        };
+      }
 
-    Swal.fire({
-      title: "¡Cuenta creada con éxito!",
-      text: `Bienvenido/a ${nuevoUsuario.nombre}`,
-      icon: "success",
-      confirmButtonColor: "#000",
-      timer: 2000,
-      showConfirmButton: false,
-    }).then(() => {
-      formRegistro.reset();
-      window.location.href = "perfilUsuario.html"; // Redirigimos al perfil
+      guardarUsuario(usuario);
+
+      Swal.fire({
+        title: "¡Cuenta creada con éxito!",
+        text: `Bienvenido/a ${usuario.nombre}`,
+        icon: "success",
+        confirmButtonColor: "#000",
+      }).then(() => {
+        // 1. Guardamos al usuario que se acaba de registrar como "Activo"
+        localStorage.setItem("usuarioActivo", JSON.stringify(usuario));
+
+        form.reset();
+        
+        // 2. Redirigimos según el tipo de cuenta que eligió
+        if (tipo === "vendedor") {
+          window.location.href = "perfilUsuario.html"; 
+        } else {
+          window.location.href = "perfilUsuario.html";
+        }
+      });
     });
-  });
+  };
+
+  const formComprador = document.getElementById("form-comprador");
+  if (formComprador) validarYRegistrar(formComprador, "comprador");
+
+  const formVendedor = document.getElementById("form-vendedor");
+  if (formVendedor) validarYRegistrar(formVendedor, "vendedor");
+});
+
+// el fix de tema 
+document.addEventListener("DOMContentLoaded", () => {
+  const esperarNavbar = setInterval(() => {
+    const themeBtn = document.getElementById("theme-toggle");
+    if (themeBtn) {
+      clearInterval(esperarNavbar);
+      themeBtn.addEventListener("click", () => {
+        const html = document.documentElement;
+        const currentTheme = html.getAttribute("data-theme");
+        const newTheme = currentTheme === "dark" ? "light" : "dark";
+        html.setAttribute("data-theme", newTheme);
+        localStorage.setItem("theme", newTheme);
+      });
+    }
+  }, 100);
 });
