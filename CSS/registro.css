@@ -1,0 +1,41 @@
+html[data-theme='dark'] body {
+    background-color: #0b0b16;
+    color: #f3f4f6;
+}
+
+html[data-theme='dark'] main.bg-light {
+    background-color: #0b0b16 !important;
+    color: #f3f4f6;
+}
+
+html[data-theme='dark'] .card {
+    background: #111827;
+    border-color: #1f2937;
+    color: #f9fafb;
+}
+
+html[data-theme='dark'] .form-control {
+    background: #0f172a;
+    border-color: #374151;
+    color: #f9fafb;
+}
+
+html[data-theme='dark'] .form-control::placeholder {
+    color: #d1d5db;
+}
+
+html[data-theme='dark'] .bg-secondary-subtle {
+    background: #1f2937 !important;
+    color: #f3f4f6;
+}
+
+.opcion-activa {
+    background: #fff !important;
+    color: #000 !important;
+    font-weight: 600;
+}
+html[data-theme='dark'] .opcion-activa {
+    background: #1f2937 !important;
+    color: #f9fafb !important;
+}
+

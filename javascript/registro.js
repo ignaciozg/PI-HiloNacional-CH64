@@ -1,7 +1,6 @@
 // registro.js - Validaciones y registro de Comprador/Vendedor
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Utilidades compartidas
   const regex = {
     nombre: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/,
     email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
@@ -9,7 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const limpiarErrores = (form) => {
     [...form.querySelectorAll(".is-invalid")].forEach(el => el.classList.remove("is-invalid"));
-    // limpiar estados de error
     [...form.querySelectorAll('[id^="error-"]')].forEach(el => el.textContent = "");
   };
 
@@ -30,118 +28,133 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem("usuarios", JSON.stringify(usuarios));
   };
 
-  const validarYRegistrar = (form, tipo) => {
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      limpiarErrores(form);
+  // Elementos
+  const btnComprador = document.getElementById("btnComprador");
+  const btnVendedor = document.getElementById("btnVendedor");
+  const title = document.getElementById("cardTitle");
+  const subtitle = document.getElementById("cardSubtitle");
+  const campoNegocio = document.getElementById("campoNegocio");
+  const campoDescripcion = document.getElementById("campoDescripcion");
+  const formRegistro = document.getElementById("registroForm");
 
-      // Campos comunes
-      const nombre = form.querySelector("#nombre");
-      const email = form.querySelector("#email");
-      const password = form.querySelector("#password");
-      const confirm = form.querySelector("#confirm");
+  let rolActivo = "comprador"; // default
 
-      // Campos de vendedor
-      const negocio = form.querySelector("#negocio");
-      const descripcion = form.querySelector("#descripcion");
+  function activarComprador() {
+    rolActivo = "comprador";
+    title.textContent = "Registro de Comprador";
+    subtitle.textContent = "Crea tu cuenta para empezar a comprar productos únicos";
+    campoNegocio.classList.add("d-none");
+    campoDescripcion.classList.add("d-none");
+    btnComprador.classList.add("opcion-activa");
+    btnVendedor.classList.remove("opcion-activa");
+  }
 
-      let esValido = true;
+  function activarVendedor() {
+    rolActivo = "vendedor";
+    title.textContent = "Registro de Vendedor";
+    subtitle.textContent = "Únete como vendedor y comparte tus productos artesanales";
+    campoNegocio.classList.remove("d-none");
+    campoDescripcion.classList.remove("d-none");
+    btnVendedor.classList.add("opcion-activa");
+    btnComprador.classList.remove("opcion-activa");
+  }
 
-      // Nombre
-      const vNombre = nombre?.value.trim() || "";
-      if (!vNombre || vNombre.length < 3) {
-        setError(nombre, "Mínimo 3 caracteres.");
-        esValido = false;
-      } else if (!regex.nombre.test(vNombre)) {
-        setError(nombre, "Solo se permiten letras.");
+  btnComprador.addEventListener("click", activarComprador);
+  btnVendedor.addEventListener("click", activarVendedor);
+
+  // Estado inicial
+  activarComprador();
+
+  // Validación y registro
+  formRegistro.addEventListener("submit", (e) => {
+    e.preventDefault();
+    limpiarErrores(formRegistro);
+
+    const nombre = formRegistro.querySelector("#nombre");
+    const email = formRegistro.querySelector("#email");
+    const password = formRegistro.querySelector("#password");
+    const confirm = formRegistro.querySelector("#confirm");
+    const negocio = formRegistro.querySelector("#negocio");
+    const descripcion = formRegistro.querySelector("#descripcion");
+
+    let esValido = true;
+
+    const vNombre = nombre?.value.trim() || "";
+    if (!vNombre || vNombre.length < 3) {
+      setError(nombre, "Mínimo 3 caracteres.");
+      esValido = false;
+    } else if (!regex.nombre.test(vNombre)) {
+      setError(nombre, "Solo se permiten letras.");
+      esValido = false;
+    }
+
+    const vEmail = email?.value.trim() || "";
+    if (!regex.email.test(vEmail)) {
+      setError(email, "Ingresa un correo válido.");
+      esValido = false;
+    } else if (correoDuplicado(vEmail)) {
+      setError(email, "Este correo ya está registrado.");
+      esValido = false;
+    }
+
+    const vPass = password?.value || "";
+    const vConf = confirm?.value || "";
+    if (vPass.length < 6) {
+      setError(password, "Mínimo 6 caracteres.");
+      esValido = false;
+    }
+    if (vPass !== vConf) {
+      setError(confirm, "Las contraseñas no coinciden.");
+      esValido = false;
+    }
+
+    if (rolActivo === "vendedor") {
+      const vNegocio = negocio?.value.trim() || "";
+      const vDesc = descripcion?.value.trim() || "";
+      if (vNegocio.length < 3) {
+        setError(negocio, "El nombre del negocio es obligatorio (mínimo 3 caracteres).");
         esValido = false;
       }
-
-      // Email
-      const vEmail = email?.value.trim() || "";
-      if (!regex.email.test(vEmail)) {
-        setError(email, "Ingresa un correo válido.");
-        esValido = false;
-      } else if (correoDuplicado(vEmail)) {
-        setError(email, "Este correo ya está registrado.");
+      if (vDesc.length < 10) {
+        setError(descripcion, "Describe tu negocio (mínimo 10 caracteres).");
         esValido = false;
       }
+    }
 
-      // Password
-      const vPass = password?.value || "";
-      const vConf = confirm?.value || "";
-      if (vPass.length < 6) {
-        setError(password, "Mínimo 6 caracteres.");
-        esValido = false;
-      }
-      if (vPass !== vConf) {
-        setError(confirm, "Las contraseñas no coinciden.");
-        esValido = false;
-      }
+    if (!esValido) return;
 
-      // validaciones para campos extras del vendedor
-      if (tipo === "vendedor") {
-        const vNegocio = negocio?.value.trim() || "";
-        const vDesc = descripcion?.value.trim() || "";
-        if (vNegocio.length < 3) {
-          setError(negocio, "El nombre del negocio es obligatorio (mínimo 3 caracteres).");
-          esValido = false;
-        }
-        if (vDesc.length < 10) {
-          setError(descripcion, "Describe tu negocio (mínimo 10 caracteres).");
-          esValido = false;
-        }
-      }
+    const usuario = {
+      id: Date.now(),
+      nombre: vNombre,
+      email: vEmail,
+      password: vPass,
+      rol: rolActivo,
+      fecha_creacion: new Date().toISOString(),
+    };
 
-      if (!esValido) return;
-
-      const usuario = {
-        id: Date.now(),
-        nombre: vNombre,
-        email: vEmail,
-        password: vPass,
-        rol: tipo,
-        fecha_creacion: new Date().toISOString(),
+    if (rolActivo === "vendedor") {
+      usuario.datos_vendedor = {
+        marca: negocio?.value.trim() || "",
+        descripcion: descripcion?.value.trim() || "",
       };
+    }
 
-      if (tipo === "vendedor") {
-        usuario.datos_vendedor = {
-          marca: negocio?.value.trim() || "",
-          descripcion: descripcion?.value.trim() || "",
-        };
-      }
+    guardarUsuario(usuario);
 
-      guardarUsuario(usuario);
-
-      Swal.fire({
-        title: "¡Cuenta creada con éxito!",
-        text: `Bienvenido/a ${usuario.nombre}`,
-        icon: "success",
-        confirmButtonColor: "#000",
-      }).then(() => {
-        // 1. Guardamos al usuario que se acaba de registrar como "Activo"
-        localStorage.setItem("usuarioActivo", JSON.stringify(usuario));
-
-        form.reset();
-        
-        // 2. Redirigimos según el tipo de cuenta que eligió
-        if (tipo === "vendedor") {
-          window.location.href = "perfilUsuario.html"; 
-        } else {
-          window.location.href = "perfilUsuario.html";
-        }
-      });
+    Swal.fire({
+      title: "¡Cuenta creada con éxito!",
+      text: `Bienvenido/a ${usuario.nombre}`,
+      icon: "success",
+      confirmButtonColor: "#000",
+    }).then(() => {
+      localStorage.setItem("usuarioActivo", JSON.stringify(usuario));
+      formRegistro.reset();
+      window.location.href = "perfilUsuario.html";
     });
-  };
-
-  const formComprador = document.getElementById("form-comprador");
-  if (formComprador) validarYRegistrar(formComprador, "comprador");
-
-  const formVendedor = document.getElementById("form-vendedor");
-  if (formVendedor) validarYRegistrar(formVendedor, "vendedor");
+  });
 });
 
-// el fix de tema 
+// Fix de tema
 document.addEventListener("DOMContentLoaded", () => {
   const esperarNavbar = setInterval(() => {
     const themeBtn = document.getElementById("theme-toggle");

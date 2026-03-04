@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!usuario) {
     // Si intentan entrar al perfil sin registrarse, los mandamos fuera
-    window.location.href = "login.html"; 
+    window.location.href = "login-comprador.html"; 
     return;
   }
 
