@@ -119,8 +119,17 @@ document.addEventListener("DOMContentLoaded", () => {
         icon: "success",
         confirmButtonColor: "#000",
       }).then(() => {
+        // 1. Guardamos al usuario que se acaba de registrar como "Activo"
+        localStorage.setItem("usuarioActivo", JSON.stringify(usuario));
+
         form.reset();
-        window.location.href = "login.html";
+        
+        // 2. Redirigimos según el tipo de cuenta que eligió
+        if (tipo === "vendedor") {
+          window.location.href = "perfilUsuario.html"; 
+        } else {
+          window.location.href = "perfilUsuario.html";
+        }
       });
     });
   };
