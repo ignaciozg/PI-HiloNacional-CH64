@@ -8,7 +8,29 @@ document.addEventListener("DOMContentLoaded", () => {
   cargarNavbar();
   cargarFooter();
 });
+document.addEventListener("DOMContentLoaded", () => {
+  // 1. CARGA DE COMPONENTES DINÁMICOS
+  cargarNavbar();
+  cargarFooter();
 
+  // --- NUEVO: GESTIÓN DE SESIÓN ---
+  const usuario = JSON.parse(localStorage.getItem("usuarioActivo"));
+
+  if (!usuario) {
+    // Si intentan entrar al perfil sin registrarse, los mandamos fuera
+    window.location.href = "login-comprador.html"; 
+    return;
+  }
+
+  // Pintamos los datos en la Sidebar automáticamente
+  const sidebarNombre = document.getElementById("sidebar-nombre");
+  const sidebarEmail = document.getElementById("sidebar-email");
+  const sidebarAvatar = document.getElementById("sidebar-avatar");
+
+  if (sidebarNombre) sidebarNombre.textContent = usuario.nombre;
+  if (sidebarEmail) sidebarEmail.textContent = usuario.email;
+  if (sidebarAvatar) sidebarAvatar.textContent = usuario.nombre.charAt(0).toUpperCase();
+});
 // --- FUNCIONES DE CARGA ---
 
 async function cargarNavbar() {
@@ -274,4 +296,68 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+});
+
+// ================== API DE PAISES ==================
+document.addEventListener("DOMContentLoaded", function() {
+
+    const selectPais = document.getElementById("pais");
+    if (!selectPais) return;
+
+    fetch("https://restcountries.com/v3.1/all?fields=name")
+        .then(res => {
+            if (!res.ok) {
+                throw new Error("Error en la API");
+            }
+            return res.json();
+        })
+        .then(data => {
+
+            // ahora sí data es array
+            data.sort((a, b) =>
+                a.name.common.localeCompare(b.name.common)
+            );
+
+            data.forEach(pais => {
+                const option = document.createElement("option");
+                option.value = pais.name.common;
+                option.textContent = pais.name.common;
+                selectPais.appendChild(option);
+            });
+
+            new TomSelect("#pais", {
+                create: false,
+                sortField: {
+                    field: "text",
+                    direction: "asc"
+                }
+            });
+
+        })
+        .catch(error => {
+            console.error("Error cargando países:", error);
+        });
+
+});
+// Funcion para que funcione cerrar sesion
+function cerrarSesion() {
+    // Eliminamos la sesión activa
+    localStorage.removeItem("usuarioActivo");
+
+    // Redirigimos al index o login
+    window.location.href = "index.html"; 
+}
+
+// Llenar los campos de configuración automáticamente al cargar
+document.addEventListener("DOMContentLoaded", () => {
+    const usuario = JSON.parse(localStorage.getItem("usuarioActivo"));
+    
+    if (usuario) {
+        // Llenamos los inputs de la pestaña Configuración
+        const inputNombre = document.getElementById("config-nombre");
+        const inputEmail = document.getElementById("config-email");
+
+        if (inputNombre) inputNombre.value = usuario.nombre;
+        if (inputEmail) inputEmail.value = usuario.email;
+    }
 });
