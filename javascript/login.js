@@ -1,23 +1,33 @@
+document.addEventListener("DOMContentLoaded", () => {
 
-      (function(){
-        const form = document.getElementById('form-login-vendedor');
-        if(!form) return;
-        form.addEventListener('submit', function(e){
-          const email = form.email;
-          const pass = form.password;
-          let ok = true;
-          if(!email.value || !email.checkValidity()) ok = false;
-          if(!pass.value || pass.value.length < 6) ok = false;
-          if(!ok){
-            e.preventDefault();
-            e.stopPropagation();
-          } else {
-            e.preventDefault();
-            Swal.fire({icon:'success', title:'¡Bienvenido!', text:'Inicio de sesión de vendedor validado.'});
-          }
-          form.classList.add('was-validated');
-        });
-      })();
+  const btnComprador = document.getElementById("btnComprador");
+  const btnVendedor = document.getElementById("btnVendedor");
 
+  const title = document.getElementById("loginTitle");
+  const subtitle = document.getElementById("loginSubtitle");
+  const registerLink = document.getElementById("registerLink");
+
+  function activarComprador() {
+    title.textContent = "Iniciar Sesión como Comprador";
+    subtitle.textContent = "Accede a tu cuenta para realizar compras";
+    registerLink.href = "./registro.html";
+
+    btnComprador.classList.add("tipo-activo");
+    btnVendedor.classList.remove("tipo-activo");
+  }
+
+  function activarVendedor() {
+    title.textContent = "Iniciar Sesión como Vendedor";
+    subtitle.textContent = "Accede a tu panel de vendedor";
+    registerLink.href = "./registro.html";
+
+    btnVendedor.classList.add("tipo-activo");
+    btnComprador.classList.remove("tipo-activo");
+  }
+
+  btnComprador.addEventListener("click", activarComprador);
+  btnVendedor.addEventListener("click", activarVendedor);
+
+});
 
 

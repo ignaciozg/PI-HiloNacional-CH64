@@ -164,3 +164,31 @@
 .dropdown-toggle::after {
   display: none !important;
 }
+
+/* -------------------API de Paises (barra desplegable)----------------------*/
+
+[data-theme="dark"] .ts-control {
+    background-color: #1f2a44;
+    border: 1px solid #3a4a6b;
+    color: #fff;
+}
+
+[data-theme="dark"] .ts-dropdown {
+    background-color: #1f2a44;
+    border: 1px solid #3a4a6b;
+    color: #fff;
+}
+
+[data-theme="dark"] .ts-dropdown .option:hover {
+    background-color: #3a4a6b;
+}
+
+/* Quitar fondo blanco cuando está activo el modo oscuro */
+[data-theme="dark"] .ts-control,
+[data-theme="dark"] .ts-control.focus,
+[data-theme="dark"] .ts-control:focus,
+[data-theme="dark"] .ts-control:focus-within {
+    background-color: #334155 !important; 
+    color: #fff !important;
+    box-shadow: none !important;
+}
