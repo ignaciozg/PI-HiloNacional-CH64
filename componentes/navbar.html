@@ -1,7 +1,9 @@
-<nav class="navbar navbar-expand-lg sticky-top">
+<link rel="stylesheet" href="../CSS/main.css">
+
+<nav class="navbar navbar-expand-lg custom-navbar fixed-navbar shadow-sm">
   <div class="container">
-    <a class="navbar-brand" href="./index.html">
-      <img id="nav-logo" src="./assets/hilo_nacional.svg" alt="Logo Hilo Nacional" />
+    <a class="navbar-brand" href="index.html">
+      <img id="nav-logo" class="nav-logo" src="./assets/hilo_nacional.svg" height="500px" alt="Logo Hilo Nacional" />
     </a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -10,20 +12,18 @@
 
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-3">
-        <li class="nav-item"><a class="nav-link" href="./index.html">Inicio</a></li>
-        <li class="nav-item"><a class="nav-link fw-bold" href="./productos.html">Productos</a></li>
-        <li class="nav-item"><a class="nav-link" href="./acerca-de.html">Nosotros</a></li>
-        <li class="nav-item"><a class="nav-link" href="./contactenos.html">Contacto</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" href="productos.html">Productos</a></li>
+        <li class="nav-item"><a class="nav-link" href="acerca-de.html">Nosotros</a></li>
+        <li class="nav-item"><a class="nav-link" href="contactenos.html">Contacto</a></li>
       </ul>
 
-      <form class="d-flex ms-auto" role="search">
+      <form class="d-flex ms-auto" role="search" onsubmit="return false;">
         <div class="input-group">
-          <span class="input-group-text">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-            </svg>
+          <span class="input-group-text bg-transparent border-end-0">
+            <i class="bi bi-search text-muted"></i>
           </span>
-          <input class="form-control buscar" type="search" id="input-buscar" placeholder="Buscar..." aria-label="Buscar" />
+          <input class="form-control buscar border-start-0" type="search" id="input-buscar" placeholder="Buscar artesanía..." aria-label="Buscar" />
         </div>
       </form>
 
@@ -32,48 +32,54 @@
             <i class="bi bi-moon-fill" style="font-size: 1.2rem;"></i>
         </button>
 
-        <a href="#"><img src="./assets/icono_perfil.svg" alt="perfil" width="24"/></a>
+        <!-- Dropdown perfil -->
+        <div class="nav-item dropdown">
+          <a href="#" class="nav-link p-0 dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="./assets/icono_perfil.svg" alt="Perfil de usuario" width="24"/>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="userDropdown">
+          <li><a class="dropdown-item" href="../perfilUsuario.html"><i class="bi bi-person me-2"></i>Mi Perfil</a></li>
+          <li><a class="dropdown-item" href="../registro.html"><i class="bi bi-person me-2"></i>Crea tu cuenta</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li>
+            <a class="dropdown-item" href="../login.html" id="authButton">
+              <i class="bi bi-box-arrow-in-right me-2" id="authIcon"></i>
+              <span id="authText">Iniciar Sesión</span>
+            </a>
+          </li>
+          </ul>
+        </div>
+        </a> 
         
-        <a href="#offcanvasFavoritos" data-bs-toggle="offcanvas" role="button" class="position-relative nav-link p-0 text-decoration-none">
-            <img src="./assets/icono_corazon.svg" alt="favoritos" width="24"/>
-            <span id="contador-favoritos" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.65rem; display: none;">0</span>
-        </a>
+        <div class="dropdown">
+          <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" class="position-relative nav-link p-0 text-decoration-none no-caret">
+              <img src="./assets/icono_corazon.svg" alt="favoritos" width="24"/>
+              <span id="contador-favoritos" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.65rem; display: none;">0</span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-end shadow-lg p-3" style="width: 320px; border-radius: 12px;">
+            <h6 class="fw-bold border-bottom pb-2">Mis Favoritos</h6>
+            <div id="lista-favoritos-dropdown" class="overflow-auto" style="max-height: 350px;"></div>
+          </div>
+        </div>
 
-        <a href="#offcanvasCarrito" data-bs-toggle="offcanvas" role="button" class="position-relative nav-link p-0 text-decoration-none">
-            <img src="./assets/Icono_carrito.svg" alt="carrito" width="24"/>
-            <span id="contador-carrito" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success" style="font-size: 0.65rem; display: none;">0</span>
-        </a>
+        <div class="dropdown">
+          <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" class="position-relative nav-link p-0 text-decoration-none no-caret">
+              <img src="./assets/Icono_carrito.svg" alt="carrito" width="24"/>
+              <span id="contador-carrito" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success" style="font-size: 0.65rem; display: none;">0</span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-end shadow-lg p-0" style="width: 350px; border-radius: 12px; overflow: hidden;">
+            <div class="p-3 border-bottom"><h6 class="fw-bold mb-0">Mi Carrito</h6></div>
+            <div id="lista-carrito-dropdown" class="overflow-auto p-3" style="max-height: 350px;"></div>
+            <div class="p-3 bg-light border-top">
+              <div class="d-flex justify-content-between mb-3">
+                <span class="small fw-bold">Total:</span>
+                <span id="total-carrito-dropdown" class="fw-bold" style="color: var(--primary-color);">$0.00</span>
+              </div>
+              <button class="btn btn-sm w-100 text-white fw-bold shadow-sm" style="background-color: var(--primary-color); border-radius: 50px;">Finalizar Compra</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </nav>
-
-<div class="offcanvas offcanvas-end card" tabindex="-1" id="offcanvasFavoritos">
-  <div class="offcanvas-header border-bottom border-secondary">
-    <h5 class="fw-bold mb-0">Mis Favoritos</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body" id="lista-favoritos">
-    </div>
-</div>
-
-<div class="offcanvas offcanvas-end card" tabindex="-1" id="offcanvasCarrito">
-  <div class="offcanvas-header border-bottom border-secondary">
-    <h5 class="fw-bold mb-0">Mi Carrito</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body d-flex flex-column">
-    <div id="lista-carrito" class="flex-grow-1">
-        </div>
-    
-    <div class="p-3 border-top border-secondary mt-auto">
-      <div class="d-flex justify-content-between mb-3">
-        <span class="fw-bold">Total estimado:</span>
-        <span id="total-carrito" class="fw-bold fs-5" style="color: var(--primary-color);">$0.00</span>
-      </div>
-      <button class="btn w-100 rounded-pill py-2 text-white fw-bold shadow-sm" style="background-color: var(--primary-color);">
-        Continuar al Pago
-      </button>
-    </div>
-  </div>
-</div>

@@ -1,0 +1,82 @@
+
+:root{
+    --hn-primary:#0b0b16;
+    --hn-muted:#6b7280;
+    --hn-card-radius:16px
+}
+
+main.login-wrap{
+    min-height:70vh;
+    padding-top:3rem;
+    padding-bottom:4rem
+}
+.login-title{
+    font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
+    font-weight:700
+}
+.login-sub{
+    color:#6b7280
+}
+
+.tabs-pill{
+    background:#f1f2f4;
+    border-radius:999px;
+    display:inline-flex;
+    padding:.25rem
+}
+.tabs-pill a{
+    color:#111827;
+    text-decoration:none;
+    padding:.5rem 1.25rem;
+    border-radius:999px;
+    display:flex;gap:.5rem;align-items:center;
+    font-weight:600
+}
+.tabs-pill a.active{
+    background:#fff;
+    box-shadow:0 1px 2px rgba(0,0,0,.06)
+}
+
+.login-card{
+    border-radius:var(--hn-card-radius)
+}
+.login-card .form-label{
+    color:#6b7280
+}
+.login-card .btn-primary{
+    background:#0b0b16;
+    border-color:#0b0b16;
+    border-radius:10px
+}
+.login-card .btn-primary:hover{
+    filter:brightness(1.1)
+}
+.login-footer a{
+    color:#6d28d9;
+    text-decoration:none
+}
+.login-footer a:hover{
+    text-decoration:underline
+}
+
+html[data-theme='dark'] .tabs-pill{
+    background:#111827
+}
+html[data-theme='dark'] .tabs-pill a{
+    color:#e5e7eb
+}
+html[data-theme='dark'] .tabs-pill a.active{
+    background:#0f172a;
+    color:#e5e7eb
+}
+
+
+.container-narrow{
+    max-width:680px
+}
+
+/*-----------botones vendedor-comprador------------*/
+.tipo-activo {
+  background-color: white !important;
+  box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+}

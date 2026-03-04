@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel del Vendedor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./CSS/agregarProductos.css">
+</head>
+<body>
+
+<div id="navbar-container"></div>
+
+<div class="container py-5">
+
+    <!-- TITULO PRINCIPAL -->
+    <div class="mb-5">
+        <h1 class="titulo-principal">Panel del vendedor</h1>
+        <p class="subtitulo-principal">Gestiona tus productos y visualiza tu inventario</p>
+    </div>
+
+    <!-- AGREGAR PRODUCTO -->
+    <div class="mb-4">
+        <h3 class="fw-bold">Agregar producto</h3>
+    </div>
+    <!-- SE AGREGA CONTENEDOR ALERTAS-->
+    <div id="alertContainer" class="mb-3"></div>
+
+    <!-- TARJETA FORMULARIO -->
+    <div class="card card-form p-4">
+        <div class="card-body">
+
+            <!-- Información básica -->
+            <div class="d-flex align-items-center mb-4">
+                <i class="bi bi-box"></i>
+                <h5  class="seccion-titulo mb-0"> Información básica</h5>
+            </div>
+
+            <h6 class="mb-4 text-muted">Detalles principales del producto</h6>
+
+            <form id="formProducto">
+
+                <!-- Nombre y Categoría -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label">
+                            Nombre del producto <span class="required">*</span>
+                        </label>
+                        <input type="text" id="nombre" class="form-control" placeholder="Ej. Playera deportiva">
+                        <span id="error-nombre" class="error-text"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">
+                            Categoría <span class="required">*</span>
+                        </label>
+                        <select id="categoria" class="form-select">
+                            <option selected disabled>Selecciona una categoría</option>
+                            <option>Hombre</option>
+                            <option>Mujer</option>
+                            <option>Unisex</option>
+                        </select>
+                        <span id="error-categoria" class="error-text"></span>
+                    </div>
+                </div>
+
+                <!-- Descripción -->
+                <div class="mb-3">
+                    <label class="form-label">
+                        Descripción <span class="required">*</span>
+                    </label>
+                    <textarea id="descripcion" class="form-control" rows="3" placeholder="Describe el producto..."></textarea>
+                    <span id="error-descripcion" class="error-text"></span>
+                </div>
+
+                <!-- Material y Precio -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label">
+                            Material <span class="required">*</span>
+                        </label>
+                        <input type="text" id="material" class="form-control" placeholder="Ej. Algodón">
+                        <span id="error-material" class="error-text"></span> </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">
+                            Precio <span class="required">*</span>
+                        </label>
+                        <input type="number" id="precio" class="form-control" placeholder="$0.00">
+                        <span id="error-precio" class="error-text"></span>
+                    </div>
+                </div>
+
+                <!-- Stock -->
+                <div class="mb-3">
+                    <label class="form-label">
+                        Stock disponible <span class="required">*</span>
+                    </label>
+                        <input type="number" id="stock" class="form-control" placeholder="Cantidad disponible">
+                        <span id="error-stock" class="error-text"></span>
+                </div>
+
+                <!-- Etiqueta -->
+                <div class="mb-3">
+                    <label class="form-label">
+                        Etiqueta del producto
+                    </label>
+                    <input type="text" id="etiqueta" class="form-control" placeholder="Ej. Nuevo, Oferta, Edición limitada">
+                    <span id="error-etiqueta" class="error-text"></span>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+<!--Tallas/Tamaños-->
+<div class="container py-5">
+
+  <!-- CARD PRINCIPAL -->
+  <div class="card shadow-sm p-4 mb-4">
+    <h5 class="mb-3">Tallas / Tamaños</h5>
+    <span id="error-tallas" class="error-text"></span> </div>
+    <p class="text-muted small">Selecciona las tallas disponibles o agrega tallas personalizadas</p>
+
+    <!-- Tallas de ropa -->
+    <div class="mb-3">
+      <label class="form-label fw-semibold">Tallas de Ropa</label>
+      <div class="d-flex flex-wrap gap-2">
+        <input type="checkbox" class="btn-check" id="xs" autocomplete="off">
+        <label class="btn btn-outline-secondary btn-sm rounded-pill" for="xs">XS</label>
+
+        <input type="checkbox" class="btn-check" id="s" autocomplete="off">
+        <label class="btn btn-outline-secondary btn-sm rounded-pill" for="s">S</label>
+
+        <input type="checkbox" class="btn-check" id="m" autocomplete="off">
+        <label class="btn btn-outline-secondary btn-sm rounded-pill" for="m">M</label>
+
+        <input type="checkbox" class="btn-check" id="l" autocomplete="off">
+        <label class="btn btn-outline-secondary btn-sm rounded-pill" for="l">L</label>
+
+        <input type="checkbox" class="btn-check" id="xl" autocomplete="off">
+        <label class="btn btn-outline-secondary btn-sm rounded-pill" for="xl">XL</label>
+
+        <input type="checkbox" class="btn-check" id="xxl" autocomplete="off">
+        <label class="btn btn-outline-secondary btn-sm rounded-pill" for="xxl">XXL</label>
+      </div>
+    </div>
+
+    <!-- Tallas de calzado -->
+    <div class="mb-3">
+      <label class="form-label fw-semibold">Tallas de Calzado</label>
+      <div class="d-flex flex-wrap gap-2">
+        <input type="checkbox" class="btn-check" id="35" autocomplete="off">
+        <label class="btn btn-outline-secondary btn-sm rounded-pill" for="35">35</label>
+
+        <input type="checkbox" class="btn-check" id="36" autocomplete="off">
+        <label class="btn btn-outline-secondary btn-sm rounded-pill" for="36">36</label>
+
+        <input type="checkbox" class="btn-check" id="37" autocomplete="off">
+        <label class="btn btn-outline-secondary btn-sm rounded-pill" for="37">37</label>
+
+        <input type="checkbox" class="btn-check" id="38" autocomplete="off">
+        <label class="btn btn-outline-secondary btn-sm rounded-pill" for="38">38</label>
+
+        <input type="checkbox" class="btn-check" id="39" autocomplete="off">
+        <label class="btn btn-outline-secondary btn-sm rounded-pill" for="39">39</label>
+      </div>
+    </div>
+
+    <!-- Tallas numéricas -->
+    <div class="mb-3">
+      <label class="form-label fw-semibold">Tallas Numéricas (Pantalones)</label>
+      <div class="d-flex flex-wrap gap-2">
+        <input type="checkbox" class="btn-check" id="28" autocomplete="off">
+        <label class="btn btn-outline-secondary btn-sm rounded-pill" for="28">28</label>
+
+        <input type="checkbox" class="btn-check" id="30" autocomplete="off">
+        <label class="btn btn-outline-secondary btn-sm rounded-pill" for="30">30</label>
+
+        <input type="checkbox" class="btn-check" id="32" autocomplete="off">
+        <label class="btn btn-outline-secondary btn-sm rounded-pill" for="32">32</label>
+      </div>
+    </div>
+
+    <!-- Talla personalizada -->
+    <div class="mb-3">
+      <label class="form-label fw-semibold">Talla Personalizada</label>
+      <div class="input-group">
+        <input type="text" id="tallaPersonalizada" class="form-control" placeholder="Ej: Único, 2XL, etc.">
+        <button class="btn btn-outline-secondary" type="button">+</button> <!--aca hay que crear un desplegable personalizado-->
+      </div>
+    </div>
+
+  </div>
+
+  <!-- IMAGEN DEL PRODUCTO -->
+  <div class="card shadow-sm p-4">
+    
+    <h5 class="mb-3">Imagen del Producto</h5>
+    <p class="text-muted small">Sube una imagen o proporciona una URL</p>
+
+    <div class="mb-3">
+      <label class="form-label fw-semibold">URL de la Imagen</label>
+      <input type="text" id="urlImagen" class="form-control" placeholder="https://ejemplo.com/imagen.jpg">
+    </div>
+
+    <!-- Separador -->
+    <div class="d-flex align-items-center my-3">
+      <hr class="flex-grow-1">
+      <span class="mx-2 text-muted small">o</span>
+      <hr class="flex-grow-1">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label fw-semibold">Subir Archivo</label>
+      <input type="file" class="form-control">
+    </div>
+
+    <!-- Botones finales --> <!--aqui hay que ligar con js-->
+    <div class="d-flex justify-content-end gap-2 mt-4">
+      <button type="button" id="btnLimpiar" class="btn btn-outline-secondary">Limpiar Formulario</button>
+      <button type="button" id="btnAgregar" class="btn btn-dark">Agregar Producto</button>
+    </div>
+
+    </div>
+</div>
+
+
+<!-- SECCIÓN INVENTARIO -->
+    <h3 class="fw-bold mb-4">Mis Productos</h3>
+        <div class="card shadow-sm p-4 mb-4">
+            <h5>Inventario</h5>
+            <p class="text-muted">Gestiona tu inventario de productos y su visibilidad</p>
+
+            <div class="list-group ">
+
+
+                <div class="list-group-item d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center gap-3">
+                        <img src="./assets/Productos/camisaHombre1.png" alt="Camisa blanca con bordado" class="img-thumbnail" style="width:80px; height:auto;">
+                        <div>
+                            <h6 class="mb-1">Camisa blanca con bordado</h6>
+                            <small class="text-muted">Hombre</small><br>
+                            <small class="text-muted">Tallas: XS, S, M, L, XL</small>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-start gap-3">
+                        <div class="d-flex flex-column align-items-end">
+                            <span class="fw-bold mb-1">$49.99</span>
+                            <span class="badge bg-dark">Nuevo</span>
+                        </div>
+                        <div class="d-flex flex-column gap-1">
+                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-eye"></i></button>
+                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i></button>
+                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="list-group-item d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center gap-3">
+                        <img src="/assets/Productos/camisaHombre2.png" alt="Camisa beige bordado" class="img-thumbnail" style="width:80px; height:auto;">
+                        <div>
+                            <h6 class="mb-1">Camisa beige bordado</h6>
+                            <small class="text-muted">Hombre</small><br>
+                            <small class="text-muted">Tallas: S, M, L, XL, XXL</small>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-start gap-3">
+                        <div class="d-flex flex-column align-items-end">
+                            <span class="fw-bold mb-1">$39.99</span>
+                            <span class="badge bg-primary">Activo</span>
+                        </div>
+                        <div class="d-flex flex-column gap-1">
+                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-eye"></i></button>
+                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i></button>
+                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="list-group-item d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center gap-3">
+                        <img src="./assets/Productos/CamisaMujer1.png" alt="Blusa pintada a mano" class="img-thumbnail" style="width:80px; height:auto;">
+                        <div>
+                            <h6 class="mb-1">Blusa pintada a mano</h6>
+                            <small class="text-muted">Mujer</small><br>
+                            <small class="text-muted">Tallas: XS, S, M, L</small>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-start gap-3">
+                        <div class="d-flex flex-column align-items-end">
+                            <span class="fw-bold mb-1">$64.99</span>
+                            <span class="badge bg-dark">Nuevo</span>
+                        </div>
+                        <div class="d-flex flex-column gap-1">
+                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-eye"></i></button>
+                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i></button>
+                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="list-group-item d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center gap-3">
+                        <img src="./assets/Productos/collarAretes1.png" alt="Set de joyería Onix" class="img-thumbnail" style="width:80px; height:auto;">
+                        <div>
+                            <h6 class="mb-1">Set de joyería Onix</h6>
+                            <small class="text-muted">Mujer</small><br>
+                            <small class="text-muted"></small>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-start gap-3">
+                        <div class="d-flex flex-column align-items-end">
+                            <span class="fw-bold mb-1">$79.99</span>
+                            <span class="badge bg-primary">Activo</span>
+                        </div>
+                        <div class="d-flex flex-column gap-1">
+                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-eye"></i></button>
+                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i></button>
+                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="list-group-item d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center gap-3">
+                        <img src="./assets/Productos/GuayaberaHombre.png" alt="Guayabera negra" class="img-thumbnail" style="width:80px; height:auto;">
+                        <div>
+                            <h6 class="mb-1">Guayabera negra</h6>
+                            <small class="text-muted">Hombre</small><br>
+                            <small class="text-muted">Tallas: XS, S, M, L, XL</small>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-start gap-3">
+                        <div class="d-flex flex-column align-items-end">
+                            <span class="fw-bold mb-1">$129.99</span>
+                            <span class="badge bg-dark">Nuevo</span>
+                        </div>
+                        <div class="d-flex flex-column gap-1">
+                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-eye"></i></button>
+                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i></button>
+                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="list-group-item d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center gap-3">
+                        <img src="./assets/Productos/HoodieHombre.png" alt="Sudadera técnicas mixtas" class="img-thumbnail" style="width:80px; height:auto;">
+                        <div>
+                            <h6 class="mb-1">Sudadera técnicas mixtas</h6>
+                            <small class="text-muted">Hombre</small><br>
+                            <small class="text-muted">Tallas: XS, S, M, L, XL</small>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-start gap-3">
+                        <div class="d-flex flex-column align-items-end">
+                            <span class="fw-bold mb-1">$89.99</span>
+                            <span class="badge bg-primary">Activo</span>
+                        </div>
+                        <div class="d-flex flex-column gap-1">
+                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-eye"></i></button>
+                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i></button>
+                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+</div>
+
+    <div id="footer"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="./javascript/main.js"></script>
+<script src="./javascript/agregarProductos.js"></script>
+<link rel="stylesheet" href="./CSS/main.css">
+</body>
+</html>
