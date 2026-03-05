@@ -29,6 +29,7 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
     />
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
     <!-- CSS -->
     <link rel="stylesheet" href="CSS/login.css" />
@@ -159,6 +160,67 @@
                 Regístrate
               </a>
 >>>>>>> Stashed changes
+=======
+    <!-- CSS -->
+    <link rel="stylesheet" href="CSS/registro-comprador.css" />
+    <link rel="stylesheet" href="CSS/login.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="icon" type="image/svg+xml" href="./assets/logoFooter.svg" />
+  </head>
+
+  <body>
+    <div id="navbar-container"></div>
+
+    <main class="login-wrap bg-light">
+      <div class="container container-narrow">
+        <!-- Título -->
+        <div class="text-center mb-4">
+          <h1 class="display-6 login-title mb-2">Bienvenido</h1>
+          <p class="login-sub">Inicia sesión en tu cuenta</p>
+        </div>
+
+        <!-- Toggle Comprador / Vendedor -->
+        <nav
+          class="d-flex gap-2 bg-secondary-subtle rounded-pill p-1 mx-auto mb-3"
+          style="max-width: 26rem"
+        >
+          <button
+            id="btnComprador"
+            class="flex-fill text-center py-2 px-3 rounded-pill fw-semibold border-0 d-flex align-items-center justify-content-center gap-2"
+          >
+            <img src="assets/icono_comprador.svg" width="18" />
+            Comprador
+          </button>
+
+          <button
+            id="btnVendedor"
+            class="flex-fill text-center py-2 px-3 rounded-pill fw-semibold border-0 bg-transparent d-flex align-items-center justify-content-center gap-2"
+          >
+            <img src="assets/icono_vendedor.svg" width="18" />
+            Vendedor
+          </button>
+        </nav>
+
+        <!-- Card -->
+        <div class="card shadow-sm mx-auto login-card" style="max-width: 560px">
+          <div class="card-body p-4 p-md-5">
+            <h5 id="loginTitle" class="fw-semibold mb-1">
+              Iniciar Sesión como Comprador
+            </h5>
+
+            <p id="loginSubtitle" class="text-muted mb-4">
+              Accede a tu cuenta para realizar compras
+>>>>>>> 76d0a2acc10c179512e1c1d8b75e5796dc55f9c0
             </p>
 
             <form id="form-login" novalidate>
@@ -166,6 +228,10 @@
                 <label class="form-label">Email</label>
                 <input
                   type="email"
+<<<<<<< HEAD
+=======
+                  id="email"
+>>>>>>> 76d0a2acc10c179512e1c1d8b75e5796dc55f9c0
                   class="form-control"
                   placeholder="tu@email.com"
                   required
@@ -175,6 +241,7 @@
 
               <div class="mb-3">
                 <label class="form-label">Contraseña</label>
+<<<<<<< HEAD
                 <input
                   type="password"
                   class="form-control"
@@ -182,6 +249,24 @@
                   placeholder="*******"
                   required
                 />
+=======
+                <div class="input-group">
+                  <input
+                    type="password"
+                    id="loginPassword"
+                    class="form-control"
+                    placeholder="*******"
+                    required
+                  />
+                  <button
+                    class="btn btn-outline-secondary"
+                    type="button"
+                    id="btnToggleLoginPass"
+                  >
+                    <i class="bi bi-eye" id="loginEyeIcon"></i>
+                  </button>
+                </div>
+>>>>>>> 76d0a2acc10c179512e1c1d8b75e5796dc55f9c0
                 <div class="invalid-feedback">
                   La contraseña debe tener al menos 6 caracteres.
                 </div>
@@ -224,12 +309,16 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
+=======
+>>>>>>> 76d0a2acc10c179512e1c1d8b75e5796dc55f9c0
     <!-- Scripts -->
     <script src="./javascript/main.js"></script>
     <script src="./javascript/productos.js"></script>
     <script src="javascript/login.js"></script>
   </body>
+<<<<<<< HEAD
 =======
   <div id="footer"></div>
 
@@ -243,4 +332,6 @@
 
 </body>
 >>>>>>> Stashed changes
+=======
+>>>>>>> 76d0a2acc10c179512e1c1d8b75e5796dc55f9c0
 </html>
