@@ -30,7 +30,6 @@
     />
 
     <!-- CSS -->
-    <link rel="stylesheet" href="CSS/registro-comprador.css" />
     <link rel="stylesheet" href="CSS/login.css" />
     <link
       rel="stylesheet"
@@ -72,7 +71,7 @@
 
           <button
             id="btnVendedor"
-            class="flex-fill text-center py-2 px-3 rounded-pill fw-semibold border-0 bg-transparent d-flex align-items-center justify-content-center gap-2"
+            class="flex-fill text-center py-2 px-3 rounded-pill fw-semibold border-0 d-flex align-items-center justify-content-center gap-2"
           >
             <img src="assets/icono_vendedor.svg" width="18" />
             Vendedor
@@ -80,7 +79,7 @@
         </nav>
 
         <!-- Card -->
-        <div class="card shadow-sm mx-auto login-card" style="max-width: 560px">
+        <div class="card border shadow-sm mx-auto login-card rounded-4" style="max-width: 560px">
           <div class="card-body p-4 p-md-5">
             <h5 id="loginTitle" class="fw-semibold mb-1">
               Iniciar Sesión como Comprador
@@ -113,13 +112,6 @@
                     placeholder="*******"
                     required
                   />
-                  <button
-                    class="btn btn-outline-secondary"
-                    type="button"
-                    id="btnToggleLoginPass"
-                  >
-                    <i class="bi bi-eye" id="loginEyeIcon"></i>
-                  </button>
                 </div>
                 <div class="invalid-feedback">
                   La contraseña debe tener al menos 6 caracteres.

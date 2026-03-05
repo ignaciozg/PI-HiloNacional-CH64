@@ -11,18 +11,18 @@ document.addEventListener("DOMContentLoaded", () => {
     tipoUsuario = "comprador";
     document.getElementById("loginTitle").textContent =
       "Iniciar Sesión como Comprador";
-    btnComprador.classList.add("btn-dark"); // O la clase que uses para el estado activo
-    btnVendedor.classList.remove("btn-dark");
+    btnComprador.classList.add("bg-white", "shadow-sm", "tipo-activo");
+    btnVendedor.classList.remove("bg-white", "shadow-sm", "tipo-activo");
   }
 
   function activarVendedor() {
     tipoUsuario = "vendedor";
     document.getElementById("loginTitle").textContent =
       "Iniciar Sesión como Vendedor";
-    btnVendedor.classList.add("btn-dark");
-    btnComprador.classList.remove("btn-dark");
+    btnVendedor.classList.add("bg-white", "shadow-sm", "tipo-activo");
+    btnComprador.classList.remove("bg-white", "shadow-sm", "tipo-activo");
   }
-
+  activarComprador(); 
   btnComprador.addEventListener("click", activarComprador);
   btnVendedor.addEventListener("click", activarVendedor);
 
@@ -85,6 +85,8 @@ document.addEventListener("DOMContentLoaded", () => {
       },
     });
   }
+
+
 });
 
 // inicio de sesión real con usuarios guardados en localStorage
