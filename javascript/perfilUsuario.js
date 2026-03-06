@@ -150,7 +150,8 @@ function initTheme() {
   const htmlElement = document.documentElement;
   const logoImg = document.getElementById("nav-logo");
 
-  const applyVisuals = (theme) => {
+ //configuracion modo oscuro 
+const applyVisuals = (theme) => {
     htmlElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
 
@@ -159,24 +160,23 @@ function initTheme() {
     if (theme === "dark") {
       // MODO OSCURO
       if (themeIcon) {
-        themeIcon.className = "bi bi-sun-fill";
-        themeIcon.style.color = "#fbbf24";
+        // CAMBIO: Mantenemos bi-moon-fill en lugar de bi-sun-fill
+        themeIcon.className = "bi bi-moon-fill"; 
+        themeIcon.style.color = "#fbbf24"; // Mantenemos el color amarillo para resaltar
       }
       if (logoImg) {
-        // ARCHIVO PARA MODO OSCURO
         logoImg.src = "./assets/logo22.png";
-        logoImg.style.height = "45px"; // Re-forzamos el tamaño
+        logoImg.style.height = "45px";
       }
     } else {
       // MODO CLARO
       if (themeIcon) {
-        themeIcon.className = "bi bi-moon-fill";
-        themeIcon.style.color = "";
+        themeIcon.className = "bi bi-moon-fill"; // Se queda igual
+        themeIcon.style.color = ""; // Color original
       }
       if (logoImg) {
-        // ARCHIVO PARA MODO CLARO
         logoImg.src = "./assets/hilo_nacional.svg";
-        logoImg.style.height = "45px"; // Re-forzamos el tamaño
+        logoImg.style.height = "45px";
       }
     }
   };
@@ -360,4 +360,128 @@ document.addEventListener("DOMContentLoaded", () => {
         if (inputNombre) inputNombre.value = usuario.nombre;
         if (inputEmail) inputEmail.value = usuario.email;
     }
+});
+
+/**
+ * perfil.js - Gestión de pestañas Comprador/Vendedor
+ */
+
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // ========== TOGGLE PRINCIPAL: COMPRADOR / VENDEDOR ==========
+    const btnComprador = document.getElementById('btn-comprador');
+    const btnVendedor = document.getElementById('btn-vendedor');
+    const seccionComprador = document.getElementById('seccion-comprador');
+    const seccionVendedor = document.getElementById('seccion-vendedor');
+
+    // Función para cambiar a modo Comprador
+    btnComprador.addEventListener('click', function() {
+        // Activar botón Comprador
+        btnComprador.classList.add('active');
+        btnVendedor.classList.remove('active');
+        
+        // Mostrar sección Comprador y ocultar Vendedor
+        seccionComprador.classList.remove('content-hidden');
+        seccionVendedor.classList.add('content-hidden');
+    });
+
+    // Función para cambiar a modo Vendedor
+    btnVendedor.addEventListener('click', function() {
+        // Activar botón Vendedor
+        btnVendedor.classList.add('active');
+        btnComprador.classList.remove('active');
+        
+        // Mostrar sección Vendedor y ocultar Comprador
+        seccionVendedor.classList.remove('content-hidden');
+        seccionComprador.classList.add('content-hidden');
+    });
+
+    // ========== TABS SECUNDARIAS: COMPRADOR ==========
+    const tabPedidos = document.getElementById('tab-pedidos');
+    const tabDirecciones = document.getElementById('tab-direcciones');
+    const tabConfiguracion = document.getElementById('tab-configuracion');
+    
+    const contenidoPedidos = document.getElementById('contenido-pedidos');
+    const contenidoDirecciones = document.getElementById('contenido-direcciones');
+    const contenidoConfiguracion = document.getElementById('contenido-configuracion');
+
+    // Función para cambiar tabs del Comprador
+    tabPedidos.addEventListener('click', function() {
+        activarTabComprador('pedidos');
+    });
+
+    tabDirecciones.addEventListener('click', function() {
+        activarTabComprador('direcciones');
+    });
+
+    tabConfiguracion.addEventListener('click', function() {
+        activarTabComprador('configuracion');
+    });
+
+    function activarTabComprador(tab) {
+        // Remover clase active de todos los tabs
+        tabPedidos.classList.remove('active');
+        tabDirecciones.classList.remove('active');
+        tabConfiguracion.classList.remove('active');
+        
+        // Ocultar todo el contenido
+        contenidoPedidos.classList.add('content-hidden');
+        contenidoDirecciones.classList.add('content-hidden');
+        contenidoConfiguracion.classList.add('content-hidden');
+        
+        // Activar el tab seleccionado
+        switch(tab) {
+            case 'pedidos':
+                tabPedidos.classList.add('active');
+                contenidoPedidos.classList.remove('content-hidden');
+                break;
+            case 'direcciones':
+                tabDirecciones.classList.add('active');
+                contenidoDirecciones.classList.remove('content-hidden');
+                break;
+            case 'configuracion':
+                tabConfiguracion.classList.add('active');
+                contenidoConfiguracion.classList.remove('content-hidden');
+                break;
+        }
+    }
+
+    // ========== TABS SECUNDARIAS: VENDEDOR ==========
+    const tabInfoTienda = document.getElementById('tab-info-tienda');
+    const tabAgregarProducto = document.getElementById('tab-agregar-producto');
+    
+    const contenidoInfoTienda = document.getElementById('contenido-info-tienda');
+    const contenidoAgregarProducto = document.getElementById('contenido-agregar-producto');
+
+    // Función para cambiar tabs del Vendedor
+    tabInfoTienda.addEventListener('click', function() {
+        activarTabVendedor('info-tienda');
+    });
+
+    tabAgregarProducto.addEventListener('click', function() {
+        activarTabVendedor('agregar-producto');
+    });
+
+    function activarTabVendedor(tab) {
+        // Remover clase active de todos los tabs
+        tabInfoTienda.classList.remove('active');
+        tabAgregarProducto.classList.remove('active');
+        
+        // Ocultar todo el contenido
+        contenidoInfoTienda.classList.add('content-hidden');
+        contenidoAgregarProducto.classList.add('content-hidden');
+        
+        // Activar el tab seleccionado
+        switch(tab) {
+            case 'info-tienda':
+                tabInfoTienda.classList.add('active');
+                contenidoInfoTienda.classList.remove('content-hidden');
+                break;
+            case 'agregar-producto':
+                tabAgregarProducto.classList.add('active');
+                contenidoAgregarProducto.classList.remove('content-hidden');
+                break;
+        }
+    }
+
 });
