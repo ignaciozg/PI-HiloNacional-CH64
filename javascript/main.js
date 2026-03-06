@@ -58,23 +58,16 @@ function initTheme() {
   const htmlElement = document.documentElement;
   const logoImg = document.getElementById("nav-logo");
 
-  const applyVisuals = (theme) => {
+  //Modo oscuro navbar
+
+const applyVisuals = (theme) => {
     htmlElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
 
     if (theme === "dark") {
-      if (themeIcon) {
-        themeIcon.className = "bi bi-sun-fill"; // Usamos className para asegurar el cambio
-        themeIcon.style.color = "#fbbf24";
-      }
       if (logoImg) logoImg.src = "../assets/logo22.png";
     } else {
-      if (themeIcon) {
-        themeIcon.className = "bi bi-moon-fill";
-        themeIcon.style.color = "";
-      }
-      // Asegúrate de que este nombre sea el correcto
-      if (logoImg) logoImg.src = "../assets/logo23-Photoroom.png";
+      if (logoImg) logoImg.src = "../assets/logo23.png";
     }
   };
 

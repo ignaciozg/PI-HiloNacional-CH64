@@ -192,3 +192,8 @@
     color: #fff !important;
     box-shadow: none !important;
 }
+/* Clase fundamental para ocultar secciones */
+.content-hidden {
+    display: none !important;
+}
+
