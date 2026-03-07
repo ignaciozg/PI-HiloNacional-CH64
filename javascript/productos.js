@@ -254,24 +254,30 @@ window.inicializarUI = () => {
   if (listCar) {
     let total = 0;
     listCar.innerHTML =
-      carrito.length === 0
-        ? '<p class="text-center py-3 small text-muted">Tu carrito está vacío</p>'
-        : carrito
-            .map((p) => {
-              total += p.precio * p.cantidad;
-              return `
-                    <div class="d-flex align-items-center mb-2 pb-2 border-bottom">
-                        <img src="${p.imagen}" width="40" height="40" class="me-2 rounded object-fit-cover">
-                        <div class="flex-grow-1 overflow-hidden">
-                            <p class="mb-0 fw-bold small text-truncate" style="color: var(--text-main);">${p.titulo}</p>
-                            <p class="mb-0 small text-muted">${p.cantidad} x $${p.precio}</p>
-                        </div>
-                        <button class="btn btn-sm text-danger" onclick="event.stopPropagation(); eliminarDelCarrito(${p.id})">
-                            <i class="bi bi-x-circle"></i>
-                        </button>
-                    </div>`;
-            })
-            .join("");
+    carrito.length === 0
+      ? '<p class="text-center py-3 small text-muted">Tu carrito está vacío</p>'
+      : carrito
+          .map((p) => {
+            total += p.precio * p.cantidad;
+            return `
+              <div class="d-flex align-items-center mb-2 pb-2 border-bottom">
+                <img src="${p.imagen}" width="40" height="40" class="me-2 rounded object-fit-cover">
+                <div class="flex-grow-1 overflow-hidden">
+                  <p class="mb-0 fw-bold small text-truncate" style="color: var(--text-main);">${p.titulo}</p>
+                  <p class="mb-0 small text-muted">Talla: ${p.talla || "-"}</p>
+                  <div class="d-flex align-items-center mt-1">
+                    <button class="btn btn-sm btn-outline-secondary" onclick="event.stopPropagation(); cambiarCantidad(${p.id}, '${p.talla}', 'restar')">-</button>
+                    <span class="mx-2">${p.cantidad}</span>
+                    <button class="btn btn-sm btn-outline-secondary" onclick="event.stopPropagation(); cambiarCantidad(${p.id}, '${p.talla}', 'sumar')">+</button>
+                  </div>
+                  <p class="mb-0 small text-muted">$${p.precio} c/u</p>
+                </div>
+                <button class="btn btn-sm text-danger" onclick="event.stopPropagation(); eliminarDelCarrito(${p.id})">
+                  <i class="bi bi-x-circle"></i>
+                </button>
+              </div>`;
+          })
+          .join("");
     if (totalCar) totalCar.innerText = `$${total.toFixed(2)}`;
   }
 };
@@ -292,13 +298,40 @@ window.toggleFav = (id) => {
   mostrarProductos(productosBase);
 };
 
+
+
+
+
 window.agregarAlCarrito = (id) => {
-  const idx = carrito.findIndex((p) => p.id === id);
-  if (idx > -1) carrito[idx].cantidad++;
-  else carrito.push({ ...productosBase.find((p) => p.id === id), cantidad: 1 });
+  const producto = productosBase.find((p) => p.id === id);
+  const tallaSelect = document.getElementById("productSize");
+  const tallaElegida = tallaSelect ? tallaSelect.value : null;
+
+  const idx = carrito.findIndex((p) => p.id === id && p.talla === tallaElegida);
+  if (idx > -1) {
+    carrito[idx].cantidad++;
+  } else {
+    carrito.push({ ...producto, cantidad: 1, talla: tallaElegida });
+  }
+
   localStorage.setItem("carrito_hilo", JSON.stringify(carrito));
   inicializarUI();
 };
+
+window.cambiarCantidad = (id, talla, accion) => {
+  const idx = carrito.findIndex((p) => p.id === id && p.talla === talla);
+  if (idx > -1) {
+    if (accion === "sumar") carrito[idx].cantidad++;
+    else if (accion === "restar") carrito[idx].cantidad--;
+
+    if (carrito[idx].cantidad <= 0) carrito.splice(idx, 1);
+    localStorage.setItem("carrito_hilo", JSON.stringify(carrito));
+    inicializarUI();
+  }
+};
+
+
+
 
 window.eliminarDelCarrito = (id) => {
   carrito = carrito.filter((p) => p.id !== id);
