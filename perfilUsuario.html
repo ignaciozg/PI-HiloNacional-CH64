@@ -1,234 +1,257 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es" data-bs-theme="light">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<title>Hilo Nacional | Conectando Talentos</title>
+    <title>Hilo Nacional | Conectando Talentos</title>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
 
-<link rel="stylesheet" href="./CSS/main.css">
-<link rel="stylesheet" href="./CSS/perfilUsuario.css">
-<link rel="stylesheet" href="./CSS/agregarProductos.css">
+    <link rel="stylesheet" href="./CSS/main.css" />
+    <link rel="stylesheet" href="./CSS/perfilUsuario.css" />
+    <link rel="stylesheet" href="./CSS/agregarProductos.css" />
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-<link rel="icon" type="image/svg+xml" href="./assets/logoFooter.svg">
-</head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/svg+xml" href="./assets/logoFooter.svg" />
+  </head>
 
-<body>
+  <body>
+    <div id="navbar-container"></div>
 
-<div id="navbar-container"></div>
-
-
-
-   <!-- Toggle Comprador / Vendedor -->
+    <!-- Toggle Comprador / Vendedor -->
     <div class="d-flex justify-content-center mb-4 pt-4">
-        <ul class="nav nav-pills perfil-tabs shadow-sm" role="tablist">
-            <li class="nav-item">
-                <button class="nav-link active" id="btn-comprador" type="button">
-                    <i class="bi bi-bag-check me-2"></i>Comprador
-                </button>
-            </li>
-            <li class="nav-item">
-                <button class="nav-link" id="btn-vendedor" type="button">
-                    <i class="bi bi-shop me-2"></i>Vendedor
-                </button>
-            </li>
-        </ul>
+      <ul class="nav nav-pills perfil-tabs shadow-sm" role="tablist">
+        <li class="nav-item">
+          <button class="nav-link active" id="btn-comprador" type="button">
+            <i class="bi bi-bag-check me-2"></i>Comprador
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link" id="btn-vendedor" type="button">
+            <i class="bi bi-shop me-2"></i>Vendedor
+          </button>
+        </li>
+      </ul>
     </div>
 
     <div class="container perfil-container mt-2 pt-2 pb-5">
-        
-        <!-- HEADER -->
-        <div class="mb-4">
-            <h3>Mi Perfil</h3>
-            <p>Gestiona tu información y pedidos</p>
+      <!-- HEADER -->
+      <div class="mb-4">
+        <h3>Mi Perfil</h3>
+        <p>Gestiona tu información y pedidos</p>
+      </div>
+
+      <div class="row g-4">
+        <!-- SIDEBAR -->
+        <div class="col-12 col-md-4 col-lg-3">
+          <div class="perfil-card">
+            <div class="perfil-avatar" id="sidebar-avatar">JP</div>
+            <h6 class="mt-2 mb-0" id="sidebar-nombre">Juan Pérez</h6>
+            <div class="perfil-email" id="sidebar-email">juan@ejemplo.com</div>
+            <hr />
+            <button
+              class="btn btn-outline-secondary btn-sm w-100"
+              onclick="cerrarSesion()"
+            >
+              <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+            </button>
+          </div>
         </div>
 
-        <div class="row g-4">
-            
-            <!-- SIDEBAR -->
-            <div class="col-12 col-md-4 col-lg-3">
-                <div class="perfil-card">
-                    <div class="perfil-avatar" id="sidebar-avatar">JP</div>
-                    <h6 class="mt-2 mb-0" id="sidebar-nombre">Juan Pérez</h6>
-                    <div class="perfil-email" id="sidebar-email">juan@ejemplo.com</div>
-                    <hr>
-                    <button class="btn btn-outline-secondary btn-sm w-100" onclick="cerrarSesion()">
-                        <i class="bi bi-box-arrow-right"></i> Cerrar sesión
-                    </button>
+        <!-- CONTENIDO PRINCIPAL -->
+        <div class="col-12 col-md-8 col-lg-9">
+          <!-- ========== SECCIÓN COMPRADOR ========== -->
+          <div id="seccion-comprador">
+            <!-- Tabs secundarias -->
+            <ul class="nav nav-tabs perfil-tabs mb-4">
+              <li class="nav-item">
+                <button class="nav-link active" id="tab-pedidos" type="button">
+                  Pedidos
+                </button>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link" id="tab-direcciones" type="button">
+                  Direcciones
+                </button>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link" id="tab-configuracion" type="button">
+                  Configuración
+                </button>
+              </li>
+            </ul>
+
+            <!-- Contenido Pedidos -->
+            <div id="contenido-pedidos" class="tab-content-item">
+              <div class="historial-card">
+                <h6>Historial de Pedidos</h6>
+                <p>Revisa el estado de tus pedidos anteriores</p>
+
+                <div
+                  class="pedido-card d-flex justify-content-between align-items-center"
+                >
+                  <div class="pedido-info">
+                    <strong>ORD-001</strong>
+                    <span class="badge badge-entregado ms-2">Entregado</span>
+                    <div class="pedido-meta">
+                      2 artículos <br />
+                      2025-01-20
+                    </div>
+                  </div>
+                  <div class="pedido-total">
+                    <strong>$149.99</strong>
+                    <a href="#">Ver detalles</a>
+                  </div>
                 </div>
+
+                <div
+                  class="pedido-card d-flex justify-content-between align-items-center"
+                >
+                  <div class="pedido-info">
+                    <strong>ORD-002</strong>
+                    <span class="badge badge-transito ms-2">En tránsito</span>
+                    <div class="pedido-meta">
+                      1 artículo <br />
+                      2025-01-15
+                    </div>
+                  </div>
+                  <div class="pedido-total">
+                    <strong>$89.99</strong>
+                    <a href="#">Ver detalles</a>
+                  </div>
+                </div>
+
+                <div
+                  class="pedido-card d-flex justify-content-between align-items-center"
+                >
+                  <div class="pedido-info">
+                    <strong>ORD-003</strong>
+                    <span class="badge badge-entregado ms-2">Entregado</span>
+                    <div class="pedido-meta">
+                      3 artículos <br />
+                      2025-01-10
+                    </div>
+                  </div>
+                  <div class="pedido-total">
+                    <strong>$234.97</strong>
+                    <a href="#">Ver detalles</a>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <!-- CONTENIDO PRINCIPAL -->
-            <div class="col-12 col-md-8 col-lg-9">
-                
-                <!-- ========== SECCIÓN COMPRADOR ========== -->
-                <div id="seccion-comprador">
-                    
-                    <!-- Tabs secundarias -->
-                    <ul class="nav nav-tabs perfil-tabs mb-4">
-                        <li class="nav-item">
-                            <button class="nav-link active" id="tab-pedidos" type="button">
-                                Pedidos
-                            </button>
-                        </li>
-                        <li class="nav-item">
-                            <button class="nav-link" id="tab-direcciones" type="button">
-                                Direcciones
-                            </button>
-                        </li>
-                        <li class="nav-item">
-                            <button class="nav-link" id="tab-configuracion" type="button">
-                                Configuración
-                            </button>
-                        </li>
-                    </ul>
+            <!-- Contenido Direcciones -->
+            <div
+              id="contenido-direcciones"
+              class="tab-content-item content-hidden"
+            >
+              <div class="historial-card">
+                <h6>Dirección de envío</h6>
+                <form class="row g-3">
+                  <div class="col-md-6">
+                    <label class="form-label">Nombre *</label>
+                    <input type="text" class="form-control" required />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Apellidos *</label>
+                    <input type="text" class="form-control" required />
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label">Nombre de la Calle *</label>
+                    <input type="text" class="form-control" required />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Número Exterior *</label>
+                    <input type="text" class="form-control" required />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Número Interior</label>
+                    <input type="text" class="form-control" />
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label">Código Postal *</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      pattern="[0-9]{5}"
+                      required
+                    />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Ciudad *</label>
+                    <input type="text" class="form-control" required />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Estado *</label>
+                    <input type="text" class="form-control" required />
+                  </div>
+                  <div class="col-12">
+                    <button class="btn btn-dark w-100" type="submit">
+                      Guardar Dirección
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
 
-                    <!-- Contenido Pedidos -->
-                    <div id="contenido-pedidos" class="tab-content-item">
-                        <div class="historial-card">
-                            <h6>Historial de Pedidos</h6>
-                            <p>Revisa el estado de tus pedidos anteriores</p>
+            <!-- Contenido Configuración -->
+            <div
+              id="contenido-configuracion"
+              class="tab-content-item content-hidden"
+            >
+              <div class="historial-card">
+                <h5 class="fw-bold mb-1">Configuración de la Cuenta</h5>
+                <p class="text-muted small mb-4">
+                  Actualiza tu información personal
+                </p>
+                <form class="row g-3">
+                  <div class="col-md-6">
+                    <label class="form-label">Nombre *</label>
+                    <input type="text" class="form-control" required />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Apellidos *</label>
+                    <input type="text" class="form-control" required />
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label">Email *</label>
+                    <input type="email" class="form-control" required />
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label">Teléfono</label>
+                    <input type="tel" class="form-control" />
+                  </div>
+                  <hr class="my-4" />
+                  <div class="col-md-6">
+                    <label class="form-label">Contraseña Actual</label>
+                    <input type="password" class="form-control" />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Nueva Contraseña</label>
+                    <input type="password" class="form-control" />
+                  </div>
+                  <div class="col-12">
+                    <button class="btn btn-dark w-100" type="submit">
+                      Guardar Cambios
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
 
-                            <div class="pedido-card d-flex justify-content-between align-items-center">
-                                <div class="pedido-info">
-                                    <strong>ORD-001</strong>
-                                    <span class="badge badge-entregado ms-2">Entregado</span>
-                                    <div class="pedido-meta">
-                                        2 artículos <br>
-                                        2025-01-20
-                                    </div>
-                                </div>
-                                <div class="pedido-total">
-                                    <strong>$149.99</strong>
-                                    <a href="#">Ver detalles</a>
-                                </div>
-                            </div>
-
-                            <div class="pedido-card d-flex justify-content-between align-items-center">
-                                <div class="pedido-info">
-                                    <strong>ORD-002</strong>
-                                    <span class="badge badge-transito ms-2">En tránsito</span>
-                                    <div class="pedido-meta">
-                                        1 artículo <br>
-                                        2025-01-15
-                                    </div>
-                                </div>
-                                <div class="pedido-total">
-                                    <strong>$89.99</strong>
-                                    <a href="#">Ver detalles</a>
-                                </div>
-                            </div>
-
-                            <div class="pedido-card d-flex justify-content-between align-items-center">
-                                <div class="pedido-info">
-                                    <strong>ORD-003</strong>
-                                    <span class="badge badge-entregado ms-2">Entregado</span>
-                                    <div class="pedido-meta">
-                                        3 artículos <br>
-                                        2025-01-10
-                                    </div>
-                                </div>
-                                <div class="pedido-total">
-                                    <strong>$234.97</strong>
-                                    <a href="#">Ver detalles</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Contenido Direcciones -->
-                    <div id="contenido-direcciones" class="tab-content-item content-hidden">
-                        <div class="historial-card">
-                            <h6>Dirección de envío</h6>
-                            <form class="row g-3">
-                                <div class="col-md-6">
-                                    <label class="form-label">Nombre *</label>
-                                    <input type="text" class="form-control" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Apellidos *</label>
-                                    <input type="text" class="form-control" required>
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label">Nombre de la Calle *</label>
-                                    <input type="text" class="form-control" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Número Exterior *</label>
-                                    <input type="text" class="form-control" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Número Interior</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label">Código Postal *</label>
-                                    <input type="text" class="form-control" pattern="[0-9]{5}" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Ciudad *</label>
-                                    <input type="text" class="form-control" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Estado *</label>
-                                    <input type="text" class="form-control" required>
-                                </div>
-                                <div class="col-12">
-                                    <button class="btn btn-dark w-100" type="submit">
-                                        Guardar Dirección
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
-                    <!-- Contenido Configuración -->
-                    <div id="contenido-configuracion" class="tab-content-item content-hidden">
-                        <div class="historial-card">
-                            <h5 class="fw-bold mb-1">Configuración de la Cuenta</h5>
-                            <p class="text-muted small mb-4">Actualiza tu información personal</p>
-                            <form class="row g-3">
-                                <div class="col-md-6">
-                                    <label class="form-label">Nombre *</label>
-                                    <input type="text" class="form-control" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Apellidos *</label>
-                                    <input type="text" class="form-control" required>
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label">Email *</label>
-                                    <input type="email" class="form-control" required>
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label">Teléfono</label>
-                                    <input type="tel" class="form-control">
-                                </div>
-                                <hr class="my-4">
-                                <div class="col-md-6">
-                                    <label class="form-label">Contraseña Actual</label>
-                                    <input type="password" class="form-control">
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Nueva Contraseña</label>
-                                    <input type="password" class="form-control">
-                                </div>
-                                <div class="col-12">
-                                    <button class="btn btn-dark w-100" type="submit">
-                                        Guardar Cambios
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- ========== SECCIÓN VENDEDOR ========== -->
+          <!-- ========== SECCIÓN VENDEDOR ========== -->
                 <div id="seccion-vendedor" class="content-hidden">
                     
                     <!-- Tabs secundarias -->
@@ -272,53 +295,12 @@
 
                         <!-- Inventario -->
                         <div class="historial-card mt-4">
-                            <h5 class="fw-bold mb-3">Tus productos</h5>
+                            <h5 class="fw-bold mb-3">Mis Productos</h5>
                             <p class="text-muted">Gestiona tu inventario</p>
 
-<div class="producto-item d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">                                <div class="d-flex gap-3">
-                                    <div class="producto-imagen-placeholder">
-                                       <img src="./assets/Productos/camisaHombre1.png" alt="camisa blanca hombre" width="100px">
-                                    </div>
-                                    <div>
-                                        <h6 class="mb-1">Camisa blanca con bordado</h6>
-                                        <small class="text-muted">Hombre</small><br>
-                                        <small class="text-muted">Tallas: XS, S, M, L, XL</small>
-                                    </div>
-                                </div>
-                                <div class="d-flex gap-3 align-items-center">
-                                    <div>
-                                        <strong>$49.99</strong><br>
-                                        <span class="badge bg-dark mt-1">Inactivo</span>
-                                    </div>
-                                    <div class="d-flex flex-column gap-1">
-                                        <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-eye"></i></button>
-                                        <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i></button>
-                                        <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-
-<div class="producto-item d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">                                <div class="d-flex gap-3">
-                                    <div class="producto-imagen-placeholder">
-                                        <img src="./assets/Productos/camisaHombre2.png" alt="camisa beige bordada hombre" width="100px">
-                                    </div>
-                                    <div>
-                                        <h6 class="mb-1">Camisa beige bordado</h6>
-                                        <small class="text-muted">Hombre</small><br>
-                                        <small class="text-muted">Tallas: S, M, L, XL, XXL</small>
-                                    </div>
-                                </div>
-                                <div class="d-flex gap-3 align-items-center">
-                                    <div>
-                                        <strong>$39.99</strong><br>
-                                        <span class="badge bg-primary mt-1">Activo</span>
-                                    </div>
-                                    <div class="d-flex flex-column gap-1">
-                                        <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-eye"></i></button>
-                                        <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i></button>
-                                        <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
-                                    </div>
-                                </div>
+                            <!-- Contenedor dinámico de productos -->
+                            <div id="lista-productos">
+                                <!-- Los productos se cargarán aquí dinámicamente -->
                             </div>
                         </div>
                     </div>
@@ -422,13 +404,108 @@
         </div>
     </div>
 
-<div id="footer"></div>
+    <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-<script src="./javascript/main.js"></script>
-<script src="./javascript/perfilUsuario.js"></script>
-<script src="./javascript/agregarProductos.js"></script>
+<!-- Modal Editar Producto -->
+<div class="modal fade" id="modalEditarProducto" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Producto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formEditarProducto">
+                    <input type="hidden" id="edit-producto-id">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Nombre del producto *</label>
+                            <input type="text" id="edit-nombre" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Categoría *</label>
+                            <select id="edit-categoria" class="form-select" required>
+                                <option value="">Selecciona una categoría</option>
+                                <option>Hombre</option>
+                                <option>Mujer</option>
+                                <option>Unisex</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Descripción *</label>
+                            <textarea id="edit-descripcion" class="form-control" rows="3" required></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Material *</label>
+                            <input type="text" id="edit-material" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Precio *</label>
+                            <input type="number" id="edit-precio" class="form-control" step="0.01" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Stock disponible *</label>
+                            <input type="number" id="edit-stock" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Etiqueta del producto</label>
+                            <input type="text" id="edit-etiqueta" class="form-control">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Tallas *</label>
+                            <div class="d-flex flex-wrap gap-2" id="edit-tallas-container">
+                                <div class="form-check">
+                                    <input class="form-check-input edit-talla" type="checkbox" value="XS" id="edit-xs">
+                                    <label class="form-check-label" for="edit-xs">XS</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input edit-talla" type="checkbox" value="S" id="edit-s">
+                                    <label class="form-check-label" for="edit-s">S</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input edit-talla" type="checkbox" value="M" id="edit-m">
+                                    <label class="form-check-label" for="edit-m">M</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input edit-talla" type="checkbox" value="L" id="edit-l">
+                                    <label class="form-check-label" for="edit-l">L</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input edit-talla" type="checkbox" value="XL" id="edit-xl">
+                                    <label class="form-check-label" for="edit-xl">XL</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input edit-talla" type="checkbox" value="XXL" id="edit-xxl">
+                                    <label class="form-check-label" for="edit-xxl">XXL</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">URL de la Imagen</label>
+                            <input type="url" id="edit-imagen" class="form-control">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="guardarEdicionProducto()">Guardar Cambios</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <div id="footer-container"></div>
 
-</body>
+    <script src="./javascript/main.js"></script>
+    <script src="./javascript/perfilUsuario.js"></script>
+    <script src="./javascript/agregarProductos.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
 </html>

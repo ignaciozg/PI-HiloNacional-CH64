@@ -162,7 +162,6 @@ const applyVisuals = (theme) => {
       if (themeIcon) {
         // CAMBIO: Mantenemos bi-moon-fill en lugar de bi-sun-fill
         themeIcon.className = "bi bi-moon-fill"; 
-        themeIcon.style.color = "#fbbf24"; // Mantenemos el color amarillo para resaltar
       }
       if (logoImg) {
         logoImg.src = "./assets/logo22.png";
@@ -348,24 +347,6 @@ function cerrarSesion() {
     window.location.href = "index.html"; 
 }
 
-// Llenar los campos de configuración automáticamente al cargar
-document.addEventListener("DOMContentLoaded", () => {
-    const usuario = JSON.parse(localStorage.getItem("usuarioActivo"));
-    
-    if (usuario) {
-        // Llenamos los inputs de la pestaña Configuración
-        const inputNombre = document.getElementById("config-nombre");
-        const inputEmail = document.getElementById("config-email");
-
-        if (inputNombre) inputNombre.value = usuario.nombre;
-        if (inputEmail) inputEmail.value = usuario.email;
-    }
-});
-
-/**
- * perfil.js - Gestión de pestañas Comprador/Vendedor
- */
-
 document.addEventListener('DOMContentLoaded', function() {
     
     // ========== TOGGLE PRINCIPAL: COMPRADOR / VENDEDOR ==========
@@ -394,6 +375,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // Mostrar sección Vendedor y ocultar Comprador
         seccionVendedor.classList.remove('content-hidden');
         seccionComprador.classList.add('content-hidden');
+        
+        // Cargar productos al mostrar la sección vendedor
+        cargarProductos();
     });
 
     // ========== TABS SECUNDARIAS: COMPRADOR ==========
@@ -476,6 +460,7 @@ document.addEventListener('DOMContentLoaded', function() {
             case 'info-tienda':
                 tabInfoTienda.classList.add('active');
                 contenidoInfoTienda.classList.remove('content-hidden');
+                cargarProductos(); // Recargar productos al volver a esta pestaña
                 break;
             case 'agregar-producto':
                 tabAgregarProducto.classList.add('active');
@@ -484,4 +469,462 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // ========== GESTIÓN DE PRODUCTOS ==========
+    
+    // Cargar productos al iniciar
+    cargarProductos();
+    
+    // Manejar el formulario de agregar producto
+    const formAgregarProducto = document.querySelector('#contenido-agregar-producto form');
+    if (formAgregarProducto) {
+        formAgregarProducto.addEventListener('submit', function(e) {
+            e.preventDefault();
+            agregarProducto();
+        });
+    }
+
+    // Botón limpiar formulario
+    const btnLimpiar = document.querySelector('#contenido-agregar-producto .btn-outline-secondary');
+    if (btnLimpiar) {
+        btnLimpiar.addEventListener('click', limpiarFormulario);
+    }
+
+    // ========== VISTA PREVIA DE IMÁGENES ==========
+    
+    // Vista previa para formulario de agregar (URL)
+    const inputUrlImagen = document.getElementById('input-url-imagen');
+    if (inputUrlImagen) {
+        inputUrlImagen.addEventListener('input', function() {
+            actualizarVistaPrevia(this.value, 'preview-imagen-agregar');
+        });
+    }
+    
+    // Vista previa para formulario de agregar (Archivo)
+    const inputFileImagen = document.getElementById('input-file-imagen');
+    if (inputFileImagen) {
+        inputFileImagen.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    actualizarVistaPrevia(event.target.result, 'preview-imagen-agregar');
+                    // Limpiar el input de URL cuando se sube un archivo
+                    document.getElementById('input-url-imagen').value = '';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+    
+    // Vista previa para modal de editar
+    const inputEditImagen = document.getElementById('edit-imagen');
+    if (inputEditImagen) {
+        inputEditImagen.addEventListener('input', function() {
+            actualizarVistaPrevia(this.value, 'preview-imagen-editar');
+        });
+    }
+
 });
+
+// ========== FUNCIONES DE PRODUCTOS ==========
+
+/**
+ * Obtener productos del localStorage
+ */
+function obtenerProductos() {
+    const productos = localStorage.getItem('productos');
+    return productos ? JSON.parse(productos) : [];
+}
+
+/**
+ * Guardar productos en localStorage
+ */
+function guardarProductos(productos) {
+    localStorage.setItem('productos', JSON.stringify(productos));
+}
+
+/**
+ * Agregar un nuevo producto
+ */
+function agregarProducto() {
+    // Obtener valores del formulario
+    const nombre = document.querySelector('#contenido-agregar-producto input[placeholder="Ej. Playera deportiva"]').value;
+    const categoria = document.querySelector('#contenido-agregar-producto select').value;
+    const descripcion = document.querySelector('#contenido-agregar-producto textarea').value;
+    const material = document.querySelector('#contenido-agregar-producto input[placeholder="Ej. Algodón"]').value;
+    const precio = document.querySelector('#contenido-agregar-producto input[placeholder="$0.00"]').value;
+    const stock = document.querySelector('#contenido-agregar-producto input[placeholder="Cantidad"]').value;
+    const etiqueta = document.querySelector('#contenido-agregar-producto input[placeholder="Ej. Nuevo, Oferta"]').value;
+    
+    // Obtener imagen (URL o Base64 de vista previa)
+    let imagenFinal = null;
+    const vistaPrevia = document.querySelector('#preview-imagen-agregar img');
+    
+    if (vistaPrevia) {
+        // Si hay una imagen en la vista previa, usar esa
+        imagenFinal = vistaPrevia.src;
+    } else {
+        // Si no, intentar obtener del input URL
+        const urlImagen = document.getElementById('input-url-imagen');
+        if (urlImagen && urlImagen.value.trim()) {
+            imagenFinal = urlImagen.value.trim();
+        }
+    }
+
+    // Obtener tallas seleccionadas
+    const tallasSeleccionadas = [];
+    const checkboxesTallas = document.querySelectorAll('#contenido-agregar-producto .form-check-input:checked');
+    checkboxesTallas.forEach(checkbox => {
+        tallasSeleccionadas.push(checkbox.nextElementSibling.textContent);
+    });
+
+    // Validaciones básicas
+    if (!nombre || !categoria || !descripcion || !material || !precio || !stock) {
+        alert('Por favor completa todos los campos obligatorios (*)');
+        return;
+    }
+
+    if (tallasSeleccionadas.length === 0) {
+        alert('Por favor selecciona al menos una talla');
+        return;
+    }
+
+    // Crear objeto producto
+    const producto = {
+        id: Date.now(), // ID único basado en timestamp
+        nombre: nombre,
+        categoria: categoria,
+        descripcion: descripcion,
+        material: material,
+        precio: parseFloat(precio),
+        stock: parseInt(stock),
+        etiqueta: etiqueta || 'Activo',
+        tallas: tallasSeleccionadas.join(', '),
+        imagen: imagenFinal,
+        fechaCreacion: new Date().toISOString()
+    };
+    
+    // Debug: Ver qué imagen se está guardando
+    console.log('📦 Producto a guardar:', producto);
+    console.log('🖼️ Imagen guardada:', imagenFinal);
+
+    // Obtener productos existentes
+    const productos = obtenerProductos();
+    
+    // Agregar nuevo producto
+    productos.push(producto);
+    
+    // Guardar en localStorage
+    guardarProductos(productos);
+    
+    // Limpiar formulario
+    limpiarFormulario();
+    
+    // Mostrar mensaje de éxito
+    alert('✅ Producto agregado exitosamente');
+    
+    // Cambiar a la pestaña de Info Tienda para ver el producto agregado
+    document.getElementById('tab-info-tienda').click();
+    
+    // Recargar la lista de productos
+    cargarProductos();
+}
+
+/**
+ * Cargar y mostrar productos en la lista
+ */
+function cargarProductos() {
+    const productos = obtenerProductos();
+    const contenedorProductos = document.getElementById('lista-productos');
+    
+    if (!contenedorProductos) return;
+    
+    // Limpiar contenedor
+    contenedorProductos.innerHTML = '';
+    
+    if (productos.length === 0) {
+        contenedorProductos.innerHTML = `
+            <div class="text-center py-4 text-muted">
+                <i class="bi bi-inbox" style="font-size: 3rem;"></i>
+                <p class="mt-2">No hay productos agregados aún</p>
+                <p class="small">Agrega tu primer producto desde la pestaña "Agregar Producto"</p>
+            </div>
+        `;
+        return;
+    }
+    
+    // Renderizar cada producto
+    productos.forEach(producto => {
+        const productoHTML = crearProductoHTML(producto);
+        contenedorProductos.insertAdjacentHTML('beforeend', productoHTML);
+    });
+    
+    // Agregar eventos a los botones de eliminar
+    document.querySelectorAll('.btn-eliminar-producto').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const id = parseInt(this.dataset.id);
+            eliminarProducto(id);
+        });
+    });
+    
+    // Agregar eventos a los botones de ver
+    document.querySelectorAll('.btn-ver-producto').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const id = parseInt(this.dataset.id);
+            verProducto(id);
+        });
+    });
+    
+    // Agregar eventos a los botones de editar
+    document.querySelectorAll('.btn-editar-producto').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const id = parseInt(this.dataset.id);
+            editarProducto(id);
+        });
+    });
+}
+
+/**
+ * Crear HTML para un producto
+ */
+function crearProductoHTML(producto) {
+    const badgeClass = producto.etiqueta === 'Nuevo' ? 'bg-dark' : 'bg-primary';
+    const precioFormateado = `$${producto.precio.toFixed(2)}`;
+    
+    return `
+        <div class="producto-item d-flex justify-content-between align-items-center">
+            <div class="d-flex gap-3">
+                <div class="producto-imagen-placeholder">
+                    ${producto.imagen ? 
+                        `<img src="${producto.imagen}" alt="${producto.nombre}" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">` :
+                        `<i class="bi bi-image"></i>`
+                    }
+                </div>
+                <div>
+                    <h6 class="mb-1">${producto.nombre}</h6>
+                    <small class="text-muted">${producto.categoria}</small><br>
+                    <small class="text-muted">Tallas: ${producto.tallas}</small><br>
+                    <small class="text-muted">Stock: ${producto.stock} unidades</small>
+                </div>
+            </div>
+            <div class="d-flex gap-3 align-items-center">
+                <div>
+                    <strong>${precioFormateado}</strong><br>
+                    <span class="badge ${badgeClass} mt-1">${producto.etiqueta}</span>
+                </div>
+                <div class="d-flex flex-column gap-1">
+                    <button class="btn btn-sm btn-outline-secondary btn-ver-producto" data-id="${producto.id}" title="Ver producto">
+                        <i class="bi bi-eye"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-secondary btn-editar-producto" data-id="${producto.id}" title="Editar producto">
+                        <i class="bi bi-pencil"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-danger btn-eliminar-producto" data-id="${producto.id}" title="Eliminar producto">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+/**
+ * Eliminar un producto
+ */
+function eliminarProducto(id) {
+    if (!confirm('¿Estás seguro de que deseas eliminar este producto?')) {
+        return;
+    }
+    
+    let productos = obtenerProductos();
+    productos = productos.filter(p => p.id !== id);
+    guardarProductos(productos);
+    
+    alert('✅ Producto eliminado correctamente');
+    cargarProductos();
+}
+
+/**
+ * Ver un producto
+ */
+function verProducto(id) {
+    const productos = obtenerProductos();
+    const producto = productos.find(p => p.id === id);
+    
+    if (!producto) {
+        alert('Producto no encontrado');
+        return;
+    }
+    
+    // Llenar el modal con los datos del producto
+    document.getElementById('modal-producto-nombre').textContent = producto.nombre;
+    document.getElementById('modal-producto-categoria').textContent = producto.categoria;
+    document.getElementById('modal-producto-precio').textContent = `$${producto.precio.toFixed(2)}`;
+    document.getElementById('modal-producto-stock').textContent = `${producto.stock} unidades`;
+    document.getElementById('modal-producto-material').textContent = producto.material;
+    document.getElementById('modal-producto-tallas').textContent = producto.tallas;
+    document.getElementById('modal-producto-etiqueta').innerHTML = `<span class="badge ${producto.etiqueta === 'Nuevo' ? 'bg-dark' : 'bg-primary'}">${producto.etiqueta}</span>`;
+    document.getElementById('modal-producto-descripcion').textContent = producto.descripcion;
+    
+    // Mostrar imagen o placeholder
+    const imagenContainer = document.getElementById('modal-producto-imagen');
+    if (producto.imagen) {
+        imagenContainer.innerHTML = `<img src="${producto.imagen}" alt="${producto.nombre}" class="img-fluid rounded" style="width:100%; max-height:300px; object-fit:cover;">`;
+    } else {
+        imagenContainer.innerHTML = `<div class="producto-imagen-placeholder" style="height:300px; font-size:4rem;"><i class="bi bi-image"></i></div>`;
+    }
+    
+    // Mostrar el modal
+    const modal = new bootstrap.Modal(document.getElementById('modalVerProducto'));
+    modal.show();
+}
+
+/**
+ * Editar un producto
+ */
+function editarProducto(id) {
+    const productos = obtenerProductos();
+    const producto = productos.find(p => p.id === id);
+    
+    if (!producto) {
+        alert('Producto no encontrado');
+        return;
+    }
+    
+    // Llenar el formulario de edición con los datos del producto
+    document.getElementById('edit-producto-id').value = producto.id;
+    document.getElementById('edit-nombre').value = producto.nombre;
+    document.getElementById('edit-categoria').value = producto.categoria;
+    document.getElementById('edit-descripcion').value = producto.descripcion;
+    document.getElementById('edit-material').value = producto.material;
+    document.getElementById('edit-precio').value = producto.precio;
+    document.getElementById('edit-stock').value = producto.stock;
+    document.getElementById('edit-etiqueta').value = producto.etiqueta;
+    document.getElementById('edit-imagen').value = producto.imagen || '';
+    
+    // Actualizar vista previa de imagen en el modal de editar
+    if (producto.imagen) {
+        actualizarVistaPrevia(producto.imagen, 'preview-imagen-editar');
+    } else {
+        actualizarVistaPrevia('', 'preview-imagen-editar');
+    }
+    
+    // Marcar las tallas seleccionadas
+    const tallasArray = producto.tallas.split(', ');
+    document.querySelectorAll('.edit-talla').forEach(checkbox => {
+        checkbox.checked = tallasArray.includes(checkbox.value);
+    });
+    
+    // Mostrar el modal
+    const modal = new bootstrap.Modal(document.getElementById('modalEditarProducto'));
+    modal.show();
+}
+
+/**
+ * Guardar la edición de un producto
+ */
+function guardarEdicionProducto() {
+    const id = parseInt(document.getElementById('edit-producto-id').value);
+    const nombre = document.getElementById('edit-nombre').value;
+    const categoria = document.getElementById('edit-categoria').value;
+    const descripcion = document.getElementById('edit-descripcion').value;
+    const material = document.getElementById('edit-material').value;
+    const precio = parseFloat(document.getElementById('edit-precio').value);
+    const stock = parseInt(document.getElementById('edit-stock').value);
+    const etiqueta = document.getElementById('edit-etiqueta').value;
+    const imagen = document.getElementById('edit-imagen').value;
+    
+    // Obtener tallas seleccionadas
+    const tallasSeleccionadas = [];
+    document.querySelectorAll('.edit-talla:checked').forEach(checkbox => {
+        tallasSeleccionadas.push(checkbox.value);
+    });
+    
+    // Validaciones
+    if (!nombre || !categoria || !descripcion || !material || !precio || !stock) {
+        alert('Por favor completa todos los campos obligatorios (*)');
+        return;
+    }
+    
+    if (tallasSeleccionadas.length === 0) {
+        alert('Por favor selecciona al menos una talla');
+        return;
+    }
+    
+    // Obtener productos y actualizar el producto editado
+    let productos = obtenerProductos();
+    const index = productos.findIndex(p => p.id === id);
+    
+    if (index === -1) {
+        alert('Error: Producto no encontrado');
+        return;
+    }
+    
+    // Actualizar el producto
+    productos[index] = {
+        ...productos[index],
+        nombre: nombre,
+        categoria: categoria,
+        descripcion: descripcion,
+        material: material,
+        precio: precio,
+        stock: stock,
+        etiqueta: etiqueta || 'Activo',
+        tallas: tallasSeleccionadas.join(', '),
+        imagen: imagen || null
+    };
+    
+    // Guardar cambios
+    guardarProductos(productos);
+    
+    // Cerrar modal
+    const modal = bootstrap.Modal.getInstance(document.getElementById('modalEditarProducto'));
+    modal.hide();
+    
+    // Recargar productos
+    cargarProductos();
+    
+    // Mensaje de éxito
+    alert('✅ Producto actualizado correctamente');
+}
+
+/**
+ * Limpiar el formulario de agregar producto
+ */
+function limpiarFormulario() {
+    const form = document.querySelector('#contenido-agregar-producto form');
+    if (form) {
+        form.reset();
+        
+        // Desmarcar todos los checkboxes de tallas
+        const checkboxes = document.querySelectorAll('#contenido-agregar-producto .form-check-input');
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = false;
+        });
+        
+        // Limpiar la vista previa de imagen
+        const previewContainer = document.getElementById('preview-imagen-agregar');
+        if (previewContainer) {
+            previewContainer.innerHTML = `
+                <div class="text-muted">
+                    <i class="bi bi-image" style="font-size: 3rem;"></i>
+                    <p class="mt-2 mb-0">Vista previa de la imagen</p>
+                </div>
+            `;
+        }
+    }
+}
+
+/**
+ * Actualizar la vista previa de la imagen
+ */
+function actualizarVistaPrevia(url, idContenedor) {
+    const contenedor = document.getElementById(idContenedor);
+    if (contenedor) {
+        if (url) {
+            contenedor.innerHTML = `<img src="${url}" alt="Vista previa" class="img-fluid rounded" style="width:100%; max-height:300px; object-fit:cover;">`;
+        } else {
+            contenedor.innerHTML = `<div class="producto-imagen-placeholder" style="height:300px; font-size:4rem;"><i class="bi bi-image"></i></div>`;
+        }
+    }
+}
