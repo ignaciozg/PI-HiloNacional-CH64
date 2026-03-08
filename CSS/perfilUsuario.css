@@ -197,3 +197,74 @@
     display: none !important;
 }
 
+/*-- DIRECCION GUARDADA--*/
+
+.notificacion-exito{
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+
+  background: rgba(0,0,0,0.35);
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  opacity:0;
+  visibility:hidden;
+
+  transition:all .3s ease;
+
+  z-index:9999;
+}
+
+.notificacion-card{
+
+  background:white;
+  padding:30px 45px;
+
+  border-radius:12px;
+
+  text-align:center;
+
+  box-shadow:0 10px 25px rgba(0,0,0,.2);
+
+  transform:scale(.8);
+
+  transition:.3s;
+}
+
+.check-icon{
+
+  width:60px;
+  height:60px;
+
+  background:#28a745;
+  color:white;
+
+  border-radius:50%;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  font-size:32px;
+
+  margin:auto;
+  margin-bottom:15px;
+}
+
+/* CUANDO APARECE */
+
+.notificacion-exito.mostrar{
+
+  opacity:1;
+  visibility:visible;
+}
+
+.notificacion-exito.mostrar .notificacion-card{
+
+  transform:scale(1);
+}

@@ -129,15 +129,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* ===== SI TODO ES VALIDO ===== */
     if (valido) {
-      alert("Dirección guardada correctamente ✅");
 
-      form.reset();
+  const notificacion = document.getElementById("notificacion-direccion");
 
-      // quitar clases visuales
-      form.querySelectorAll(".is-valid").forEach((el) => {
-        el.classList.remove("is-valid");
-      });
-    }
+  notificacion.classList.add("mostrar");
+
+  setTimeout(() => {
+    notificacion.classList.remove("mostrar");
+  }, 3000);
+
+  form.reset();
+
+  form.querySelectorAll(".is-valid").forEach((el) => {
+    el.classList.remove("is-valid");
+  });
+
+}
   });
 });
 
@@ -297,47 +304,285 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// ================== API DE PAISES ==================
-document.addEventListener("DOMContentLoaded", function() {
+//=======================DIRECCIONES=============================
+document.addEventListener("DOMContentLoaded", function () {
+
+    iniciarAPIcp();
+    iniciarAPIpaises();
+    iniciarDirecciones();
+
+});
+
+
+/* ================================
+   API CODIGO POSTAL
+================================ */
+
+function iniciarAPIcp(){
+
+    const cpInput = document.getElementById("cp");
+    const estadoInput = document.getElementById("estado");
+    const municipioInput = document.getElementById("municipio");
+    const coloniaSelect = document.getElementById("colonia");
+
+    if (!cpInput) return;
+
+    cpInput.addEventListener("input", function () {
+
+        const cp = this.value;
+
+        /* limpiar si borran CP */
+
+        if (cp.length < 5){
+
+            estadoInput.value = "";
+            municipioInput.value = "";
+            coloniaSelect.innerHTML =
+            "<option value=''>Selecciona colonia</option>";
+
+            return;
+        }
+
+        /* =======================
+           API 1 → COLONIAS
+        ======================= */
+
+        fetch(`https://api.zippopotam.us/mx/${cp}`)
+        .then(res => res.json())
+        .then(data => {
+
+            estadoInput.value = data.places[0]["state"];
+
+            coloniaSelect.innerHTML = "";
+
+            data.places.forEach(place => {
+
+                const option = document.createElement("option");
+
+                option.value = place["place name"];
+                option.textContent = place["place name"];
+
+                coloniaSelect.appendChild(option);
+
+            });
+
+        })
+        .catch(() => {
+
+            estadoInput.value = "";
+            coloniaSelect.innerHTML =
+            "<option value=''>No se encontraron colonias</option>";
+
+        });
+
+
+        /* =======================
+           API 2 → MUNICIPIO
+        ======================= */
+
+        fetch(`https://sepomex.nitrostudio.com.mx/api/20241009/cp/${cp}.json`)
+        .then(res => res.json())
+        .then(data => {
+
+            const info = data.data.postcodes[0];
+
+            municipioInput.value = info.d_mnpio;
+
+        })
+        .catch(() => {
+
+            municipioInput.value = "";
+
+        });
+
+    });
+
+}
+
+
+/* ================================
+   API PAISES
+================================ */
+
+function iniciarAPIpaises(){
 
     const selectPais = document.getElementById("pais");
+
     if (!selectPais) return;
 
     fetch("https://restcountries.com/v3.1/all?fields=name")
-        .then(res => {
-            if (!res.ok) {
-                throw new Error("Error en la API");
-            }
-            return res.json();
-        })
-        .then(data => {
+    .then(res => {
 
-            // ahora sí data es array
-            data.sort((a, b) =>
-                a.name.common.localeCompare(b.name.common)
-            );
+        if (!res.ok) throw new Error("Error en API");
 
-            data.forEach(pais => {
-                const option = document.createElement("option");
-                option.value = pais.name.common;
-                option.textContent = pais.name.common;
-                selectPais.appendChild(option);
-            });
+        return res.json();
 
-            new TomSelect("#pais", {
-                create: false,
-                sortField: {
-                    field: "text",
-                    direction: "asc"
-                }
-            });
+    })
+    .then(data => {
 
-        })
-        .catch(error => {
-            console.error("Error cargando países:", error);
+        data.sort((a,b)=>
+            a.name.common.localeCompare(b.name.common)
+        );
+
+        data.forEach(pais => {
+
+            const option = document.createElement("option");
+
+            option.value = pais.name.common;
+            option.textContent = pais.name.common;
+
+            selectPais.appendChild(option);
+
         });
 
-});
+        new TomSelect("#pais",{
+            create:false,
+            sortField:{
+                field:"text",
+                direction:"asc"
+            }
+        });
+
+    })
+    .catch(error => {
+
+        console.error("Error cargando países:", error);
+
+    });
+
+}
+
+
+/* ================================
+   DIRECCIONES (LOCAL STORAGE)
+================================ */
+
+function iniciarDirecciones(){
+
+    const form = document.getElementById("form-direccion");
+    const lista = document.getElementById("lista-direcciones");
+
+    if (!form || !lista) return;
+
+    mostrarDirecciones();
+
+    form.addEventListener("submit", function(e){
+
+        e.preventDefault();
+
+        const direccion = {
+
+            nombre: document.getElementById("nombre").value,
+            apellidos: document.getElementById("apellidos").value,
+            calle: document.getElementById("calle").value,
+            num_ext: document.getElementById("num_ext").value,
+            num_int: document.getElementById("num_int").value,
+            cp: document.getElementById("cp").value,
+            estado: document.getElementById("estado").value,
+            municipio: document.getElementById("municipio").value,
+            colonia: document.getElementById("colonia").value,
+            pais: document.getElementById("pais").value
+
+        };
+
+        const direcciones =
+        JSON.parse(localStorage.getItem("direcciones")) || [];
+
+        direcciones.push(direccion);
+
+        localStorage.setItem(
+            "direcciones",
+            JSON.stringify(direcciones)
+        );
+
+        form.reset();
+
+        document.getElementById("estado").value="";
+        document.getElementById("municipio").value="";
+        document.getElementById("colonia").innerHTML =
+        "<option value=''>Selecciona colonia</option>";
+
+        mostrarDirecciones();
+
+        mostrarNotificacion();
+
+    });
+
+
+    function mostrarDirecciones(){
+
+        const direcciones =
+        JSON.parse(localStorage.getItem("direcciones")) || [];
+
+        lista.innerHTML = "";
+
+        direcciones.forEach((dir,index)=>{
+
+            const div = document.createElement("div");
+
+            div.className = "card p-3 mb-2";
+
+            div.innerHTML = `
+            <strong>${dir.nombre} ${dir.apellidos}</strong><br>
+            ${dir.calle} #${dir.num_ext} ${dir.num_int || ""}<br>
+            ${dir.colonia}, ${dir.municipio}<br>
+            ${dir.estado}, ${dir.pais}<br>
+            CP: ${dir.cp}
+            <br><br>
+            <button onclick="eliminarDireccion(${index})" class="btn btn-sm btn-danger">
+            Eliminar
+            </button>
+            `;
+
+            lista.appendChild(div);
+
+        });
+
+    }
+
+
+    window.eliminarDireccion = function(index){
+
+        const direcciones =
+        JSON.parse(localStorage.getItem("direcciones")) || [];
+
+        direcciones.splice(index,1);
+
+        localStorage.setItem(
+            "direcciones",
+            JSON.stringify(direcciones)
+        );
+
+        mostrarDirecciones();
+
+    }
+
+}
+
+
+/* ================================
+   NOTIFICACION
+================================ */
+
+function mostrarNotificacion(){
+
+    const notificacion =
+    document.getElementById("notificacion-direccion");
+
+    if(!notificacion) return;
+
+    notificacion.classList.add("mostrar");
+
+    setTimeout(()=>{
+
+        notificacion.classList.remove("mostrar");
+
+    },1000);
+
+}
+
+
+
 // Funcion para que funcione cerrar sesion
 function cerrarSesion() {
     // Eliminamos la sesión activa
