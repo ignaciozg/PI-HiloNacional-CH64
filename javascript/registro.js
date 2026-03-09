@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const regex = {
     nombre: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/,
     email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+    telCompleto: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/
   };
 
   const limpiarErrores = (form) => {
@@ -48,6 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const nombre = document.getElementById("nombre");
     const email = document.getElementById("email");
+    const telefono = document.getElementById("telefono");
     const password = document.getElementById("password");
     const confirm = document.getElementById("confirm");
     const negocio = document.getElementById("negocio");
@@ -55,6 +57,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let esValido = true;
     let mensajeError = "";
+    let valorTelefono = "";
+    let vPass = "";
+    let vEmail = "";
 
     // Validaciones básicas
     const vNombre = nombre.value.trim();
@@ -65,18 +70,57 @@ document.addEventListener("DOMContentLoaded", () => {
       esValido = false;
     }
 
-    const vEmail = email.value.trim();
-    if (!regex.email.test(vEmail)) {
-      setError(email);
-      mensajeError = "Ingresa un correo válido.";
-      esValido = false;
-    } else if (correoDuplicado(vEmail)) {
-      setError(email);
-      mensajeError = "Este correo ya está registrado.";
-      esValido = false;
+    if (esValido) {
+        vEmail = email.value.trim();
+        if (!regex.email.test(vEmail)) {
+          setError(email);
+          mensajeError = "Ingresa un correo válido.";
+          esValido = false;
+        } else if (correoDuplicado(vEmail)) {
+          setError(email);
+          mensajeError = "Este correo ya está registrado.";
+          esValido = false;
+        }
     }
 
-    const vPass = password.value;
+      // 2. ✅ VALIDACIÓN TELÉFONO (🆕 Integrada aquí)
+    if (esValido) {
+        valorTelefono = telefono.value.trim();
+        const soloNumeros = valorTelefono.replace(/\D/g, "");
+
+    if (!valorTelefono) {
+        setError(telefono);
+        mensajeError = "El teléfono es obligatorio.";
+        esValido = false;
+    } else if (!regex.telCompleto.test(valorTelefono)) {
+        setError(telefono);
+        mensajeError = "Formato inválido (ej: +52 331 123 4567).";
+        esValido = false;
+    } else if (soloNumeros.length < 10) {
+        setError(telefono);
+        mensajeError = "El número debe tener al menos 10 dígitos.";
+        esValido = false;
+    } else if (soloNumeros.startsWith("0")) {
+        setError(telefono);
+        mensajeError = "No puede empezar con 0.";
+        esValido = false;
+    } else if (new Set(soloNumeros).size === 1) {
+        setError(telefono);
+        mensajeError = "No se permiten números repetidos (ej: 111...).";
+        esValido = false;
+    } else if (soloNumeros.match(/0{5,}/)) {
+        setError(telefono);
+        mensajeError = "Ingresa un número de teléfono real.";
+        esValido = false;
+    } else if (soloNumeros === "1234567890" || soloNumeros === "1234567891") {
+        setError(telefono);
+        mensajeError = "No uses secuencias numéricas.";
+        esValido = false;
+    }
+  }
+
+  if (esValido) {
+    vPass = password.value;
     const vConf = confirm.value;
     if (vPass.length < 6) {
       setError(password);
@@ -87,9 +131,10 @@ document.addEventListener("DOMContentLoaded", () => {
       mensajeError = "Las contraseñas no coinciden.";
       esValido = false;
     }
+  }
 
     // Validaciones extra si es vendedor
-    if (tipoRegistro === "vendedor") {
+    if (esValido && tipoRegistro === "vendedor") {
       const vNegocio = negocio.value.trim();
       const vDesc = descripcion.value.trim();
       if (vNegocio.length < 3) {
@@ -115,6 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
       id: Date.now(),
       nombre: vNombre,
       email: vEmail,
+      telefono: valorTelefono,
       password: vPass,
       rol: tipoRegistro,
       fecha_creacion: new Date().toISOString(),
