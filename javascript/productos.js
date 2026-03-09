@@ -191,20 +191,194 @@ window.inicializarFiltros = () => {
   });
 };
 
-// --- BUSCADOR ---
+// --- BUSCADOR CON SUGERENCIAS E IMÁGENES (Y CLIC AL MODAL) ---
 window.setupSearch = () => {
   const input = document.getElementById("input-buscar");
   if (!input) return;
-  input.oninput = (e) => {
-    const val = e.target.value.toLowerCase();
-    mostrarProductos(
-      productosBase.filter(
+
+  // 1. Crear el contenedor de sugerencias
+  let cajaSugerencias = document.getElementById("caja-sugerencias");
+  if (!cajaSugerencias) {
+    cajaSugerencias = document.createElement("div");
+    cajaSugerencias.id = "caja-sugerencias";
+    cajaSugerencias.className = "dropdown-menu w-100 shadow-sm mt-1 p-0";
+    cajaSugerencias.style.position = "absolute";
+    cajaSugerencias.style.top = "100%";
+    cajaSugerencias.style.left = "0";
+    cajaSugerencias.style.zIndex = "1050";
+    cajaSugerencias.style.maxHeight = "350px";
+    cajaSugerencias.style.overflowY = "auto";
+
+    const form = input.closest("form");
+    if (form) {
+      form.style.position = "relative";
+      form.appendChild(cajaSugerencias);
+    }
+  }
+
+  const esPaginaProductos = typeof mostrarProductos !== "undefined";
+
+  // 2. Evento al escribir
+  input.addEventListener("input", (e) => {
+    const val = e.target.value.trim().toLowerCase();
+
+    if (val === "") {
+      cajaSugerencias.classList.remove("show");
+      if (esPaginaProductos && typeof productosBase !== "undefined") {
+        mostrarProductos(productosBase);
+      }
+      return;
+    }
+
+    if (typeof productosBase !== "undefined") {
+      const coincidencias = productosBase.filter(
         (p) =>
           p.titulo.toLowerCase().includes(val) ||
           p.categoria.toLowerCase().includes(val),
-      ),
-    );
-  };
+      );
+
+      if (esPaginaProductos) {
+        mostrarProductos(coincidencias);
+      }
+
+      // AQUÍ ES DONDE ESTÁ EL ENLACE CON EL ONCLICK
+      if (coincidencias.length > 0) {
+        cajaSugerencias.innerHTML = coincidencias
+          .slice(0, 6)
+          .map(
+            (p) => `
+          <a href="#" onclick="abrirDetallesProducto(${p.id}); return false;" class="dropdown-item py-2 border-bottom d-flex align-items-center gap-3" style="white-space: normal;">
+            <div style="width: 45px; height: 45px; flex-shrink: 0;">
+              <img src="${p.imagen}" alt="${p.titulo}" class="img-fluid rounded" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="flex-grow-1 min-w-0">
+              <div class="fw-bold text-dark text-truncate">${p.titulo}</div>
+              <small class="text-muted d-block text-truncate">${p.categoria}</small>
+            </div>
+          </a>
+        `,
+          )
+          .join("");
+      } else {
+        cajaSugerencias.innerHTML = `
+          <div class="dropdown-item text-muted py-3 text-center">
+            <i class="bi bi-search d-block fs-4 mb-2"></i>
+            No se encontraron artesanías...
+          </div>`;
+      }
+
+      cajaSugerencias.classList.add("show");
+    }
+  });
+
+  // 3. Ocultar al hacer clic afuera
+  document.addEventListener("click", (e) => {
+    if (!input.contains(e.target) && !cajaSugerencias.contains(e.target)) {
+      cajaSugerencias.classList.remove("show");
+    }
+  });
+
+  // 4. Presionar "Enter"
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      const val = e.target.value.trim();
+      if (val !== "" && !esPaginaProductos) {
+        window.location.href = `index.html?buscar=${encodeURIComponent(val)}`;
+      }
+    }
+  });
+};
+
+// --- FUNCIÓN PARA LLENAR Y ABRIR TU MODAL (FUNCIONA EN CUALQUIER PÁGINA) ---
+window.abrirDetallesProducto = (idProducto) => {
+  // 1. Ocultamos la caja de sugerencias
+  const cajaSugerencias = document.getElementById("caja-sugerencias");
+  if (cajaSugerencias) cajaSugerencias.classList.remove("show");
+
+  if (typeof productosBase === "undefined") return;
+  const producto = productosBase.find((p) => p.id === idProducto);
+
+  if (producto) {
+    // 2. Buscamos el modal en la página actual
+    let modalElement = document.getElementById("productModal");
+
+    // 3. SI EL MODAL NO EXISTE EN ESTA PÁGINA, LO CREAMOS AL VUELO
+    if (!modalElement) {
+      const modalContainer = document.createElement("div");
+      modalContainer.innerHTML = `
+        <div class="modal fade" id="productModal" tabindex="-1">
+          <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content card border-0 shadow-lg">
+              <div class="modal-header border-0 pb-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+              </div>
+              <div class="modal-body p-4">
+                <div class="row g-4">
+                  <div class="col-md-6 text-center">
+                    <img id="productModalImg" src="" class="img-fluid rounded shadow-sm" />
+                  </div>
+                  <div class="col-md-6">
+                    <h4 id="productModalLabel" class="fw-bold mb-3"></h4>
+                    <p id="productModalDesc" class="small text-muted"></p>
+                    <div class="small border-top pt-3 border-secondary">
+                      <p class="mb-1"><strong>Material:</strong> <span id="productFabric"></span></p>
+                      <p class="mb-1"><strong>Región:</strong> <span id="productRegion"></span></p>
+                      <p class="mb-1"><strong>Cuidado:</strong> <span id="productCare"></span></p>
+                    </div>
+                    <div id="sizeSection" class="my-3 d-none">
+                      <label class="fw-bold small d-block mb-1">Talla:</label>
+                      <select id="productSize" class="form-select form-select-sm"></select>
+                    </div>
+                    <h3 id="productModalPrice" class="fw-bold mt-4" style="color: var(--primary-color)"></h3>
+                    <button id="btn-modal-carrito" class="btn w-100 rounded-pill mt-3 py-2 text-white fw-bold shadow-sm" style="background-color: var(--primary-color)">
+                      Añadir al Carrito
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      // Lo inyectamos al final del documento
+      document.body.appendChild(modalContainer.firstElementChild);
+
+      // Ahora sí, lo seleccionamos
+      modalElement = document.getElementById("productModal");
+    }
+
+    // 4. Llenamos los datos (igual que antes)
+    document.getElementById("productModalImg").src = producto.imagen;
+    document.getElementById("productModalImg").alt = producto.titulo;
+    document.getElementById("productModalLabel").textContent = producto.titulo;
+    document.getElementById("productModalDesc").textContent =
+      producto.descripcion;
+    document.getElementById("productFabric").textContent = producto.fabric;
+    document.getElementById("productRegion").textContent = producto.region;
+    document.getElementById("productCare").textContent = producto.cuidados;
+    document.getElementById("productModalPrice").textContent =
+      `$${producto.precio} MXN`;
+
+    const sizeSection = document.getElementById("sizeSection");
+    const productSize = document.getElementById("productSize");
+
+    if (producto.tallas && producto.tallas.length > 0) {
+      sizeSection.classList.remove("d-none");
+      productSize.innerHTML = producto.tallas
+        .map((talla) => `<option value="${talla}">${talla}</option>`)
+        .join("");
+    } else {
+      sizeSection.classList.add("d-none");
+      productSize.innerHTML = "";
+    }
+
+    // 5. Abrimos el modal
+    const modalBootstrap =
+      bootstrap.Modal.getInstance(modalElement) ||
+      new bootstrap.Modal(modalElement);
+    modalBootstrap.show();
+  }
 };
 
 // --- CARRITO Y FAVS (DROPDOWN COMPATIBLE) ---
@@ -254,12 +428,12 @@ window.inicializarUI = () => {
   if (listCar) {
     let total = 0;
     listCar.innerHTML =
-    carrito.length === 0
-      ? '<p class="text-center py-3 small text-muted">Tu carrito está vacío</p>'
-      : carrito
-          .map((p) => {
-            total += p.precio * p.cantidad;
-            return `
+      carrito.length === 0
+        ? '<p class="text-center py-3 small text-muted">Tu carrito está vacío</p>'
+        : carrito
+            .map((p) => {
+              total += p.precio * p.cantidad;
+              return `
               <div class="d-flex align-items-center mb-2 pb-2 border-bottom">
                 <img src="${p.imagen}" width="40" height="40" class="me-2 rounded object-fit-cover">
                 <div class="flex-grow-1 overflow-hidden">
@@ -276,8 +450,8 @@ window.inicializarUI = () => {
                   <i class="bi bi-x-circle"></i>
                 </button>
               </div>`;
-          })
-          .join("");
+            })
+            .join("");
     if (totalCar) totalCar.innerText = `$${total.toFixed(2)}`;
   }
 };
@@ -297,10 +471,6 @@ window.toggleFav = (id) => {
   inicializarUI();
   mostrarProductos(productosBase);
 };
-
-
-
-
 
 window.agregarAlCarrito = (id) => {
   const producto = productosBase.find((p) => p.id === id);
@@ -329,9 +499,6 @@ window.cambiarCantidad = (id, talla, accion) => {
     inicializarUI();
   }
 };
-
-
-
 
 window.eliminarDelCarrito = (id) => {
   carrito = carrito.filter((p) => p.id !== id);
