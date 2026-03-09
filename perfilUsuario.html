@@ -1,294 +1,538 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es" data-bs-theme="light">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>Hilo Nacional | Conectando Talentos</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
 
-    <link rel="stylesheet" href="./CSS/main.css">
-    <link rel="stylesheet" href="./CSS/perfilUsuario.css">
+    <link rel="stylesheet" href="./CSS/main.css" />
+    <link rel="stylesheet" href="./CSS/perfilUsuario.css" />
+    <link rel="stylesheet" href="./CSS/agregarProductos.css" />
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/svg+xml" href="./assets/logoFooter.svg">
-</head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/svg+xml" href="./assets/logoFooter.svg" />
+  </head>
 
-<body>
+  <body>
+    <div id="navbar-container"></div>
 
-<div id="navbar-container"></div>
+    <!-- Toggle Comprador / Vendedor -->
+    <div class="d-flex justify-content-center mb-4 pt-4">
+      <ul class="nav nav-pills perfil-tabs shadow-sm" role="tablist">
+        <li class="nav-item">
+          <button class="nav-link active" id="btn-comprador" type="button">
+            <i class="bi bi-bag-check me-2"></i>Comprador
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link" id="btn-vendedor" type="button">
+            <i class="bi bi-shop me-2"></i>Vendedor
+          </button>
+        </li>
+      </ul>
+    </div>
 
-<div class="container perfil-container mt-5 pt-5 pb-5">
-
-    <!-- Encabezado -->
-    <div class="mb-4">
+    <div class="container perfil-container mt-2 pt-2 pb-5">
+      <!-- HEADER -->
+      <div class="mb-4">
         <h3>Mi Perfil</h3>
         <p>Gestiona tu información y pedidos</p>
-    </div>
+      </div>
 
-    <div class="row g-4">
+      <div class="row g-4">
+        <!-- SIDEBAR -->
+        <div class="col-12 col-md-4 col-lg-3">
+          <div class="perfil-card">
+            <div class="perfil-avatar" id="sidebar-avatar">JP</div>
+            <h6 class="mt-2 mb-0" id="sidebar-nombre">Juan Pérez</h6>
+            <div class="perfil-email" id="sidebar-email">juan@ejemplo.com</div>
+            <hr />
+            <button
+              class="btn btn-outline-secondary btn-sm w-100"
+              onclick="cerrarSesion()"
+            >
+              <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+            </button>
+          </div>
+        </div>
 
-        <!-- ===== SIDEBAR ===== -->
-<div class="col-12 col-md-4 col-lg-3">
-    <div class="perfil-card">
-        <div class="perfil-avatar" id="sidebar-avatar"></div>
-        
-        <h6 class="mt-2 mb-0" id="sidebar-nombre"></h6>
-        
-        <div class="perfil-email" id="sidebar-email"></div>
-        
-        <hr>
-        
-        <button class="btn btn-outline-secondary btn-sm w-100" onclick="cerrarSesion()">
-            <i class="bi bi-box-arrow-right"></i> Cerrar sesión
-        </button>
-    </div>
-</div>
-
-        <!-- ===== CONTENIDO PRINCIPAL ===== -->
+        <!-- CONTENIDO PRINCIPAL -->
         <div class="col-12 col-md-8 col-lg-9">
-
-            <!-- TABS -->
+          <!-- ========== SECCIÓN COMPRADOR ========== -->
+          <div id="seccion-comprador">
+            <!-- Tabs secundarias -->
             <ul class="nav nav-tabs perfil-tabs mb-4">
-                <li class="nav-item">
-                    <button class="nav-link active"
-                            data-bs-toggle="tab"
-                            data-bs-target="#pedidos"
-                            type="button">
-                        Pedidos
-                    </button>
-                </li>
-
-                <li class="nav-item">
-                    <button class="nav-link"
-                            data-bs-toggle="tab"
-                            data-bs-target="#direcciones"
-                            type="button">
-                        Direcciones
-                    </button>
-                </li>
-
-                <li class="nav-item">
-                    <button class="nav-link"
-                            data-bs-toggle="tab"
-                            data-bs-target="#configuracion"
-                            type="button">
-                        Configuración
-                    </button>
-                </li>
+              <li class="nav-item">
+                <button class="nav-link active" id="tab-pedidos" type="button">
+                  Pedidos
+                </button>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link" id="tab-direcciones" type="button">
+                  Direcciones
+                </button>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link" id="tab-configuracion" type="button">
+                  Configuración
+                </button>
+              </li>
             </ul>
 
-            <!-- TAB CONTENT -->
-            <div class="tab-content">
+            <!-- Contenido Pedidos -->
+            <div id="contenido-pedidos" class="tab-content-item">
+              <div class="historial-card">
+                <h6>Historial de Pedidos</h6>
+                <p>Revisa el estado de tus pedidos anteriores</p>
 
-                <!-- ================= PEDIDOS ================= -->
-                <div class="tab-pane fade show active" id="pedidos">
-
-                    <div class="historial-card">
-                        <h6>Historial de Pedidos</h6>
-                        <p>Revisa el estado de tus pedidos anteriores</p>
-
-                        <!-- Pedido 1 -->
-                        <div class="pedido-card d-flex justify-content-between align-items-center">
-                            <div class="pedido-info">
-                                <strong>ORD-001</strong>
-                                <span class="badge badge-entregado ms-2">Entregado</span>
-                                <div class="pedido-meta">
-                                    2 artículos <br>
-                                    2025-01-20
-                                </div>
-                            </div>
-                            <div class="pedido-total">
-                                $149.99
-                                <a href="#">Ver detalles</a>
-                            </div>
-                        </div>
-
-                        <!-- Pedido 2 -->
-                        <div class="pedido-card d-flex justify-content-between align-items-center">
-                            <div class="pedido-info">
-                                <strong>ORD-002</strong>
-                                <span class="badge badge-transito ms-2">En tránsito</span>
-                                <div class="pedido-meta">
-                                    1 artículo <br>
-                                    2025-01-15
-                                </div>
-                            </div>
-                            <div class="pedido-total">
-                                $89.99
-                                <a href="#">Ver detalles</a>
-                            </div>
-                        </div>
-
-                        <!-- Pedido 3 -->
-                        <div class="pedido-card d-flex justify-content-between align-items-center">
-                            <div class="pedido-info">
-                                <strong>ORD-003</strong>
-                                <span class="badge badge-entregado ms-2">Entregado</span>
-                                <div class="pedido-meta">
-                                    3 artículos <br>
-                                    2025-01-10
-                                </div>
-                            </div>
-                            <div class="pedido-total">
-                                $234.97
-                                <a href="#">Ver detalles</a>
-                            </div>
-                        </div>
-
+                <div
+                  class="pedido-card d-flex justify-content-between align-items-center"
+                >
+                  <div class="pedido-info">
+                    <strong>ORD-001</strong>
+                    <span class="badge badge-entregado ms-2">Entregado</span>
+                    <div class="pedido-meta">
+                      2 artículos <br />
+                      2025-01-20
                     </div>
+                  </div>
+                  <div class="pedido-total">
+                    <strong>$149.99</strong>
+                    <a href="#">Ver detalles</a>
+                  </div>
                 </div>
 
-                <!-- ================= DIRECCIONES ================= -->
-                <div class="tab-pane fade" id="direcciones">
+                <div
+                  class="pedido-card d-flex justify-content-between align-items-center"
+                >
+                  <div class="pedido-info">
+                    <strong>ORD-002</strong>
+                    <span class="badge badge-transito ms-2">En tránsito</span>
+                    <div class="pedido-meta">
+                      1 artículo <br />
+                      2025-01-15
+                    </div>
+                  </div>
+                  <div class="pedido-total">
+                    <strong>$89.99</strong>
+                    <a href="#">Ver detalles</a>
+                  </div>
+                </div>
 
-                    <div class="historial-card">
-                        <h6>Dirección de envío</h6>
+                <div
+                  class="pedido-card d-flex justify-content-between align-items-center"
+                >
+                  <div class="pedido-info">
+                    <strong>ORD-003</strong>
+                    <span class="badge badge-entregado ms-2">Entregado</span>
+                    <div class="pedido-meta">
+                      3 artículos <br />
+                      2025-01-10
+                    </div>
+                  </div>
+                  <div class="pedido-total">
+                    <strong>$234.97</strong>
+                    <a href="#">Ver detalles</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+<!-------------------------------DIRECCIONES--------------------->
+            <form id="form-direccion" class="row g-3">
+  <!-- Nombre -->
+  <div class="col-md-6">
+    <label class="form-label">Nombre *</label>
+    <input id="nombre" type="text" class="form-control" required />
+  </div>
+<!-- Apellidos -->
+  <div class="col-md-6">
+    <label class="form-label">Apellidos *</label>
+    <input id="apellidos" type="text" class="form-control" required />
+  </div>
+<!-- nombre calle -->
+  <div class="col-12">
+    <label class="form-label">Nombre de la Calle *</label>
+    <input id="calle" type="text" class="form-control" required />
+  </div>
+<!-- Numero exterior -->
+  <div class="col-md-6">
+    <label class="form-label">Número Exterior *</label>
+    <input id="num_ext" type="text" class="form-control" required />
+  </div>
+<!-- numero interior -->
+  <div class="col-md-6">
+    <label class="form-label">Número Interior</label>
+    <input id="num_int" type="text" class="form-control" />
+  </div>
 
-                        <form class="row g-3 needs-validation" novalidate>
+  <!-- CP -->
+  <div class="col-md-4">
+    <label class="form-label">Código Postal *</label>
+    <input type="text" id="cp" class="form-control" maxlength="5" required>
+  </div>
 
-                            <div class="col-md-6">
-                                <label class="form-label">Nombre *</label>
-                                <input type="text" id="nombre" class="form-control" required>
-                                <div class="invalid-feedback">
-                                    Ingrese un nombre válido.
+  <!-- Estado -->
+  <div class="col-md-4">
+    <label class="form-label">Estado</label>
+    <input type="text" id="estado" class="form-control" readonly>
+  </div>
+
+  <!-- Municipio -->
+  <div class="col-md-4">
+    <label class="form-label">Municipio</label>
+    <input type="text" id="municipio" class="form-control" readonly>
+  </div>
+
+  <!-- Colonia -->
+  <div class="col-md-6 mt-3">
+    <label class="form-label">Colonia *</label>
+    <select id="colonia" class="form-control">
+      <option value="">Selecciona colonia</option>
+    </select>
+  </div>
+
+  <!-- País -->
+  <div class="col-md-6">
+    <label class="form-label">País *</label>
+    <select id="pais" class="form-control" required>
+      <option value="">Selecciona un país</option>
+    </select>
+  </div>
+
+  <div class="col-12">
+    <button class="btn btn-dark w-100" type="submit">
+      Guardar Dirección
+    </button>
+  </div>
+</form>
+
+<!-- NOTIFICACION -->
+<div id="notificacion-direccion" class="notificacion-exito">
+
+  <div class="notificacion-card">
+
+    <div class="check-icon">✓</div>
+
+    <h5>Dirección guardada</h5>
+    <p>Tu dirección se guardó correctamente</p>
+
+  </div>
+
+</div>
+            <!-- Contenido Configuración -->
+            <div
+              id="contenido-configuracion"
+              class="tab-content-item content-hidden"
+            >
+              <div class="historial-card">
+                <h5 class="fw-bold mb-1">Configuración de la Cuenta</h5>
+                <p class="text-muted small mb-4">
+                  Actualiza tu información personal
+                </p>
+                <form class="row g-3">
+                  <div class="col-md-6">
+                    <label class="form-label">Nombre *</label>
+                    <input type="text" class="form-control" required />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Apellidos *</label>
+                    <input type="text" class="form-control" required />
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label">Email *</label>
+                    <input type="email" class="form-control" required />
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label">Teléfono</label>
+                    <input type="tel" class="form-control" />
+                  </div>
+                  <hr class="my-4" />
+                  <div class="col-md-6">
+                    <label class="form-label">Contraseña Actual</label>
+                    <input type="password" class="form-control" />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Nueva Contraseña</label>
+                    <input type="password" class="form-control" />
+                  </div>
+                  <div class="col-12">
+                    <button class="btn btn-dark w-100" type="submit">
+                      Guardar Cambios
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- ========== SECCIÓN VENDEDOR ========== -->
+                <div id="seccion-vendedor" class="content-hidden">
+                    
+                    <!-- Tabs secundarias -->
+                    <ul class="nav nav-tabs perfil-tabs mb-4">
+                        <li class="nav-item">
+                            <button class="nav-link active" id="tab-info-tienda" type="button">
+                                Información Tienda
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-link" id="tab-agregar-producto" type="button">
+                                Agregar Producto
+                            </button>
+                        </li>
+                    </ul>
+
+                    <!-- Contenido Info Tienda -->
+                    <div id="contenido-info-tienda" class="tab-content-item">
+                        <div class="historial-card">
+                            <h5 class="fw-bold">Información de la Tienda</h5>
+                            <form class="row g-3 mt-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Nombre de la tienda</label>
+                                    <input type="text" class="form-control">
                                 </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label class="form-label">Apellidos *</label>
-                                <input type="text" id="apellidos" class="form-control" required>
-                                <div class="invalid-feedback">
-                                    Ingrese un apellido válido.
+                                <div class="col-md-6">
+                                    <label class="form-label">Teléfono</label>
+                                    <input type="text" class="form-control">
                                 </div>
-                            </div>
-
-                            <div class="col-12">
-                                <label class="form-label">Nombre de la Calle *</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label class="form-label">Número Exterior *</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label class="form-label">Número Interior</label>
-                                <input type="text" class="form-control">
-                            </div>
-
-                            <div class="col-12">
-                                <label class="form-label">Entre calles (Referencia)</label>
-                                <input type="text" class="form-control">
-                            </div>
-
-                            <div class="col-md-6">
-                                <label class="form-label">Código Postal *</label>
-                                <input type="text" id="cp" class="form-control" required pattern="[0-9]{5}">
-                                <div class="invalid-feedback">
-                                    El código postal no es válido. Debe tener 5 dígitos.
+                                <div class="col-12">
+                                    <label class="form-label">Descripción</label>
+                                    <textarea class="form-control" rows="3"></textarea>
                                 </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label class="form-label">Colonia *</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label class="form-label">Municipio *</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label class="form-label">Ciudad *</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label class="form-label">Estado *</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="pais" class="form-label">País *</label>
-                                <select id="pais" class="form-select" required>
-                                    <option value="">Selecciona un país</option>
-                                </select>
-                                <div class="invalid-feedback">
-                                    Ingresa un país válido.
+                                <div class="col-12">
+                                    <button class="btn btn-dark w-100" type="submit">
+                                        Guardar Información
+                                    </button>
                                 </div>
-                            </div>
+                            </form>
+                        </div>
 
-                            <div class="col-12">
-                                <button class="btn btn-dark w-100" type="submit">
-                                    Guardar Dirección
-                                </button>
-                            </div>
+                        <!-- Inventario -->
+                        <div class="historial-card mt-4">
+                            <h5 class="fw-bold mb-3">Mis Productos</h5>
+                            <p class="text-muted">Gestiona tu inventario</p>
 
-                        </form>
+                            <!-- Contenedor dinámico de productos -->
+                            <div id="lista-productos">
+                                <!-- Los productos se cargarán aquí dinámicamente -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contenido Agregar Producto -->
+                    <div id="contenido-agregar-producto" class="tab-content-item content-hidden">
+                        <div class="historial-card">
+                            <h5 class="fw-bold">Agregar producto</h5>
+                            <p class="text-muted">Detalles principales del producto</p>
+                            
+                            <form class="mt-4">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Nombre del producto *</label>
+                                        <input type="text" class="form-control" placeholder="Ej. Playera deportiva">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Categoría *</label>
+                                        <select class="form-select">
+                                            <option selected disabled>Selecciona una categoría</option>
+                                            <option>Hombre</option>
+                                            <option>Mujer</option>
+                                            <option>Unisex</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Descripción *</label>
+                                        <textarea class="form-control" rows="3" placeholder="Describe el producto..."></textarea>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Material *</label>
+                                        <input type="text" class="form-control" placeholder="Ej. Algodón">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Precio *</label>
+                                        <input type="number" class="form-control" placeholder="$0.00">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Stock disponible *</label>
+                                        <input type="number" class="form-control" placeholder="Cantidad">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Etiqueta del producto</label>
+                                        <input type="text" class="form-control" placeholder="Ej. Nuevo, Oferta">
+                                    </div>
+
+                                    <!-- Tallas -->
+                                    <div class="col-12 mt-4">
+                                        <h6 class="fw-bold">Tallas / Tamaños</h6>
+                                        <label class="form-label mt-3">Tallas de Ropa</label>
+                                        <div class="d-flex flex-wrap gap-2">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="xs">
+                                                <label class="form-check-label" for="xs">XS</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="s">
+                                                <label class="form-check-label" for="s">S</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="m">
+                                                <label class="form-check-label" for="m">M</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="l">
+                                                <label class="form-check-label" for="l">L</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="xl">
+                                                <label class="form-check-label" for="xl">XL</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="xxl">
+                                                <label class="form-check-label" for="xxl">XXL</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Imagen -->
+                                    <div class="col-12 mt-4">
+                                        <h6 class="fw-bold">Imagen del Producto</h6>
+                                        <label class="form-label mt-3">URL de la Imagen</label>
+                                        <input type="url" class="form-control" placeholder="https://ejemplo.com/imagen.jpg">
+                                        <div class="text-center my-3 text-muted">— o —</div>
+                                        <label class="form-label">Subir Archivo</label>
+                                        <input type="file" class="form-control" accept="image/*">
+                                    </div>
+
+                                    <div class="col-12 mt-4 d-flex gap-2 justify-content-end">
+                                        <button type="button" class="btn btn-outline-secondary">Limpiar Formulario</button>
+                                        <button type="submit" class="btn btn-dark">Agregar Producto</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
 
                 </div>
 
-                <!-- ================= CONFIGURACIÓN ================= -->
-<div class="tab-pane fade" id="configuracion">
-    <div class="config-card">
-        <h3>Configuración de la Cuenta</h3>
-        <p class="subtitle">Actualiza tu información personal</p>
-
-        <form class="row g-3 needs-validation" id="form-configuracion" novalidate>
-            <div class="col-md-6">
-                <label class="form-label">Nombre *</label>
-                <input type="text" id="config-nombre" class="form-control" value="" required placeholder="Ingrese su nombre">
-                <div class="invalid-feedback">Ingrese un nombre válido.</div>
             </div>
+        </div>
+    </div>
 
-            <div class="col-md-6">
-                <label class="form-label">Apellidos *</label>
-                <input type="text" id="config-apellidos" class="form-control" value="" required placeholder="Ingrese sus apellidos">
-                <div class="invalid-feedback">Ingrese un apellido válido.</div>
+    <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
-
-            <div class="col-12">
-                <label class="form-label">Email *</label>
-                <input type="email" id="config-email" class="form-control" value="" required placeholder="correo@ejemplo.com">
-                <div class="invalid-feedback">Ingrese un correo válido.</div>
-            </div>
-
-            <div class="col-12">
-                <label class="form-label">Teléfono</label>
-                <input type="text" id="config-telefono" class="form-control" value="" placeholder="Ingrese su número de teléfono">
-            </div>
-
-            <hr class="form-divider my-4">
-
-            <div class="col-md-6">
-                <label class="form-label">Contraseña Actual</label>
-                <input type="password" id="config-pass-actual" class="form-control" placeholder="********">
-            </div>
-
-            <div class="col-md-6">
-                <label class="form-label">Nueva Contraseña</label>
-                <input type="password" id="config-pass-nueva" class="form-control" placeholder="********">
-            </div>
-
-            <div class="col-12 mt-4">
-                <button class="btn btn-dark w-100" type="submit">
-                    Guardar Cambios
-                </button>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div id="footer"></div>
+<!-- Modal Editar Producto -->
+<div class="modal fade" id="modalEditarProducto" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Producto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formEditarProducto">
+                    <input type="hidden" id="edit-producto-id">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Nombre del producto *</label>
+                            <input type="text" id="edit-nombre" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Categoría *</label>
+                            <select id="edit-categoria" class="form-select" required>
+                                <option value="">Selecciona una categoría</option>
+                                <option>Hombre</option>
+                                <option>Mujer</option>
+                                <option>Unisex</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Descripción *</label>
+                            <textarea id="edit-descripcion" class="form-control" rows="3" required></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Material *</label>
+                            <input type="text" id="edit-material" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Precio *</label>
+                            <input type="number" id="edit-precio" class="form-control" step="0.01" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Stock disponible *</label>
+                            <input type="number" id="edit-stock" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Etiqueta del producto</label>
+                            <input type="text" id="edit-etiqueta" class="form-control">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Tallas *</label>
+                            <div class="d-flex flex-wrap gap-2" id="edit-tallas-container">
+                                <div class="form-check">
+                                    <input class="form-check-input edit-talla" type="checkbox" value="XS" id="edit-xs">
+                                    <label class="form-check-label" for="edit-xs">XS</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input edit-talla" type="checkbox" value="S" id="edit-s">
+                                    <label class="form-check-label" for="edit-s">S</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input edit-talla" type="checkbox" value="M" id="edit-m">
+                                    <label class="form-check-label" for="edit-m">M</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input edit-talla" type="checkbox" value="L" id="edit-l">
+                                    <label class="form-check-label" for="edit-l">L</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input edit-talla" type="checkbox" value="XL" id="edit-xl">
+                                    <label class="form-check-label" for="edit-xl">XL</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input edit-talla" type="checkbox" value="XXL" id="edit-xxl">
+                                    <label class="form-check-label" for="edit-xxl">XXL</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">URL de la Imagen</label>
+                            <input type="url" id="edit-imagen" class="form-control">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="guardarEdicionProducto()">Guardar Cambios</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-<script src="./javascript/main.js"></script>
-<script src="./javascript/perfilUsuario.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <div id="footer-container"></div>
 
-</body>
+    <script src="./javascript/main.js"></script>
+    <script src="./javascript/perfilUsuario.js"></script>
+    <script src="./javascript/agregarProductos.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
 </html>
