@@ -60,7 +60,7 @@ function initTheme() {
 
   //Modo oscuro navbar
 
-const applyVisuals = (theme) => {
+  const applyVisuals = (theme) => {
     htmlElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
 

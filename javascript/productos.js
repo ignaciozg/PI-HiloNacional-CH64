@@ -191,20 +191,106 @@ window.inicializarFiltros = () => {
   });
 };
 
-// --- BUSCADOR ---
+// --- BUSCADOR (CON REDIRECCIÓN A PÁGINA DE DETALLES) ---
 window.setupSearch = () => {
   const input = document.getElementById("input-buscar");
   if (!input) return;
-  input.oninput = (e) => {
-    const val = e.target.value.toLowerCase();
-    mostrarProductos(
-      productosBase.filter(
+
+  // 1. Crear el contenedor flotante de sugerencias
+  let cajaSugerencias = document.getElementById("caja-sugerencias");
+  if (!cajaSugerencias) {
+    cajaSugerencias = document.createElement("div");
+    cajaSugerencias.id = "caja-sugerencias";
+    cajaSugerencias.className = "dropdown-menu w-100 shadow-sm mt-1 p-0";
+    cajaSugerencias.style.position = "absolute";
+    cajaSugerencias.style.top = "100%";
+    cajaSugerencias.style.left = "0";
+    cajaSugerencias.style.zIndex = "1050";
+    cajaSugerencias.style.maxHeight = "350px";
+    cajaSugerencias.style.overflowY = "auto";
+
+    const form = input.closest("form");
+    if (form) {
+      form.style.position = "relative";
+      form.appendChild(cajaSugerencias);
+    }
+  }
+
+  const esPaginaProductos =
+    typeof mostrarProductos !== "undefined" &&
+    document.getElementById("contenedor-productos") !== null;
+
+  // 2. Evento al escribir en el buscador
+  input.addEventListener("input", (e) => {
+    const val = e.target.value.trim().toLowerCase();
+
+    if (val === "") {
+      cajaSugerencias.classList.remove("show");
+      if (esPaginaProductos) mostrarProductos(productosBase);
+      return;
+    }
+
+    if (typeof productosBase !== "undefined") {
+      const coincidencias = productosBase.filter(
         (p) =>
           p.titulo.toLowerCase().includes(val) ||
           p.categoria.toLowerCase().includes(val),
-      ),
-    );
-  };
+      );
+
+      // Si estamos en la página de productos, filtra las tarjetas de fondo
+      if (esPaginaProductos) {
+        mostrarProductos(coincidencias);
+      }
+
+      // Mostrar las sugerencias en la cajita flotante
+      if (coincidencias.length > 0) {
+        cajaSugerencias.innerHTML = coincidencias
+          .slice(0, 6)
+          .map(
+            (p) => `
+          <a href="detalle.html?id=${p.id}" class="dropdown-item py-2 border-bottom d-flex align-items-center gap-3" style="white-space: normal;">
+            <div style="width: 45px; height: 45px; flex-shrink: 0;">
+              <img src="${p.imagen}" alt="${p.titulo}" class="img-fluid rounded" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="flex-grow-1 min-w-0">
+              <div class="fw-bold text-dark text-truncate">${p.titulo}</div>
+              <small class="text-muted d-block text-truncate">${p.categoria}</small>
+            </div>
+          </a>
+        `,
+          )
+          .join("");
+      } else {
+        cajaSugerencias.innerHTML = `
+          <div class="dropdown-item text-muted py-3 text-center">
+            <i class="bi bi-search d-block fs-4 mb-2"></i>
+            No se encontraron resultados.
+          </div>`;
+      }
+
+      cajaSugerencias.classList.add("show");
+    }
+  });
+
+  // 3. Ocultar sugerencias al hacer clic afuera
+  document.addEventListener("click", (e) => {
+    if (!input.contains(e.target) && !cajaSugerencias.contains(e.target)) {
+      cajaSugerencias.classList.remove("show");
+    }
+  });
+
+  // 4. Búsqueda general con "Enter" (opcional)
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      const val = e.target.value.trim();
+      // Si escriben algo y le dan Enter, los mandamos a productos.html (o tu tienda) para ver resultados
+      if (val !== "" && !esPaginaProductos) {
+        // OJO AQUÍ: Cambia 'productos.html' por tu página de tienda
+        window.location.href = `productos.html?buscar=${encodeURIComponent(val)}`;
+      }
+    }
+  });
 };
 
 // --- CARRITO Y FAVS (DROPDOWN COMPATIBLE) ---
@@ -254,12 +340,12 @@ window.inicializarUI = () => {
   if (listCar) {
     let total = 0;
     listCar.innerHTML =
-    carrito.length === 0
-      ? '<p class="text-center py-3 small text-muted">Tu carrito está vacío</p>'
-      : carrito
-          .map((p) => {
-            total += p.precio * p.cantidad;
-            return `
+      carrito.length === 0
+        ? '<p class="text-center py-3 small text-muted">Tu carrito está vacío</p>'
+        : carrito
+            .map((p) => {
+              total += p.precio * p.cantidad;
+              return `
               <div class="d-flex align-items-center mb-2 pb-2 border-bottom">
                 <img src="${p.imagen}" width="40" height="40" class="me-2 rounded object-fit-cover">
                 <div class="flex-grow-1 overflow-hidden">
@@ -276,8 +362,8 @@ window.inicializarUI = () => {
                   <i class="bi bi-x-circle"></i>
                 </button>
               </div>`;
-          })
-          .join("");
+            })
+            .join("");
     if (totalCar) totalCar.innerText = `$${total.toFixed(2)}`;
   }
 };
@@ -297,10 +383,6 @@ window.toggleFav = (id) => {
   inicializarUI();
   mostrarProductos(productosBase);
 };
-
-
-
-
 
 window.agregarAlCarrito = (id) => {
   const producto = productosBase.find((p) => p.id === id);
@@ -329,9 +411,6 @@ window.cambiarCantidad = (id, talla, accion) => {
     inicializarUI();
   }
 };
-
-
-
 
 window.eliminarDelCarrito = (id) => {
   carrito = carrito.filter((p) => p.id !== id);
@@ -378,10 +457,32 @@ window.setupTheme = () => {
   };
 };
 
+// --- DOMContentLoaded ---
 document.addEventListener("DOMContentLoaded", () => {
-  mostrarProductos(productosBase);
-});
+  // Iniciar Buscador en TODAS las páginas
+  if (typeof setupSearch === "function") {
+    setupSearch();
+  }
 
+  // Página de productos
+  const contenedorProd = document.getElementById("contenedor-productos");
+  if (contenedorProd && typeof mostrarProductos === "function") {
+    mostrarProductos(productosBase);
+  }
+
+  // Carrusel en el index
+  if (typeof renderizarCarruselNovedades === "function") {
+    renderizarCarruselNovedades();
+  }
+
+  // Interfaz de carrito/favoritos
+  if (typeof inicializarUI === "function") {
+    inicializarUI();
+  }
+
+  // Filtros Remotos
+  manejarFiltroRemoto();
+});
 // --- CARRUSEL DE NOVEDADES (PÁGINA DE INICIO) ---
 window.renderizarCarruselNovedades = () => {
   const contenedor = document.getElementById("carrusel-novedades");
@@ -468,3 +569,60 @@ const manejarFiltroRemoto = () => {
   }
 };
 document.addEventListener("DOMContentLoaded", manejarFiltroRemoto);
+
+// --- CARGAR PRODUCTO DINÁMICO EN LA PÁGINA producto.html ---
+document.addEventListener("DOMContentLoaded", () => {
+  // 1. Revisamos si estamos en la página del molde buscando uno de sus IDs
+  const contenedorDetalle = document.getElementById(
+    "contenedor-detalle-producto",
+  );
+
+  if (contenedorDetalle) {
+    // 2. Leemos el "?id=X" de la URL
+    const parametrosURL = new URLSearchParams(window.location.search);
+    const idProducto = parseInt(parametrosURL.get("id"));
+
+    // 3. Buscamos el producto en tu base de datos
+    const producto = productosBase.find((p) => p.id === idProducto);
+
+    if (producto) {
+      // 4. Inyectamos los datos en el HTML
+      document.getElementById("detalle-img").src = producto.imagen;
+      document.getElementById("detalle-img").alt = producto.titulo;
+      document.getElementById("detalle-titulo").textContent = producto.titulo;
+      document.getElementById("detalle-categoria").textContent =
+        producto.categoria;
+      document.getElementById("detalle-precio").textContent =
+        `$${producto.precio.toLocaleString()} MXN`;
+      document.getElementById("detalle-desc").textContent =
+        producto.descripcion;
+      document.getElementById("detalle-fabric").textContent = producto.fabric;
+      document.getElementById("detalle-region").textContent = producto.region;
+      document.getElementById("detalle-care").textContent = producto.cuidados;
+
+      // 5. Manejamos las tallas
+      const seccionTallas = document.getElementById("detalle-seccion-tallas");
+      const selectTallas = document.getElementById("detalle-select-tallas");
+
+      if (producto.tallas && producto.tallas.length > 0) {
+        seccionTallas.classList.remove("d-none");
+        selectTallas.innerHTML = producto.tallas
+          .map((t) => `<option value="${t}">${t}</option>`)
+          .join("");
+      }
+
+      // 6. Conectamos el botón de añadir al carrito
+      document.getElementById("btn-detalle-carrito").onclick = () => {
+        // Aprovechamos la función agregarAlCarrito que ya tienes
+        agregarAlCarrito(producto.id);
+      };
+
+      // Actualizamos el título de la pestaña del navegador para el SEO
+      document.title = `${producto.titulo} | Hilo Nacional`;
+    } else {
+      // Si el producto no existe (ej. pusieron un ID inventado)
+      contenedorDetalle.classList.add("d-none");
+      document.getElementById("mensaje-error").classList.remove("d-none");
+    }
+  }
+});

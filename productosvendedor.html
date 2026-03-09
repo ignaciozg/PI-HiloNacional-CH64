@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Vendedor - Agregar Producto</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="./CSS/main.css">
+    <link rel="stylesheet" href="./CSS/productos.css">
+    <link rel="stylesheet" href="./CSS/navbar.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<div id="navbar-container"></div>
+
+<body class="bg-[#fafafa] text-gray-800 p-6 md:p-10">
+
+    <div class="max-w-4xl mx-auto">
+        <div class="mb-8">
+            <h1 class="text-2xl font-bold text-gray-900">Panel de Vendedor</h1>
+            <p class="text-sm text-gray-500 mt-1">Gestiona tus productos y visualiza tu inventario</p>
+            <h2 class="text-xl font-bold text-gray-900 mt-8">Agregar Producto</h2>
+        </div>
+
+        <form action="#" method="POST">
+            <div class="bg-white rounded-xl border border-gray-200 p-6 mb-6 shadow-sm">
+                <div class="flex items-center gap-2 mb-1">
+                    <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                    <h3 class="font-semibold text-gray-900">Información Básica</h3>
+                </div>
+                <p class="text-sm text-gray-500 mb-6">Detalles principales del producto</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-1">Nombre del Producto <span class="text-red-500">*</span></label>
+                        <input type="text" placeholder="Ej: Camisa Casual Azul" class="w-full bg-gray-50 border border-gray-200 text-gray-700 text-sm rounded-lg focus:ring-gray-900 focus:border-gray-900 block p-2.5 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-1">Categoría <span class="text-red-500">*</span></label>
+                        <select class="w-full bg-gray-50 border border-gray-200 text-gray-400 text-sm rounded-lg focus:ring-gray-900 focus:border-gray-900 block p-2.5 outline-none appearance-none">
+                            <option>Selecciona una categor</option>
+                            <option>Ropa</option>
+                            <option>Calzado</option>
+                            <option>Accesorios</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mb-5">
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">Descripción <span class="text-red-500">*</span></label>
+                    <textarea rows="3" placeholder="Describe las características principales del producto..." class="w-full bg-gray-50 border border-gray-200 text-gray-700 text-sm rounded-lg focus:ring-gray-900 focus:border-gray-900 block p-2.5 outline-none resize-none"></textarea>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-1">Material <span class="text-red-500">*</span></label>
+                        <input type="text" placeholder="Ej: 100% Algodón" class="w-full bg-gray-50 border border-gray-200 text-gray-700 text-sm rounded-lg focus:ring-gray-900 focus:border-gray-900 block p-2.5 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-1">Precio (USD) <span class="text-red-500">*</span></label>
+                        <input type="number" placeholder="0.00" class="w-full bg-gray-50 border border-gray-200 text-gray-700 text-sm rounded-lg focus:ring-gray-900 focus:border-gray-900 block p-2.5 outline-none">
+                    </div>
+                </div>
+
+                <div class="mb-5">
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">Stock Disponible <span class="text-red-500">*</span></label>
+                    <input type="number" placeholder="0" class="w-full bg-gray-50 border border-gray-200 text-gray-700 text-sm rounded-lg focus:ring-gray-900 focus:border-gray-900 block p-2.5 outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">Etiqueta del Producto <span class="text-gray-400 font-normal">(Opcional)</span></label>
+                    <input type="text" placeholder="Ej: &quot;Nuevo&quot;, &quot;Oferta&quot;, &quot;Bestseller&quot;, &quot;Edición Limitada&quot;" class="w-full bg-gray-50 border border-gray-200 text-gray-700 text-sm rounded-lg focus:ring-gray-900 focus:border-gray-900 block p-2.5 outline-none">
+                    <p class="text-[11px] text-gray-400 mt-1">Esta etiqueta se mostrará como insignia sobre la imagen del producto</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl border border-gray-200 p-6 mb-6 shadow-sm">
+                <h3 class="font-semibold text-gray-900 mb-1">Tallas / Tamaños</h3>
+                <p class="text-sm text-gray-500 mb-6">Selecciona las tallas disponibles o agrega tallas personalizadas</p>
+
+                <div class="mb-5">
+                    <label class="block text-xs font-semibold text-gray-700 mb-2">Tallas de Ropa</label>
+                    <div class="flex flex-wrap gap-2">
+                        <button type="button" class="px-3 py-1.5 text-xs border border-gray-200 rounded-md text-gray-700 hover:border-gray-400 focus:bg-gray-100 transition-colors">XS</button>
+                        <button type="button" class="px-3 py-1.5 text-xs border border-gray-200 rounded-md text-gray-700 hover:border-gray-400 focus:bg-gray-100 transition-colors">S</button>
+                        <button type="button" class="px-3 py-1.5 text-xs border border-gray-200 rounded-md text-gray-700 hover:border-gray-400 focus:bg-gray-100 transition-colors">M</button>
+                        <button type="button" class="px-3 py-1.5 text-xs border border-gray-200 rounded-md text-gray-700 hover:border-gray-400 focus:bg-gray-100 transition-colors">L</button>
+                        <button type="button" class="px-3 py-1.5 text-xs border border-gray-200 rounded-md text-gray-700 hover:border-gray-400 focus:bg-gray-100 transition-colors">XL</button>
+                        <button type="button" class="px-3 py-1.5 text-xs border border-gray-200 rounded-md text-gray-700 hover:border-gray-400 focus:bg-gray-100 transition-colors">XXL</button>
+                    </div>
+                </div>
+
+                <div class="mb-5">
+                    <label class="block text-xs font-semibold text-gray-700 mb-2">Tallas de Calzado</label>
+                    <div class="flex flex-wrap gap-2">
+                        <button type="button" class="px-3 py-1.5 text-xs border border-gray-200 rounded-md text-gray-700 hover:border-gray-400 focus:bg-gray-100 transition-colors">35</button>
+                        <button type="button" class="px-3 py-1.5 text-xs border border-gray-200 rounded-md text-gray-700 hover:border-gray-400 focus:bg-gray-100 transition-colors">36</button>
+                        <button type="button" class="px-3 py-1.5 text-xs border border-gray-200 rounded-md text-gray-700 hover:border-gray-400 focus:bg-gray-100 transition-colors">37</button>
+                        <button type="button" class="px-3 py-1.5 text-xs border border-gray-200 rounded-md text-gray-700 hover:border-gray-400 focus:bg-gray-100 transition-colors">38</button>
+                        <button type="button" class="px-3 py-1.5 text-xs border border-gray-200 rounded-md text-gray-700 hover:border-gray-400 focus:bg-gray-100 transition-colors">39</button>
+                        <button type="button" class="px-3 py-1.5 text-xs border border-gray-200 rounded-md text-gray-700 hover:border-gray-400 focus:bg-gray-100 transition-colors">40</button>
+                        <button type="button" class="px-3 py-1.5 text-xs border border-gray-200 rounded-md text-gray-700 hover:border-gray-400 focus:bg-gray-100 transition-colors">41</button>
+                        <button type="button" class="px-3 py-1.5 text-xs border border-gray-200 rounded-md text-gray-700 hover:border-gray-400 focus:bg-gray-100 transition-colors">42</button>
+                        <button type="button" class="px-3 py-1.5 text-xs border border-gray-200 rounded-md text-gray-700 hover:border-gray-400 focus:bg-gray-100 transition-colors">43</button>
+                        <button type="button" class="px-3 py-1.5 text-xs border border-gray-200 rounded-md text-gray-700 hover:border-gray-400 focus:bg-gray-100 transition-colors">44</button>
+                        <button type="button" class="px-3 py-1.5 text-xs border border-gray-200 rounded-md text-gray-700 hover:border-gray-400 focus:bg-gray-100 transition-colors">45</button>
+                    </div>
+                </div>
+
+                <div class="mb-5">
+                    <label class="block text-xs font-semibold text-gray-700 mb-2">Tallas Numéricas (Pantalones)</label>
+                    <div class="flex flex-wrap gap-2">
+                        <button type="button" class="px-3 py-1.5 text-xs border border-gray-200 rounded-md text-gray-700 hover:border-gray-400 focus:bg-gray-100 transition-colors">28</button>
+                        <button type="button" class="px-3 py-1.5 text-xs border border-gray-200 rounded-md text-gray-700 hover:border-gray-400 focus:bg-gray-100 transition-colors">30</button>
+                        <button type="button" class="px-3 py-1.5 text-xs border border-gray-200 rounded-md text-gray-700 hover:border-gray-400 focus:bg-gray-100 transition-colors">32</button>
+                        <button type="button" class="px-3 py-1.5 text-xs border border-gray-200 rounded-md text-gray-700 hover:border-gray-400 focus:bg-gray-100 transition-colors">34</button>
+                        <button type="button" class="px-3 py-1.5 text-xs border border-gray-200 rounded-md text-gray-700 hover:border-gray-400 focus:bg-gray-100 transition-colors">36</button>
+                        <button type="button" class="px-3 py-1.5 text-xs border border-gray-200 rounded-md text-gray-700 hover:border-gray-400 focus:bg-gray-100 transition-colors">38</button>
+                        <button type="button" class="px-3 py-1.5 text-xs border border-gray-200 rounded-md text-gray-700 hover:border-gray-400 focus:bg-gray-100 transition-colors">40</button>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-2">Talla Personalizada</label>
+                    <div class="flex gap-2">
+                        <input type="text" placeholder="Ej: Único, 2XL, etc." class="flex-grow bg-gray-50 border border-gray-200 text-gray-700 text-sm rounded-lg focus:ring-gray-900 focus:border-gray-900 block p-2.5 outline-none">
+                        <button type="button" class="px-4 py-2 border border-gray-200 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors text-lg font-medium leading-none">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl border border-gray-200 p-6 mb-6 shadow-sm">
+                <div class="flex items-center gap-2 mb-1">
+                    <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                    <h3 class="font-semibold text-gray-900">Imagen del Producto</h3>
+                </div>
+                <p class="text-sm text-gray-500 mb-6">Sube una imagen o proporciona una URL</p>
+
+                <div class="mb-4">
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">URL de la Imagen</label>
+                    <input type="url" placeholder="https://ejemplo.com/imagen.jpg" class="w-full bg-gray-50 border border-gray-200 text-gray-700 text-sm rounded-lg focus:ring-gray-900 focus:border-gray-900 block p-2.5 outline-none">
+                </div>
+
+                <div class="flex items-center justify-center mb-4">
+                    <div class="w-full h-px bg-gray-200"></div>
+                    <span class="px-3 text-xs text-gray-400 uppercase bg-white">o</span>
+                    <div class="w-full h-px bg-gray-200"></div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">Subir Archivo</label>
+                    <div class="w-full h-10 bg-gray-50 border border-gray-200 rounded-lg flex items-center px-3 cursor-pointer hover:bg-gray-100 transition-colors">
+                        </div>
+                </div>
+            </div>
+
+            <div class="flex justify-end gap-3 mt-8">
+                <button type="reset" class="px-5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 transition-colors">
+                    Limpiar Formulario
+                </button>
+                <button type="submit" class="px-5 py-2 text-sm font-medium text-white bg-[#0f111a] rounded-lg hover:bg-gray-800 focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-colors">
+                    Agregar Producto
+                </button>
+            </div>
+        </form>
+    </div>
+
+
+    <div id="footer"></div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./javascript/main.js"></script>
+    <script src="./javascript/productos.js"></script>
+</body>
+</html>
