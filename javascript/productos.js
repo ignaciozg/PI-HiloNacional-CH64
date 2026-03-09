@@ -191,12 +191,12 @@ window.inicializarFiltros = () => {
   });
 };
 
-// --- BUSCADOR CON SUGERENCIAS E IMÁGENES (Y CLIC AL MODAL) ---
+// --- BUSCADOR (CON REDIRECCIÓN A PÁGINA DE DETALLES) ---
 window.setupSearch = () => {
   const input = document.getElementById("input-buscar");
   if (!input) return;
 
-  // 1. Crear el contenedor de sugerencias
+  // 1. Crear el contenedor flotante de sugerencias
   let cajaSugerencias = document.getElementById("caja-sugerencias");
   if (!cajaSugerencias) {
     cajaSugerencias = document.createElement("div");
@@ -216,17 +216,17 @@ window.setupSearch = () => {
     }
   }
 
-  const esPaginaProductos = typeof mostrarProductos !== "undefined";
+  const esPaginaProductos =
+    typeof mostrarProductos !== "undefined" &&
+    document.getElementById("contenedor-productos") !== null;
 
-  // 2. Evento al escribir
+  // 2. Evento al escribir en el buscador
   input.addEventListener("input", (e) => {
     const val = e.target.value.trim().toLowerCase();
 
     if (val === "") {
       cajaSugerencias.classList.remove("show");
-      if (esPaginaProductos && typeof productosBase !== "undefined") {
-        mostrarProductos(productosBase);
-      }
+      if (esPaginaProductos) mostrarProductos(productosBase);
       return;
     }
 
@@ -237,17 +237,18 @@ window.setupSearch = () => {
           p.categoria.toLowerCase().includes(val),
       );
 
+      // Si estamos en la página de productos, filtra las tarjetas de fondo
       if (esPaginaProductos) {
         mostrarProductos(coincidencias);
       }
 
-      // AQUÍ ES DONDE ESTÁ EL ENLACE CON EL ONCLICK
+      // Mostrar las sugerencias en la cajita flotante
       if (coincidencias.length > 0) {
         cajaSugerencias.innerHTML = coincidencias
           .slice(0, 6)
           .map(
             (p) => `
-          <a href="#" onclick="abrirDetallesProducto(${p.id}); return false;" class="dropdown-item py-2 border-bottom d-flex align-items-center gap-3" style="white-space: normal;">
+          <a href="detalle.html?id=${p.id}" class="dropdown-item py-2 border-bottom d-flex align-items-center gap-3" style="white-space: normal;">
             <div style="width: 45px; height: 45px; flex-shrink: 0;">
               <img src="${p.imagen}" alt="${p.titulo}" class="img-fluid rounded" style="width: 100%; height: 100%; object-fit: cover;">
             </div>
@@ -263,7 +264,7 @@ window.setupSearch = () => {
         cajaSugerencias.innerHTML = `
           <div class="dropdown-item text-muted py-3 text-center">
             <i class="bi bi-search d-block fs-4 mb-2"></i>
-            No se encontraron artesanías...
+            No se encontraron resultados.
           </div>`;
       }
 
@@ -271,114 +272,25 @@ window.setupSearch = () => {
     }
   });
 
-  // 3. Ocultar al hacer clic afuera
+  // 3. Ocultar sugerencias al hacer clic afuera
   document.addEventListener("click", (e) => {
     if (!input.contains(e.target) && !cajaSugerencias.contains(e.target)) {
       cajaSugerencias.classList.remove("show");
     }
   });
 
-  // 4. Presionar "Enter"
+  // 4. Búsqueda general con "Enter" (opcional)
   input.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
       const val = e.target.value.trim();
+      // Si escriben algo y le dan Enter, los mandamos a productos.html (o tu tienda) para ver resultados
       if (val !== "" && !esPaginaProductos) {
-        window.location.href = `index.html?buscar=${encodeURIComponent(val)}`;
+        // OJO AQUÍ: Cambia 'productos.html' por tu página de tienda
+        window.location.href = `productos.html?buscar=${encodeURIComponent(val)}`;
       }
     }
   });
-};
-
-// --- FUNCIÓN PARA LLENAR Y ABRIR TU MODAL (FUNCIONA EN CUALQUIER PÁGINA) ---
-window.abrirDetallesProducto = (idProducto) => {
-  // 1. Ocultamos la caja de sugerencias
-  const cajaSugerencias = document.getElementById("caja-sugerencias");
-  if (cajaSugerencias) cajaSugerencias.classList.remove("show");
-
-  if (typeof productosBase === "undefined") return;
-  const producto = productosBase.find((p) => p.id === idProducto);
-
-  if (producto) {
-    // 2. Buscamos el modal en la página actual
-    let modalElement = document.getElementById("productModal");
-
-    // 3. SI EL MODAL NO EXISTE EN ESTA PÁGINA, LO CREAMOS AL VUELO
-    if (!modalElement) {
-      const modalContainer = document.createElement("div");
-      modalContainer.innerHTML = `
-        <div class="modal fade" id="productModal" tabindex="-1">
-          <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content card border-0 shadow-lg">
-              <div class="modal-header border-0 pb-0">
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-              </div>
-              <div class="modal-body p-4">
-                <div class="row g-4">
-                  <div class="col-md-6 text-center">
-                    <img id="productModalImg" src="" class="img-fluid rounded shadow-sm" />
-                  </div>
-                  <div class="col-md-6">
-                    <h4 id="productModalLabel" class="fw-bold mb-3"></h4>
-                    <p id="productModalDesc" class="small text-muted"></p>
-                    <div class="small border-top pt-3 border-secondary">
-                      <p class="mb-1"><strong>Material:</strong> <span id="productFabric"></span></p>
-                      <p class="mb-1"><strong>Región:</strong> <span id="productRegion"></span></p>
-                      <p class="mb-1"><strong>Cuidado:</strong> <span id="productCare"></span></p>
-                    </div>
-                    <div id="sizeSection" class="my-3 d-none">
-                      <label class="fw-bold small d-block mb-1">Talla:</label>
-                      <select id="productSize" class="form-select form-select-sm"></select>
-                    </div>
-                    <h3 id="productModalPrice" class="fw-bold mt-4" style="color: var(--primary-color)"></h3>
-                    <button id="btn-modal-carrito" class="btn w-100 rounded-pill mt-3 py-2 text-white fw-bold shadow-sm" style="background-color: var(--primary-color)">
-                      Añadir al Carrito
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      `;
-      // Lo inyectamos al final del documento
-      document.body.appendChild(modalContainer.firstElementChild);
-
-      // Ahora sí, lo seleccionamos
-      modalElement = document.getElementById("productModal");
-    }
-
-    // 4. Llenamos los datos (igual que antes)
-    document.getElementById("productModalImg").src = producto.imagen;
-    document.getElementById("productModalImg").alt = producto.titulo;
-    document.getElementById("productModalLabel").textContent = producto.titulo;
-    document.getElementById("productModalDesc").textContent =
-      producto.descripcion;
-    document.getElementById("productFabric").textContent = producto.fabric;
-    document.getElementById("productRegion").textContent = producto.region;
-    document.getElementById("productCare").textContent = producto.cuidados;
-    document.getElementById("productModalPrice").textContent =
-      `$${producto.precio} MXN`;
-
-    const sizeSection = document.getElementById("sizeSection");
-    const productSize = document.getElementById("productSize");
-
-    if (producto.tallas && producto.tallas.length > 0) {
-      sizeSection.classList.remove("d-none");
-      productSize.innerHTML = producto.tallas
-        .map((talla) => `<option value="${talla}">${talla}</option>`)
-        .join("");
-    } else {
-      sizeSection.classList.add("d-none");
-      productSize.innerHTML = "";
-    }
-
-    // 5. Abrimos el modal
-    const modalBootstrap =
-      bootstrap.Modal.getInstance(modalElement) ||
-      new bootstrap.Modal(modalElement);
-    modalBootstrap.show();
-  }
 };
 
 // --- CARRITO Y FAVS (DROPDOWN COMPATIBLE) ---
@@ -545,10 +457,32 @@ window.setupTheme = () => {
   };
 };
 
+// --- DOMContentLoaded ---
 document.addEventListener("DOMContentLoaded", () => {
-  mostrarProductos(productosBase);
-});
+  // Iniciar Buscador en TODAS las páginas
+  if (typeof setupSearch === "function") {
+    setupSearch();
+  }
 
+  // Página de productos
+  const contenedorProd = document.getElementById("contenedor-productos");
+  if (contenedorProd && typeof mostrarProductos === "function") {
+    mostrarProductos(productosBase);
+  }
+
+  // Carrusel en el index
+  if (typeof renderizarCarruselNovedades === "function") {
+    renderizarCarruselNovedades();
+  }
+
+  // Interfaz de carrito/favoritos
+  if (typeof inicializarUI === "function") {
+    inicializarUI();
+  }
+
+  // Filtros Remotos
+  manejarFiltroRemoto();
+});
 // --- CARRUSEL DE NOVEDADES (PÁGINA DE INICIO) ---
 window.renderizarCarruselNovedades = () => {
   const contenedor = document.getElementById("carrusel-novedades");
@@ -635,3 +569,60 @@ const manejarFiltroRemoto = () => {
   }
 };
 document.addEventListener("DOMContentLoaded", manejarFiltroRemoto);
+
+// --- CARGAR PRODUCTO DINÁMICO EN LA PÁGINA producto.html ---
+document.addEventListener("DOMContentLoaded", () => {
+  // 1. Revisamos si estamos en la página del molde buscando uno de sus IDs
+  const contenedorDetalle = document.getElementById(
+    "contenedor-detalle-producto",
+  );
+
+  if (contenedorDetalle) {
+    // 2. Leemos el "?id=X" de la URL
+    const parametrosURL = new URLSearchParams(window.location.search);
+    const idProducto = parseInt(parametrosURL.get("id"));
+
+    // 3. Buscamos el producto en tu base de datos
+    const producto = productosBase.find((p) => p.id === idProducto);
+
+    if (producto) {
+      // 4. Inyectamos los datos en el HTML
+      document.getElementById("detalle-img").src = producto.imagen;
+      document.getElementById("detalle-img").alt = producto.titulo;
+      document.getElementById("detalle-titulo").textContent = producto.titulo;
+      document.getElementById("detalle-categoria").textContent =
+        producto.categoria;
+      document.getElementById("detalle-precio").textContent =
+        `$${producto.precio.toLocaleString()} MXN`;
+      document.getElementById("detalle-desc").textContent =
+        producto.descripcion;
+      document.getElementById("detalle-fabric").textContent = producto.fabric;
+      document.getElementById("detalle-region").textContent = producto.region;
+      document.getElementById("detalle-care").textContent = producto.cuidados;
+
+      // 5. Manejamos las tallas
+      const seccionTallas = document.getElementById("detalle-seccion-tallas");
+      const selectTallas = document.getElementById("detalle-select-tallas");
+
+      if (producto.tallas && producto.tallas.length > 0) {
+        seccionTallas.classList.remove("d-none");
+        selectTallas.innerHTML = producto.tallas
+          .map((t) => `<option value="${t}">${t}</option>`)
+          .join("");
+      }
+
+      // 6. Conectamos el botón de añadir al carrito
+      document.getElementById("btn-detalle-carrito").onclick = () => {
+        // Aprovechamos la función agregarAlCarrito que ya tienes
+        agregarAlCarrito(producto.id);
+      };
+
+      // Actualizamos el título de la pestaña del navegador para el SEO
+      document.title = `${producto.titulo} | Hilo Nacional`;
+    } else {
+      // Si el producto no existe (ej. pusieron un ID inventado)
+      contenedorDetalle.classList.add("d-none");
+      document.getElementById("mensaje-error").classList.remove("d-none");
+    }
+  }
+});
