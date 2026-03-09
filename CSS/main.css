@@ -357,3 +357,9 @@ a:hover {
 [data-theme="dark"] .dropdown-divider {
   border-top: 1px solid #495057;
 }
+
+[data-theme="dark"] .caja-sugerencias {
+  color: white;
+  background-color: #1e293b;
+  border-color: #495057;
+}
