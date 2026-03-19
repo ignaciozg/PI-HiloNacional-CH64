@@ -91,7 +91,7 @@ document.getElementById("formulario").addEventListener("submit", function(e) {
         if (response.ok) {
             Swal.fire({
                 title: "¡Formulario enviado con éxito!",
-                text: "Revisa tu correo 📩",
+                text: "📩",
                 icon: "success"
             });
             this.reset();
