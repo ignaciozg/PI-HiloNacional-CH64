@@ -467,6 +467,7 @@ function cargarProductos() {
 
   const productos = obtenerProductos();
 
+  // 1. Si no hay productos, mostramos el mensaje de vacío
   if (productos.length === 0) {
     contenedorProductos.innerHTML = `
       <div class="text-center py-4 text-muted">
@@ -477,27 +478,30 @@ function cargarProductos() {
     return;
   }
 
+  // 2. Limpiamos y renderizamos los productos
   contenedorProductos.innerHTML = "";
-
   productos.forEach(producto => {
     const productoHTML = crearProductoHTML(producto);
     contenedorProductos.insertAdjacentHTML("beforeend", productoHTML);
   });
 
-  // Agregar eventos a los botones
-  document.querySelectorAll(".btn-eliminar-producto").forEach(btn => {
-    btn.addEventListener("click", function () {
-      const id = parseInt(this.dataset.id);
-      eliminarProducto(id);
-    });
-  });
+  // 3. REEMPLAZO: En lugar de usar forEach en cada botón, 
+  // escuchamos UN SOLO CLIC en todo el contenedor.
+  contenedorProductos.onclick = (e) => {
+    // .closest busca el botón aunque hagas clic en el icono de adentro
+    const btnEditar = e.target.closest(".btn-editar-producto");
+    const btnEliminar = e.target.closest(".btn-eliminar-producto");
 
-  document.querySelectorAll(".btn-editar-producto").forEach(btn => {
-    btn.addEventListener("click", function () {
-      const id = parseInt(this.dataset.id);
+    if (btnEditar) {
+      const id = parseInt(btnEditar.dataset.id);
       editarProducto(id);
-    });
-  });
+    }
+
+    if (btnEliminar) {
+      const id = parseInt(btnEliminar.dataset.id);
+      eliminarProducto(id);
+    }
+  };
 }
 
 function crearProductoHTML(producto) {
