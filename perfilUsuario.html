@@ -60,11 +60,8 @@
             <h6 class="mt-2 mb-0" id="sidebar-nombre">Juan Pérez</h6>
             <div class="perfil-email" id="sidebar-email">juan@ejemplo.com</div>
             <hr />
-            <button
-              class="btn btn-outline-secondary btn-sm w-100"
-              onclick="cerrarSesion()"
-            >
-              <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+            <button class="btn btn-outline-danger btn-sm w-100" onclick="cerrarSesion()">
+            <i class="bi bi-box-arrow-right"></i> Cerrar sesión
             </button>
           </div>
         </div>
@@ -151,75 +148,61 @@
               </div>
             </div>
 <!-------------------------------DIRECCIONES--------------------->
-            <form id="form-direccion" class="row g-3">
-  <!-- Nombre -->
-  <div class="col-md-6">
-    <label class="form-label">Nombre *</label>
-    <input id="nombre" type="text" class="form-control" required />
-  </div>
-<!-- Apellidos -->
-  <div class="col-md-6">
-    <label class="form-label">Apellidos *</label>
-    <input id="apellidos" type="text" class="form-control" required />
-  </div>
-<!-- nombre calle -->
-  <div class="col-12">
-    <label class="form-label">Nombre de la Calle *</label>
-    <input id="calle" type="text" class="form-control" required />
-  </div>
-<!-- Numero exterior -->
-  <div class="col-md-6">
-    <label class="form-label">Número Exterior *</label>
-    <input id="num_ext" type="text" class="form-control" required />
-  </div>
-<!-- numero interior -->
-  <div class="col-md-6">
-    <label class="form-label">Número Interior</label>
-    <input id="num_int" type="text" class="form-control" />
-  </div>
-
-  <!-- CP -->
-  <div class="col-md-4">
-    <label class="form-label">Código Postal *</label>
-    <input type="text" id="cp" class="form-control" maxlength="5" required>
-  </div>
-
-  <!-- Estado -->
-  <div class="col-md-4">
-    <label class="form-label">Estado</label>
-    <input type="text" id="estado" class="form-control" readonly>
-  </div>
-
-  <!-- Municipio -->
-  <div class="col-md-4">
-    <label class="form-label">Municipio</label>
-    <input type="text" id="municipio" class="form-control" readonly>
-  </div>
-
-  <!-- Colonia -->
-  <div class="col-md-6 mt-3">
-    <label class="form-label">Colonia *</label>
-    <select id="colonia" class="form-control">
-      <option value="">Selecciona colonia</option>
-    </select>
-  </div>
-
-  <!-- País -->
-  <div class="col-md-6">
-    <label class="form-label">País *</label>
-    <select id="pais" class="form-control" required>
-      <option value="">Selecciona un país</option>
-    </select>
-  </div>
-
-  <div class="col-12">
-    <button class="btn btn-dark w-100" type="submit">
-      Guardar Dirección
-    </button>
-  </div>
-</form>
-
-<!-- NOTIFICACION -->
+                        <div id="contenido-direcciones" class="tab-content-item content-hidden">
+  <div class="historial-card">
+    <h6>Mis Direcciones</h6>
+    <form id="form-direccion" class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label">Nombre *</label>
+        <input id="nombre" type="text" class="form-control" required />
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Apellidos *</label>
+        <input id="apellidos" type="text" class="form-control" required />
+      </div>
+      <div class="col-12">
+        <label class="form-label">Nombre de la Calle *</label>
+        <input id="calle" type="text" class="form-control" required />
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Número Exterior *</label>
+        <input id="num_ext" type="text" class="form-control" required />
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Número Interior</label>
+        <input id="num_int" type="text" class="form-control" />
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Código Postal *</label>
+        <input type="text" id="cp" class="form-control" maxlength="5" required>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Estado</label>
+        <input type="text" id="estado" class="form-control" readonly>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Municipio</label>
+        <input type="text" id="municipio" class="form-control" readonly>
+      </div>
+      <div class="col-md-6 mt-3">
+        <label class="form-label">Colonia *</label>
+        <select id="colonia" class="form-control">
+          <option value="">Selecciona colonia</option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">País *</label>
+        <select id="pais" class="form-control" required>
+          <option value="">Selecciona un país</option>
+        </select>
+      </div>
+      <div class="col-12">
+        <button class="btn btn-dark w-100" type="submit">
+          Guardar Dirección
+        </button>
+      </div>
+    </form>
+    <!-- NOTIFICACION -->
 <div id="notificacion-direccion" class="notificacion-exito">
 
   <div class="notificacion-card">
@@ -230,7 +213,8 @@
     <p>Tu dirección se guardó correctamente</p>
 
   </div>
-
+  </div>
+</div>
 </div>
             <!-- Contenido Configuración -->
             <div
