@@ -60,11 +60,8 @@
             <h6 class="mt-2 mb-0" id="sidebar-nombre">Juan Pérez</h6>
             <div class="perfil-email" id="sidebar-email">juan@ejemplo.com</div>
             <hr />
-            <button
-              class="btn btn-outline-secondary btn-sm w-100"
-              onclick="cerrarSesion()"
-            >
-              <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+            <button class="btn btn-outline-danger btn-sm w-100" onclick="cerrarSesion()">
+            <i class="bi bi-box-arrow-right"></i> Cerrar sesión
             </button>
           </div>
         </div>
@@ -151,75 +148,61 @@
               </div>
             </div>
 <!-------------------------------DIRECCIONES--------------------->
-            <form id="form-direccion" class="row g-3">
-  <!-- Nombre -->
-  <div class="col-md-6">
-    <label class="form-label">Nombre *</label>
-    <input id="nombre" type="text" class="form-control" required />
-  </div>
-<!-- Apellidos -->
-  <div class="col-md-6">
-    <label class="form-label">Apellidos *</label>
-    <input id="apellidos" type="text" class="form-control" required />
-  </div>
-<!-- nombre calle -->
-  <div class="col-12">
-    <label class="form-label">Nombre de la Calle *</label>
-    <input id="calle" type="text" class="form-control" required />
-  </div>
-<!-- Numero exterior -->
-  <div class="col-md-6">
-    <label class="form-label">Número Exterior *</label>
-    <input id="num_ext" type="text" class="form-control" required />
-  </div>
-<!-- numero interior -->
-  <div class="col-md-6">
-    <label class="form-label">Número Interior</label>
-    <input id="num_int" type="text" class="form-control" />
-  </div>
-
-  <!-- CP -->
-  <div class="col-md-4">
-    <label class="form-label">Código Postal *</label>
-    <input type="text" id="cp" class="form-control" maxlength="5" required>
-  </div>
-
-  <!-- Estado -->
-  <div class="col-md-4">
-    <label class="form-label">Estado</label>
-    <input type="text" id="estado" class="form-control" readonly>
-  </div>
-
-  <!-- Municipio -->
-  <div class="col-md-4">
-    <label class="form-label">Municipio</label>
-    <input type="text" id="municipio" class="form-control" readonly>
-  </div>
-
-  <!-- Colonia -->
-  <div class="col-md-6 mt-3">
-    <label class="form-label">Colonia *</label>
-    <select id="colonia" class="form-control">
-      <option value="">Selecciona colonia</option>
-    </select>
-  </div>
-
-  <!-- País -->
-  <div class="col-md-6">
-    <label class="form-label">País *</label>
-    <select id="pais" class="form-control" required>
-      <option value="">Selecciona un país</option>
-    </select>
-  </div>
-
-  <div class="col-12">
-    <button class="btn btn-dark w-100" type="submit">
-      Guardar Dirección
-    </button>
-  </div>
-</form>
-
-<!-- NOTIFICACION -->
+                        <div id="contenido-direcciones" class="tab-content-item content-hidden">
+  <div class="historial-card">
+    <h6>Mis Direcciones</h6>
+    <form id="form-direccion" class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label">Nombre *</label>
+        <input id="nombre" type="text" class="form-control" required />
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Apellidos *</label>
+        <input id="apellidos" type="text" class="form-control" required />
+      </div>
+      <div class="col-12">
+        <label class="form-label">Nombre de la Calle *</label>
+        <input id="calle" type="text" class="form-control" required />
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Número Exterior *</label>
+        <input id="num_ext" type="text" class="form-control" required />
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Número Interior</label>
+        <input id="num_int" type="text" class="form-control" />
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Código Postal *</label>
+        <input type="text" id="cp" class="form-control" maxlength="5" required>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Estado</label>
+        <input type="text" id="estado" class="form-control" readonly>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Municipio</label>
+        <input type="text" id="municipio" class="form-control" readonly>
+      </div>
+      <div class="col-md-6 mt-3">
+        <label class="form-label">Colonia *</label>
+        <select id="colonia" class="form-control">
+          <option value="">Selecciona colonia</option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">País *</label>
+        <select id="pais" class="form-control" required>
+          <option value="">Selecciona un país</option>
+        </select>
+      </div>
+      <div class="col-12">
+        <button class="btn btn-dark w-100" type="submit">
+          Guardar Dirección
+        </button>
+      </div>
+    </form>
+    <!-- NOTIFICACION -->
 <div id="notificacion-direccion" class="notificacion-exito">
 
   <div class="notificacion-card">
@@ -230,7 +213,8 @@
     <p>Tu dirección se guardó correctamente</p>
 
   </div>
-
+  </div>
+</div>
 </div>
             <!-- Contenido Configuración -->
             <div
@@ -278,7 +262,7 @@
             </div>
           </div>
 
-          <!-- ========== SECCIÓN VENDEDOR ========== -->
+         <!-- ========== SECCIÓN VENDEDOR ========== -->
                 <div id="seccion-vendedor" class="content-hidden">
                     
                     <!-- Tabs secundarias -->
@@ -338,15 +322,15 @@
                             <h5 class="fw-bold">Agregar producto</h5>
                             <p class="text-muted">Detalles principales del producto</p>
                             
-                            <form class="mt-4">
+                            <form id="form-agregar-producto" class="mt-4">
                                 <div class="row g-3">
                                     <div class="col-md-6">
-                                        <label class="form-label">Nombre del producto *</label>
-                                        <input type="text" class="form-control" placeholder="Ej. Playera deportiva">
+                                        <label class="form-label" >Nombre del producto *</label>
+                                        <input type="text" class="form-control" id="producto-nombre" placeholder="Ej. Playera deportiva">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Categoría *</label>
-                                        <select class="form-select">
+                                        <select class="form-select" id="producto-categoria">
                                             <option selected disabled>Selecciona una categoría</option>
                                             <option>Hombre</option>
                                             <option>Mujer</option>
@@ -355,23 +339,23 @@
                                     </div>
                                     <div class="col-12">
                                         <label class="form-label">Descripción *</label>
-                                        <textarea class="form-control" rows="3" placeholder="Describe el producto..."></textarea>
+                                        <textarea class="form-control" id="producto-descripcion" rows="3" placeholder="Describe el producto..."></textarea>
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">Material *</label>
-                                        <input type="text" class="form-control" placeholder="Ej. Algodón">
+                                        <label class="form-label">Material *</label >
+                                        <input type="text" class="form-control"  id="producto-material" placeholder="Ej. Algodón">
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">Precio *</label>
-                                        <input type="number" class="form-control" placeholder="$0.00">
+                                        <label class="form-label">Precio *</label >
+                                        <input type="number" class="form-control" id="producto-precio" placeholder="$0.00">
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">Stock disponible *</label>
-                                        <input type="number" class="form-control" placeholder="Cantidad">
+                                        <label class="form-label">Stock disponible *</label >
+                                        <input type="number" class="form-control" id="producto-stock"  placeholder="Cantidad">
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">Etiqueta del producto</label>
-                                        <input type="text" class="form-control" placeholder="Ej. Nuevo, Oferta">
+                                        <label class="form-label">Etiqueta del producto</label> 
+                                        <input type="text"  id="producto-etiqueta" class="form-control" placeholder="Ej. Nuevo, Oferta">
                                     </div>
 
                                     <!-- Tallas -->
@@ -380,28 +364,28 @@
                                         <label class="form-label mt-3">Tallas de Ropa</label>
                                         <div class="d-flex flex-wrap gap-2">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="xs">
+                                                <input class="form-check-input talla-checkbox" type="checkbox" id="xs" value="XS">
                                                 <label class="form-check-label" for="xs">XS</label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="s">
+                                                <input class="form-check-input talla-checkbox" type="checkbox" id="s" value="S">
                                                 <label class="form-check-label" for="s">S</label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="m">
+                                                <input class="form-check-input talla-checkbox" type="checkbox" id="m" value="M">
                                                 <label class="form-check-label" for="m">M</label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="l">
+                                                <input class="form-check-input talla-checkbox" type="checkbox" id="l" value="L">
                                                 <label class="form-check-label" for="l">L</label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="xl">
+                                                <input class="form-check-input talla-checkbox" type="checkbox" id="xl">
                                                 <label class="form-check-label" for="xl">XL</label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="xxl">
-                                                <label class="form-check-label" for="xxl">XXL</label>
+                                                 <input type="checkbox" class="form-check-input talla-checkbox" id="xxl" value="XXL">
+                                                 <label class="form-check-label" for="xxl">XXL</label>
                                             </div>
                                         </div>
                                     </div>
@@ -409,15 +393,15 @@
                                     <!-- Imagen -->
                                     <div class="col-12 mt-4">
                                         <h6 class="fw-bold">Imagen del Producto</h6>
-                                        <label class="form-label mt-3">URL de la Imagen</label>
-                                        <input type="url" class="form-control" placeholder="https://ejemplo.com/imagen.jpg">
+                                        <label class="form-label mt-3">URL de la Imagen</label >
+                                        <input type="url" class="form-control" id="producto-imagen" placeholder="https://ejemplo.com/imagen.jpg">
                                         <div class="text-center my-3 text-muted">— o —</div>
                                         <label class="form-label">Subir Archivo</label>
                                         <input type="file" class="form-control" accept="image/*">
                                     </div>
 
                                     <div class="col-12 mt-4 d-flex gap-2 justify-content-end">
-                                        <button type="button" class="btn btn-outline-secondary">Limpiar Formulario</button>
+                                        <button type="button" class="btn btn-outline-secondary" onclick="limpiarFormulario()">Limpiar Formulario</button>
                                         <button type="submit" class="btn btn-dark">Agregar Producto</button>
                                     </div>
                                 </div>
@@ -448,76 +432,76 @@
             </div>
             <div class="modal-body">
                 <form id="formEditarProducto">
-                    <input type="hidden" id="edit-producto-id">
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label class="form-label">Nombre del producto *</label>
-                            <input type="text" id="edit-nombre" class="form-control" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Categoría *</label>
-                            <select id="edit-categoria" class="form-select" required>
-                                <option value="">Selecciona una categoría</option>
-                                <option>Hombre</option>
-                                <option>Mujer</option>
-                                <option>Unisex</option>
-                            </select>
-                        </div>
-                        <div class="col-12">
-                            <label class="form-label">Descripción *</label>
-                            <textarea id="edit-descripcion" class="form-control" rows="3" required></textarea>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Material *</label>
-                            <input type="text" id="edit-material" class="form-control" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Precio *</label>
-                            <input type="number" id="edit-precio" class="form-control" step="0.01" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Stock disponible *</label>
-                            <input type="number" id="edit-stock" class="form-control" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Etiqueta del producto</label>
-                            <input type="text" id="edit-etiqueta" class="form-control">
-                        </div>
-                        <div class="col-12">
-                            <label class="form-label">Tallas *</label>
-                            <div class="d-flex flex-wrap gap-2" id="edit-tallas-container">
-                                <div class="form-check">
-                                    <input class="form-check-input edit-talla" type="checkbox" value="XS" id="edit-xs">
-                                    <label class="form-check-label" for="edit-xs">XS</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input edit-talla" type="checkbox" value="S" id="edit-s">
-                                    <label class="form-check-label" for="edit-s">S</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input edit-talla" type="checkbox" value="M" id="edit-m">
-                                    <label class="form-check-label" for="edit-m">M</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input edit-talla" type="checkbox" value="L" id="edit-l">
-                                    <label class="form-check-label" for="edit-l">L</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input edit-talla" type="checkbox" value="XL" id="edit-xl">
-                                    <label class="form-check-label" for="edit-xl">XL</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input edit-talla" type="checkbox" value="XXL" id="edit-xxl">
-                                    <label class="form-check-label" for="edit-xxl">XXL</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <label class="form-label">URL de la Imagen</label>
-                            <input type="url" id="edit-imagen" class="form-control">
-                        </div>
-                    </div>
-                </form>
+    <input type="hidden" id="edit-producto-id">
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label class="form-label">Nombre del producto *</label>
+            <input type="text" id="edit-nombre" class="form-control" required>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Categoría *</label>
+            <select id="edit-categoria" class="form-select" required>
+                <option value="">Selecciona una categoría</option>
+                <option value="Hombre">Hombre</option>
+                <option value="Mujer">Mujer</option>
+                <option value="Unisex">Unisex</option>
+            </select>
+        </div>
+        <div class="col-12">
+            <label class="form-label">Descripción *</label>
+            <textarea class="form-control" id="edit-descripcion" rows="3"></textarea>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Material *</label>
+            <input type="text" id="edit-material" class="form-control" required>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Precio *</label>
+            <input type="number" id="edit-precio" class="form-control" step="0.01" required>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Stock disponible *</label>
+            <input type="number" id="edit-stock" class="form-control" required>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Etiqueta</label>
+            <input type="text" class="form-control" id="edit-etiqueta" placeholder="Ej. Nuevo, Oferta">
+        </div>
+        <div class="col-12">
+            <label class="form-label">URL de la Imagen</label>
+            <input type="url" id="edit-imagen" class="form-control">
+        </div>
+        </div>
+        <div class="col-12">
+    <label class="form-label fw-bold">Tallas disponibles *</label>
+    <div class="d-flex flex-wrap gap-2" id="edit-tallas-container">
+        <div class="form-check">
+            <input class="form-check-input edit-talla" type="checkbox" value="XS" id="edit-xs">
+            <label class="form-check-label" for="edit-xs">XS</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input edit-talla" type="checkbox" value="S" id="edit-s">
+            <label class="form-check-label" for="edit-s">S</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input edit-talla" type="checkbox" value="M" id="edit-m">
+            <label class="form-check-label" for="edit-m">M</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input edit-talla" type="checkbox" value="L" id="edit-l">
+            <label class="form-check-label" for="edit-l">L</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input edit-talla" type="checkbox" value="XL" id="edit-xl">
+            <label class="form-check-label" for="edit-xl">XL</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input edit-talla" type="checkbox" value="XXL" id="edit-xxl">
+            <label class="form-check-label" for="edit-xxl">XXL</label>
+        </div>
+    </div>
+</div>
+</form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>

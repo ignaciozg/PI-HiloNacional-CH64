@@ -100,11 +100,12 @@
         <div class="col-md-7">
           <div class="formulario">
             <h4>Envíanos un Mensaje</h4>
-            <form id="formulario" novalidate>
+            <form id="formulario" action="https://formspree.io/f/xpqybale" method="POST" novalidate>
               <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre Completo</label>
                 <input
                   type="text"
+                  name="nombre"
                   id="nombre"
                   class="form-control"
                   placeholder="Tu nombre"
@@ -116,6 +117,7 @@
                 <label for="email" class="form-label">Correo Electrónico</label>
                 <input
                   type="email"
+                  name="email"
                   id="correo"
                   class="form-control"
                   placeholder="tu@email.com"
@@ -127,6 +129,7 @@
                 <label for="telefono" class="form-label">Teléfono</label>
                 <input
                   type="tel"
+                  name="telefono"
                   id="telefono"
                   class="form-control"
                   placeholder="Ej: 3317884414"
@@ -137,6 +140,7 @@
               <div class="mb-3">
                 <label for="mensaje-texto" class="form-label">Mensaje</label>
                 <textarea
+                  name="mensaje"
                   class="form-control"
                   id="mensaje-texto"
                   rows="2"
