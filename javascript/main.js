@@ -349,3 +349,75 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+
+// ==================== AUTENTICACIÓN - INICIAR/CERRAR SESIÓN ====================
+document.addEventListener("DOMContentLoaded", () => {
+  // Esperamos 500ms para asegurar que el navbar dinámico se haya cargado en el HTML
+  setTimeout(() => {
+    const authButton = document.getElementById("authButton");
+    const authText = document.getElementById("authText");
+    const authIcon = document.getElementById("authIcon");
+    const registroLink = document.getElementById("registroLink"); // Enlace de "Crea tu cuenta"
+
+    // Verificamos que los elementos existan antes de continuar
+    if (!authButton || !authText || !authIcon) return;
+
+    // Función para actualizar el estado visual de la autenticación
+    function actualizarEstadoAuth() {
+      const usuarioActivo = localStorage.getItem("usuarioActivo");
+
+      if (usuarioActivo) {
+        // --- ESTADO: SESIÓN INICIADA ---
+        authText.textContent = "Cerrar Sesión";
+        authButton.classList.add("text-danger");
+        authButton.href = "#";
+        authIcon.className = "bi bi-box-arrow-right me-2";
+
+        // OCULTAMOS el enlace de "Crea tu cuenta"
+        if (registroLink) registroLink.style.display = "none";
+
+      } else {
+        // --- ESTADO: NO LOGUEADO ---
+        authText.textContent = "Iniciar Sesión";
+        authButton.classList.remove("text-danger");
+        authButton.href = "login.html";
+        authIcon.className = "bi bi-box-arrow-in-right me-2";
+
+        // MOSTRAMOS el enlace de "Crea tu cuenta"
+        if (registroLink) registroLink.style.display = "block";
+      }
+    }
+
+    // Ejecutar la validación al cargar la página
+    actualizarEstadoAuth();
+
+    // Manejar el evento de clic para Cerrar Sesión
+    authButton.addEventListener("click", (e) => {
+      const usuarioActivo = localStorage.getItem("usuarioActivo");
+
+      if (usuarioActivo) {
+        e.preventDefault();
+
+        // 1. Borrar la sesión del almacenamiento local
+        localStorage.removeItem("usuarioActivo");
+
+        // 2. Mostrar mensaje de éxito (con SweetAlert2 o Alert normal)
+        if (typeof Swal !== "undefined") {
+          Swal.fire({
+            icon: "success",
+            title: "Sesión cerrada",
+            text: "Has cerrado sesión correctamente",
+            timer: 1500,
+            showConfirmButton: false,
+          }).then(() => {
+            window.location.href = "index.html";
+          });
+        } else {
+          alert("Sesión cerrada correctamente");
+          window.location.href = "index.html";
+        }
+      }
+    });
+  }, 500);
+});
