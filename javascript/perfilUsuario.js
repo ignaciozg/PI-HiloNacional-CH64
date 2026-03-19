@@ -1,6 +1,5 @@
 /**
  * perfilUsuario.js - VERSIÓN FINAL CORREGIDA
- * Sistema de Perfil con pestañas Comprador/Vendedor y gestión de productos
  */
 
 // ==================== INICIALIZACIÓN ====================
@@ -655,33 +654,36 @@ function configurarFormularioProducto() {
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
+    // 1. Captura de valores (Asegúrate de que estos IDs existan en tu HTML)
     const nombre = document.getElementById("producto-nombre").value.trim();
     const categoria = document.getElementById("producto-categoria").value;
     const descripcion = document.getElementById("producto-descripcion").value.trim();
     const material = document.getElementById("producto-material").value.trim();
-    const precio = parseFloat(document.getElementById("producto-precio").value);
-    const stock = parseInt(document.getElementById("producto-stock").value);
-    const etiqueta = document.getElementById("producto-etiqueta").value.trim() || "Activo";
+    const precioInput = document.getElementById("producto-precio").value;
+    const stockInput = document.getElementById("producto-stock").value;
+    const etiqueta = document.getElementById("producto-etiqueta")?.value.trim() || "Activo";
+    
+    // Captura de la URL de la imagen
     const imagen = document.getElementById("producto-imagen").value.trim();
 
-    // Obtener tallas seleccionadas
+    // 2. Obtener tallas seleccionadas
     const tallasSeleccionadas = [];
     document.querySelectorAll(".talla-checkbox:checked").forEach(checkbox => {
       tallasSeleccionadas.push(checkbox.value);
     });
 
-    // Validaciones
-    if (!nombre || !categoria || !descripcion || !material || !precio || !stock) {
-      alert("Por favor completa todos los campos obligatorios (*)");
+    // 3. Validaciones robustas
+    if (!nombre || !categoria || !descripcion || !material || !precioInput || !stockInput) {
+      alert("⚠️ Por favor completa todos los campos obligatorios (*)");
       return;
     }
 
     if (tallasSeleccionadas.length === 0) {
-      alert("Por favor selecciona al menos una talla");
+      alert("⚠️ Por favor selecciona al menos una talla");
       return;
     }
 
-    // Crear nuevo producto
+    // 4. Crear objeto de producto
     const productos = obtenerProductos();
     const nuevoId = productos.length > 0 ? Math.max(...productos.map(p => p.id)) + 1 : 1;
 
@@ -691,18 +693,26 @@ function configurarFormularioProducto() {
       categoria: categoria,
       descripcion: descripcion,
       material: material,
-      precio: precio,
-      stock: stock,
+      precio: parseFloat(precioInput),
+      stock: parseInt(stockInput),
       etiqueta: etiqueta,
       tallas: tallasSeleccionadas.join(", "),
-      imagen: imagen || null
+      imagen: imagen || null // Si está vacío, guarda null
     };
 
+    // 5. Guardar y Actualizar
     productos.push(nuevoProducto);
     guardarProductos(productos);
 
     alert("✅ Producto agregado correctamente");
-    form.reset();
+
+    // 6. LIMPIEZA TOTAL
+    form.reset(); // Limpia inputs de texto y selects
+    
+    // Limpieza manual de checkboxes (form.reset() a veces no los desmarca todos)
+    document.querySelectorAll(".talla-checkbox").forEach(cb => cb.checked = false);
+    
+    // Recargar la lista visual
     cargarProductos();
   });
 }
@@ -725,3 +735,4 @@ function cerrarSesion() {
     window.location.href = "index.html";
   }
 }
+

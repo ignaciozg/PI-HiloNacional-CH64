@@ -262,7 +262,7 @@
             </div>
           </div>
 
-          <!-- ========== SECCIÓN VENDEDOR ========== -->
+         <!-- ========== SECCIÓN VENDEDOR ========== -->
                 <div id="seccion-vendedor" class="content-hidden">
                     
                     <!-- Tabs secundarias -->
@@ -322,15 +322,15 @@
                             <h5 class="fw-bold">Agregar producto</h5>
                             <p class="text-muted">Detalles principales del producto</p>
                             
-                            <form class="mt-4">
+                            <form id="form-agregar-producto" class="mt-4">
                                 <div class="row g-3">
                                     <div class="col-md-6">
-                                        <label class="form-label">Nombre del producto *</label>
-                                        <input type="text" class="form-control" placeholder="Ej. Playera deportiva">
+                                        <label class="form-label" >Nombre del producto *</label>
+                                        <input type="text" class="form-control" id="producto-nombre" placeholder="Ej. Playera deportiva">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Categoría *</label>
-                                        <select class="form-select">
+                                        <select class="form-select" id="producto-categoria">
                                             <option selected disabled>Selecciona una categoría</option>
                                             <option>Hombre</option>
                                             <option>Mujer</option>
@@ -339,23 +339,23 @@
                                     </div>
                                     <div class="col-12">
                                         <label class="form-label">Descripción *</label>
-                                        <textarea class="form-control" rows="3" placeholder="Describe el producto..."></textarea>
+                                        <textarea class="form-control" id="producto-descripcion" rows="3" placeholder="Describe el producto..."></textarea>
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">Material *</label>
-                                        <input type="text" class="form-control" placeholder="Ej. Algodón">
+                                        <label class="form-label">Material *</label >
+                                        <input type="text" class="form-control"  id="producto-material" placeholder="Ej. Algodón">
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">Precio *</label>
-                                        <input type="number" class="form-control" placeholder="$0.00">
+                                        <label class="form-label">Precio *</label >
+                                        <input type="number" class="form-control" id="producto-precio" placeholder="$0.00">
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">Stock disponible *</label>
-                                        <input type="number" class="form-control" placeholder="Cantidad">
+                                        <label class="form-label">Stock disponible *</label >
+                                        <input type="number" class="form-control" id="producto-stock"  placeholder="Cantidad">
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">Etiqueta del producto</label>
-                                        <input type="text" class="form-control" placeholder="Ej. Nuevo, Oferta">
+                                        <label class="form-label">Etiqueta del producto</label> 
+                                        <input type="text"  id="producto-etiqueta" class="form-control" placeholder="Ej. Nuevo, Oferta">
                                     </div>
 
                                     <!-- Tallas -->
@@ -364,28 +364,28 @@
                                         <label class="form-label mt-3">Tallas de Ropa</label>
                                         <div class="d-flex flex-wrap gap-2">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="xs">
+                                                <input class="form-check-input talla-checkbox" type="checkbox" id="xs">
                                                 <label class="form-check-label" for="xs">XS</label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="s">
+                                                <input class="form-check-input talla-checkbox" type="checkbox" id="s">
                                                 <label class="form-check-label" for="s">S</label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="m">
+                                                <input class="form-check-input talla-checkbox" type="checkbox" id="m">
                                                 <label class="form-check-label" for="m">M</label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="l">
+                                                <input class="form-check-input talla-checkbox" type="checkbox" id="l">
                                                 <label class="form-check-label" for="l">L</label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="xl">
+                                                <input class="form-check-input talla-checkbox" type="checkbox" id="xl">
                                                 <label class="form-check-label" for="xl">XL</label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="xxl">
-                                                <label class="form-check-label" for="xxl">XXL</label>
+                                                 <input type="checkbox" class="form-check-input talla-checkbox" id="xxl" value="XXL">
+                                                 <label class="form-check-label" for="xxl">XXL</label>
                                             </div>
                                         </div>
                                     </div>
@@ -393,15 +393,15 @@
                                     <!-- Imagen -->
                                     <div class="col-12 mt-4">
                                         <h6 class="fw-bold">Imagen del Producto</h6>
-                                        <label class="form-label mt-3">URL de la Imagen</label>
-                                        <input type="url" class="form-control" placeholder="https://ejemplo.com/imagen.jpg">
+                                        <label class="form-label mt-3">URL de la Imagen</label >
+                                        <input type="url" class="form-control" id="producto-imagen" placeholder="https://ejemplo.com/imagen.jpg">
                                         <div class="text-center my-3 text-muted">— o —</div>
                                         <label class="form-label">Subir Archivo</label>
                                         <input type="file" class="form-control" accept="image/*">
                                     </div>
 
                                     <div class="col-12 mt-4 d-flex gap-2 justify-content-end">
-                                        <button type="button" class="btn btn-outline-secondary">Limpiar Formulario</button>
+                                        <button type="button" class="btn btn-outline-secondary" onclick="limpiarFormulario()">Limpiar Formulario</button>
                                         <button type="submit" class="btn btn-dark">Agregar Producto</button>
                                     </div>
                                 </div>
@@ -449,7 +449,7 @@
                         </div>
                         <div class="col-12">
                             <label class="form-label">Descripción *</label>
-                            <textarea id="edit-descripcion" class="form-control" rows="3" required></textarea>
+                            <textarea class="form-control" id="producto-descripcion" rows="3" placeholder="Describe el producto..."></textarea>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Material *</label>
@@ -465,7 +465,7 @@
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Etiqueta del producto</label>
-                            <input type="text" id="edit-etiqueta" class="form-control">
+                            <input type="text" class="form-control" id="producto-etiqueta" placeholder="Ej. Nuevo, Oferta">
                         </div>
                         <div class="col-12">
                             <label class="form-label">Tallas *</label>
@@ -491,14 +491,14 @@
                                     <label class="form-check-label" for="edit-xl">XL</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input edit-talla" type="checkbox" value="XXL" id="edit-xxl">
+                                    <input type="checkbox" class="form-check-input talla-checkbox" id="xxl" value="XXL">
                                     <label class="form-check-label" for="edit-xxl">XXL</label>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12">
-                            <label class="form-label">URL de la Imagen</label>
-                            <input type="url" id="edit-imagen" class="form-control">
+                            <label class="form-label mt-3">URL de la Imagen</label>
+                            <input type="url" id="producto-imagen" class="form-control" placeholder="https://ejemplo.com/imagen.jpg">
                         </div>
                     </div>
                 </form>
