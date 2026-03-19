@@ -80,11 +80,31 @@ document.getElementById("formulario").addEventListener("submit", function(e) {
 
     // --- ENVIAR SI TODO ESTÁ BIEN ---
     if (esValido) {
+        const formData = new FormData(this);
+
+    fetch(this.action, {
+        method: this.method,
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+    })
+    .then(response => {
+        if (response.ok) {
+            Swal.fire({
+                title: "¡Formulario enviado con éxito!",
+                text: "Revisa tu correo 📩",
+                icon: "success"
+            });
+            this.reset();
+        } else {
+            throw new Error("Error en el envío");
+        }
+    })
+    .catch(error => {
         Swal.fire({
-        title: "¡Formulario de Hilo Nacional enviado con éxito!",
-        icon: "success",
-        draggable: true
-        });
+            title: "Error",
+            text: "No se pudo enviar el formulario 😢",
+            icon: "error"
+    });
+    });
     }
-    
-});
+    });
