@@ -12,8 +12,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const usuario = JSON.parse(localStorage.getItem("usuarioActivo"));
 
   if (!usuario) {
-    alert("Debes iniciar sesión para acceder a tu perfil");
-    window.location.href = "login.html";
+    Swal.fire({
+      icon: 'error',
+      title: 'Acceso denegado',
+      text: 'Debes iniciar sesión para acceder a tu perfil',
+    }).then(() => {
+      window.location.href = "login.html";
+    });
     return;
   }
 
@@ -238,7 +243,7 @@ function inicializarPestanas() {
       const email = document.getElementById("config-email").value.trim();
 
       if (!nombre || !email) {
-        alert("Por favor completa todos los campos");
+       Swal.fire({ icon: 'warning', title: 'Campos vacíos', text: 'Por favor completa todos los campos' });
         return;
       }
 
@@ -254,7 +259,8 @@ function inicializarPestanas() {
         .charAt(0)
         .toUpperCase();
 
-      alert("¡Cambios guardados correctamente!");
+       Swal.fire({ icon: 'success', title: '¡Guardado!', text: 'Cambios guardados correctamente', timer: 1500, showConfirmButton: false });
+      cargarDatosUsuario(usuario);
     });
   }
 }
@@ -452,12 +458,13 @@ function iniciarDirecciones() {
 
     // Si todo es válido
     if (valido) {
-      const notificacion = document.getElementById("notificacion-direccion");
-      notificacion.classList.add("mostrar");
-
-      setTimeout(() => {
-        notificacion.classList.remove("mostrar");
-      }, 3000);
+      Swal.fire({
+        icon: 'success',
+        title: 'Dirección Guardada',
+        text: 'Tu dirección se ha registrado correctamente',
+        timer: 2000,
+        showConfirmButton: false
+      });
 
       formDireccion.reset();
       formDireccion.querySelectorAll(".is-valid").forEach((el) => {
@@ -561,24 +568,37 @@ function crearProductoHTML(producto) {
 }
 
 function eliminarProducto(id) {
-  if (!confirm("¿Estás seguro de que deseas eliminar este producto?")) {
-    return;
-  }
+  Swal.fire({
+    title: '¿Estás seguro?',
+    text: "No podrás revertir esta acción",
+    icon: 'warning',
+    showCancelButton: true,
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Sí, eliminar',
+    cancelButtonText: 'Cancelar'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      let productos = obtenerProductos();
+      productos = productos.filter(p => p.id !== id);
+      guardarProductos(productos);
 
-  let productos = obtenerProductos();
-  productos = productos.filter((p) => p.id !== id);
-  guardarProductos(productos);
-
-  alert("✅ Producto eliminado correctamente");
-  cargarProductos();
+      Swal.fire(
+        '¡Eliminado!',
+        'El producto ha sido quitado de tu lista.',
+        'success'
+      );
+      cargarProductos();
+    }
+  });
 }
+
 
 function editarProducto(id) {
   const productos = obtenerProductos();
   const producto = productos.find((p) => p.id === id);
 
   if (!producto) {
-    alert("Producto no encontrado");
+    Swal.fire({ icon: 'error', title: 'Error', text: 'Producto no encontrado' });
     return;
   }
 
@@ -625,12 +645,13 @@ function guardarEdicionProducto() {
 
   // Validaciones
   if (!nombre || !categoria || !descripcion || !material || !precio || !stock) {
-    alert("Por favor completa todos los campos obligatorios (*)");
+    Swal.fire({ icon: 'warning', title: 'Faltan datos', text: 'Por favor completa todos los campos obligatorios' });
+
     return;
   }
 
   if (tallasSeleccionadas.length === 0) {
-    alert("Por favor selecciona al menos una talla");
+    Swal.fire({ icon: 'info', title: 'Tallas', text: 'Selecciona al menos una talla' });
     return;
   }
 
@@ -639,7 +660,12 @@ function guardarEdicionProducto() {
   const index = productos.findIndex((p) => p.id === id);
 
   if (index === -1) {
-    alert("Error: Producto no encontrado");
+    Swal.fire({
+        icon: 'error',
+        title: '¡Ups!',
+        text: 'Error: El producto ya no existe en el sistema',
+    });
+
     return;
   }
 
@@ -670,7 +696,14 @@ function guardarEdicionProducto() {
   cargarProductos();
 
   // Mensaje de éxito
-  alert("✅ Producto actualizado correctamente");
+ Swal.fire({
+    icon: 'success',
+    title: '¡Actualizado!',
+    text: 'Producto modificado con éxito',
+    timer: 1500,
+    showConfirmButton: false
+  });
+
 }
 
 function configurarFormularioProducto() {
@@ -710,12 +743,14 @@ function configurarFormularioProducto() {
       !precioInput ||
       !stockInput
     ) {
-      alert("⚠️ Por favor completa todos los campos obligatorios (*)");
+      Swal.fire({ icon: 'warning', title: 'Atención', text: 'Por favor rellena los campos obligatorios' });
+
       return;
     }
 
     if (tallasSeleccionadas.length === 0) {
-      alert("⚠️ Por favor selecciona al menos una talla");
+      Swal.fire({ icon: 'info', title: 'Faltan tallas', text: 'Selecciona al menos una talla para el producto' });
+
       return;
     }
 
@@ -741,7 +776,12 @@ function configurarFormularioProducto() {
     productos.push(nuevoProducto);
     guardarProductos(productos);
 
-    alert("✅ Producto agregado correctamente");
+     Swal.fire({
+      icon: 'success',
+      title: '¡Añadido!',
+      text: 'El producto se agregó correctamente'
+    });
+
 
     // 6. LIMPIEZA TOTAL
     form.reset(); // Limpia inputs de texto y selects
@@ -769,8 +809,19 @@ function limpiarFormulario() {
 // ==================== FUNCIÓN PARA CERRAR SESIÓN ====================
 
 function cerrarSesion() {
-  if (confirm("¿Estás seguro de que quieres cerrar sesión?")) {
-    localStorage.removeItem("usuarioActivo");
-    window.location.href = "index.html";
-  }
+  Swal.fire({
+    title: '¿Cerrar sesión?',
+    text: "Tendrás que volver a ingresar tus credenciales",
+    icon: 'question',
+    showCancelButton: true,
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Sí, cerrar sesión',
+    cancelButtonText: 'Cancelar'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      localStorage.removeItem("usuarioActivo");
+      window.location.href = "index.html";
+    }
+  });
+
 }
