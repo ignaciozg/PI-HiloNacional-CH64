@@ -60,6 +60,17 @@ function initTheme() {
 
   //Modo oscuro navbar
 
+  const applyVisuals = (theme) => {
+    htmlElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+
+    if (theme === "dark") {
+      if (logoImg) logoImg.src = "../assets/logo22.png";
+    } else {
+      if (logoImg) logoImg.src = "../assets/logo23.png";
+    }
+  };
+
   const savedTheme = localStorage.getItem("theme");
   const systemPrefersDark = window.matchMedia(
     "(prefers-color-scheme: dark)",
