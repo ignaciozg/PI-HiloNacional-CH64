@@ -60,17 +60,6 @@ function initTheme() {
 
   //Modo oscuro navbar
 
-  const applyVisuals = (theme) => {
-    htmlElement.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
-
-    if (theme === "dark") {
-      if (logoImg) logoImg.src = "../assets/logo22.png";
-    } else {
-      if (logoImg) logoImg.src = "../assets/logo23.png";
-    }
-  };
-
   const savedTheme = localStorage.getItem("theme");
   const systemPrefersDark = window.matchMedia(
     "(prefers-color-scheme: dark)",
@@ -350,7 +339,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-
 // ==================== AUTENTICACIÓN - INICIAR/CERRAR SESIÓN ====================
 document.addEventListener("DOMContentLoaded", () => {
   // Esperamos 500ms para asegurar que el navbar dinámico se haya cargado en el HTML
@@ -376,7 +364,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // OCULTAMOS el enlace de "Crea tu cuenta"
         if (registroLink) registroLink.style.display = "none";
-
       } else {
         // --- ESTADO: NO LOGUEADO ---
         authText.textContent = "Iniciar Sesión";

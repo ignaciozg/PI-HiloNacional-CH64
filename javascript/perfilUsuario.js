@@ -130,7 +130,9 @@ function inicializarPestanas() {
 
   const contenidoPedidos = document.getElementById("contenido-pedidos");
   const contenidoDirecciones = document.getElementById("contenido-direcciones");
-  const contenidoConfiguracion = document.getElementById("contenido-configuracion");
+  const contenidoConfiguracion = document.getElementById(
+    "contenido-configuracion",
+  );
 
   if (!tabPedidos || !tabDirecciones || !tabConfiguracion) {
     console.error("No se encontraron las tabs de comprador");
@@ -168,8 +170,12 @@ function inicializarPestanas() {
 
   // Eventos de clic
   tabPedidos.addEventListener("click", () => activarTabComprador("pedidos"));
-  tabDirecciones.addEventListener("click", () => activarTabComprador("direcciones"));
-  tabConfiguracion.addEventListener("click", () => activarTabComprador("configuracion"));
+  tabDirecciones.addEventListener("click", () =>
+    activarTabComprador("direcciones"),
+  );
+  tabConfiguracion.addEventListener("click", () =>
+    activarTabComprador("configuracion"),
+  );
 
   // IMPORTANTE: Inicializar estado por defecto (solo Pedidos visible)
   activarTabComprador("pedidos");
@@ -179,7 +185,9 @@ function inicializarPestanas() {
   const tabAgregarProducto = document.getElementById("tab-agregar-producto");
 
   const contenidoInfoTienda = document.getElementById("contenido-info-tienda");
-  const contenidoAgregarProducto = document.getElementById("contenido-agregar-producto");
+  const contenidoAgregarProducto = document.getElementById(
+    "contenido-agregar-producto",
+  );
 
   if (!tabInfoTienda || !tabAgregarProducto) {
     console.error("No se encontraron las tabs de vendedor");
@@ -210,8 +218,12 @@ function inicializarPestanas() {
   }
 
   // Eventos de clic
-  tabInfoTienda.addEventListener("click", () => activarTabVendedor("info-tienda"));
-  tabAgregarProducto.addEventListener("click", () => activarTabVendedor("agregar-producto"));
+  tabInfoTienda.addEventListener("click", () =>
+    activarTabVendedor("info-tienda"),
+  );
+  tabAgregarProducto.addEventListener("click", () =>
+    activarTabVendedor("agregar-producto"),
+  );
 
   // IMPORTANTE: Inicializar estado por defecto (solo Info Tienda visible)
   activarTabVendedor("info-tienda");
@@ -238,7 +250,9 @@ function inicializarPestanas() {
       // Actualizar sidebar
       document.getElementById("sidebar-nombre").textContent = nombre;
       document.getElementById("sidebar-email").textContent = email;
-      document.getElementById("sidebar-avatar").textContent = nombre.charAt(0).toUpperCase();
+      document.getElementById("sidebar-avatar").textContent = nombre
+        .charAt(0)
+        .toUpperCase();
 
       alert("¡Cambios guardados correctamente!");
     });
@@ -255,20 +269,22 @@ function initTheme() {
   const logoImg = document.getElementById("nav-logo");
 
   const applyVisuals = (theme) => {
-  htmlElement.setAttribute("data-theme", theme);
-  localStorage.setItem("theme", theme);
+    htmlElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
 
-  if (logoImg) {
-    if (theme === "dark") {
-      logoImg.src = "./assets/logo22.png";
-    } else {
-      logoImg.src = "./assets/hilo_nacional.svg";
+    if (logoImg) {
+      if (theme === "dark") {
+        logoImg.src = "./assets/hilo_nacional.svg";
+      } else {
+        logoImg.src = "./assets/hilo_nacional.svg";
+      }
     }
-  }
-};
+  };
 
   const savedTheme = localStorage.getItem("theme");
-  const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const systemPrefersDark = window.matchMedia(
+    "(prefers-color-scheme: dark)",
+  ).matches;
   const initialTheme = savedTheme || (systemPrefersDark ? "dark" : "light");
 
   applyVisuals(initialTheme);
@@ -318,12 +334,12 @@ function iniciarAPIcp() {
 
     // API 1 → COLONIAS
     fetch(`https://api.zippopotam.us/mx/${cp}`)
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         estadoInput.value = data.places[0]["state"];
         coloniaSelect.innerHTML = "";
 
-        data.places.forEach(place => {
+        data.places.forEach((place) => {
           const option = document.createElement("option");
           option.value = place["place name"];
           option.textContent = place["place name"];
@@ -332,13 +348,14 @@ function iniciarAPIcp() {
       })
       .catch(() => {
         estadoInput.value = "";
-        coloniaSelect.innerHTML = "<option value=''>No se encontraron colonias</option>";
+        coloniaSelect.innerHTML =
+          "<option value=''>No se encontraron colonias</option>";
       });
 
     // API 2 → MUNICIPIO
     fetch(`https://sepomex.nitrostudio.com.mx/api/20241009/cp/${cp}.json`)
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         const info = data.data.postcodes[0];
         municipioInput.value = info.d_mnpio;
       })
@@ -355,14 +372,14 @@ function iniciarAPIpaises() {
   if (!selectPais) return;
 
   fetch("https://restcountries.com/v3.1/all?fields=name")
-    .then(res => {
+    .then((res) => {
       if (!res.ok) throw new Error("Error en API");
       return res.json();
     })
-    .then(data => {
+    .then((data) => {
       data.sort((a, b) => a.name.common.localeCompare(b.name.common));
 
-      data.forEach(pais => {
+      data.forEach((pais) => {
         const option = document.createElement("option");
         option.value = pais.name.common;
         option.textContent = pais.name.common;
@@ -373,11 +390,11 @@ function iniciarAPIpaises() {
         create: false,
         sortField: {
           field: "text",
-          direction: "asc"
-        }
+          direction: "asc",
+        },
       });
     })
-    .catch(error => {
+    .catch((error) => {
       console.error("Error cargando países:", error);
     });
 }
@@ -397,7 +414,7 @@ function iniciarDirecciones() {
       apellidos: document.getElementById("apellidos"),
       cp: document.getElementById("cp"),
       colonia: document.getElementById("colonia"),
-      pais: document.getElementById("pais")
+      pais: document.getElementById("pais"),
     };
 
     // Validar nombre
@@ -443,7 +460,7 @@ function iniciarDirecciones() {
       }, 3000);
 
       formDireccion.reset();
-      formDireccion.querySelectorAll(".is-valid").forEach(el => {
+      formDireccion.querySelectorAll(".is-valid").forEach((el) => {
         el.classList.remove("is-valid");
       });
     }
@@ -480,12 +497,12 @@ function cargarProductos() {
 
   // 2. Limpiamos y renderizamos los productos
   contenedorProductos.innerHTML = "";
-  productos.forEach(producto => {
+  productos.forEach((producto) => {
     const productoHTML = crearProductoHTML(producto);
     contenedorProductos.insertAdjacentHTML("beforeend", productoHTML);
   });
 
-  // 3. REEMPLAZO: En lugar de usar forEach en cada botón, 
+  // 3. REEMPLAZO: En lugar de usar forEach en cada botón,
   // escuchamos UN SOLO CLIC en todo el contenedor.
   contenedorProductos.onclick = (e) => {
     // .closest busca el botón aunque hagas clic en el icono de adentro
@@ -512,10 +529,11 @@ function crearProductoHTML(producto) {
     <div class="producto-item d-flex justify-content-between align-items-center">
       <div class="d-flex gap-3">
         <div class="producto-imagen-placeholder">
-          ${producto.imagen ?
-      `<img src="${producto.imagen}" alt="${producto.nombre}" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">` :
-      `<i class="bi bi-image"></i>`
-    }
+          ${
+            producto.imagen
+              ? `<img src="${producto.imagen}" alt="${producto.nombre}" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">`
+              : `<i class="bi bi-image"></i>`
+          }
         </div>
         <div>
           <h6 class="mb-1">${producto.nombre}</h6>
@@ -548,7 +566,7 @@ function eliminarProducto(id) {
   }
 
   let productos = obtenerProductos();
-  productos = productos.filter(p => p.id !== id);
+  productos = productos.filter((p) => p.id !== id);
   guardarProductos(productos);
 
   alert("✅ Producto eliminado correctamente");
@@ -557,7 +575,7 @@ function eliminarProducto(id) {
 
 function editarProducto(id) {
   const productos = obtenerProductos();
-  const producto = productos.find(p => p.id === id);
+  const producto = productos.find((p) => p.id === id);
 
   if (!producto) {
     alert("Producto no encontrado");
@@ -577,12 +595,14 @@ function editarProducto(id) {
 
   // Marcar las tallas seleccionadas
   const tallasArray = producto.tallas.split(", ");
-  document.querySelectorAll(".edit-talla").forEach(checkbox => {
+  document.querySelectorAll(".edit-talla").forEach((checkbox) => {
     checkbox.checked = tallasArray.includes(checkbox.value);
   });
 
   // Mostrar el modal
-  const modal = new bootstrap.Modal(document.getElementById("modalEditarProducto"));
+  const modal = new bootstrap.Modal(
+    document.getElementById("modalEditarProducto"),
+  );
   modal.show();
 }
 
@@ -599,7 +619,7 @@ function guardarEdicionProducto() {
 
   // Obtener tallas seleccionadas
   const tallasSeleccionadas = [];
-  document.querySelectorAll(".edit-talla:checked").forEach(checkbox => {
+  document.querySelectorAll(".edit-talla:checked").forEach((checkbox) => {
     tallasSeleccionadas.push(checkbox.value);
   });
 
@@ -616,7 +636,7 @@ function guardarEdicionProducto() {
 
   // Obtener productos y actualizar
   let productos = obtenerProductos();
-  const index = productos.findIndex(p => p.id === id);
+  const index = productos.findIndex((p) => p.id === id);
 
   if (index === -1) {
     alert("Error: Producto no encontrado");
@@ -634,14 +654,16 @@ function guardarEdicionProducto() {
     stock: stock,
     etiqueta: etiqueta || "Activo",
     tallas: tallasSeleccionadas.join(", "),
-    imagen: imagen || null
+    imagen: imagen || null,
   };
 
   // Guardar cambios
   guardarProductos(productos);
 
   // Cerrar modal
-  const modal = bootstrap.Modal.getInstance(document.getElementById("modalEditarProducto"));
+  const modal = bootstrap.Modal.getInstance(
+    document.getElementById("modalEditarProducto"),
+  );
   modal.hide();
 
   // Recargar productos
@@ -661,23 +683,33 @@ function configurarFormularioProducto() {
     // 1. Captura de valores (Asegúrate de que estos IDs existan en tu HTML)
     const nombre = document.getElementById("producto-nombre").value.trim();
     const categoria = document.getElementById("producto-categoria").value;
-    const descripcion = document.getElementById("producto-descripcion").value.trim();
+    const descripcion = document
+      .getElementById("producto-descripcion")
+      .value.trim();
     const material = document.getElementById("producto-material").value.trim();
     const precioInput = document.getElementById("producto-precio").value;
     const stockInput = document.getElementById("producto-stock").value;
-    const etiqueta = document.getElementById("producto-etiqueta")?.value.trim() || "Activo";
-    
+    const etiqueta =
+      document.getElementById("producto-etiqueta")?.value.trim() || "Activo";
+
     // Captura de la URL de la imagen
     const imagen = document.getElementById("producto-imagen").value.trim();
 
     // 2. Obtener tallas seleccionadas
     const tallasSeleccionadas = [];
-    document.querySelectorAll(".talla-checkbox:checked").forEach(checkbox => {
+    document.querySelectorAll(".talla-checkbox:checked").forEach((checkbox) => {
       tallasSeleccionadas.push(checkbox.value);
     });
 
     // 3. Validaciones robustas
-    if (!nombre || !categoria || !descripcion || !material || !precioInput || !stockInput) {
+    if (
+      !nombre ||
+      !categoria ||
+      !descripcion ||
+      !material ||
+      !precioInput ||
+      !stockInput
+    ) {
       alert("⚠️ Por favor completa todos los campos obligatorios (*)");
       return;
     }
@@ -689,7 +721,8 @@ function configurarFormularioProducto() {
 
     // 4. Crear objeto de producto
     const productos = obtenerProductos();
-    const nuevoId = productos.length > 0 ? Math.max(...productos.map(p => p.id)) + 1 : 1;
+    const nuevoId =
+      productos.length > 0 ? Math.max(...productos.map((p) => p.id)) + 1 : 1;
 
     const nuevoProducto = {
       id: nuevoId,
@@ -701,7 +734,7 @@ function configurarFormularioProducto() {
       stock: parseInt(stockInput),
       etiqueta: etiqueta,
       tallas: tallasSeleccionadas.join(", "),
-      imagen: imagen || null // Si está vacío, guarda null
+      imagen: imagen || null, // Si está vacío, guarda null
     };
 
     // 5. Guardar y Actualizar
@@ -712,10 +745,12 @@ function configurarFormularioProducto() {
 
     // 6. LIMPIEZA TOTAL
     form.reset(); // Limpia inputs de texto y selects
-    
+
     // Limpieza manual de checkboxes (form.reset() a veces no los desmarca todos)
-    document.querySelectorAll(".talla-checkbox").forEach(cb => cb.checked = false);
-    
+    document
+      .querySelectorAll(".talla-checkbox")
+      .forEach((cb) => (cb.checked = false));
+
     // Recargar la lista visual
     cargarProductos();
   });
@@ -725,7 +760,7 @@ function limpiarFormulario() {
   const form = document.getElementById("form-agregar-producto");
   if (form) {
     form.reset();
-    document.querySelectorAll(".talla-checkbox").forEach(checkbox => {
+    document.querySelectorAll(".talla-checkbox").forEach((checkbox) => {
       checkbox.checked = false;
     });
   }
@@ -739,4 +774,3 @@ function cerrarSesion() {
     window.location.href = "index.html";
   }
 }
-
