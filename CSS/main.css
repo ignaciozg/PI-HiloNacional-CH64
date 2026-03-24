@@ -83,8 +83,8 @@ a:hover {
 }
 
 .navbar-brand img {
- max-height: 50px;
- width: auto;
+  max-height: 50px;
+  width: auto;
   object-fit: contain;
   transition: none !important;
 }
@@ -365,4 +365,10 @@ a:hover {
   color: white;
   background-color: #1e293b;
   border-color: #495057;
+}
+
+.navbar-nav {
+  align-items: center;
+  align-content: center;
+  align-self: center;
 }

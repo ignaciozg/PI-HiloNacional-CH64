@@ -350,7 +350,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-
 // ==================== AUTENTICACIÓN - INICIAR/CERRAR SESIÓN ====================
 document.addEventListener("DOMContentLoaded", () => {
   // Esperamos 500ms para asegurar que el navbar dinámico se haya cargado en el HTML
@@ -376,7 +375,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // OCULTAMOS el enlace de "Crea tu cuenta"
         if (registroLink) registroLink.style.display = "none";
-
       } else {
         // --- ESTADO: NO LOGUEADO ---
         authText.textContent = "Iniciar Sesión";
